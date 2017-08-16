@@ -24,7 +24,7 @@
   color: #fff;
   background-color: #F40;
   border-radius: 5px;
-  margin: 25px auto 0;
+  margin: 25px auto 30px;
   padding: 10px 0;
   text-align: center;
   width: 100px;

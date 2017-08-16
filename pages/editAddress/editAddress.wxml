@@ -7,7 +7,7 @@
     <input class="address-item" type="text" placeholder="详细地址"/>
     <view class="set-default">设为默认地址</view>
   </view>
-  <view class="save-btn">保存</view>
+  <view class="save-btn" bindtap="saveAddress">保存</view>
 </view>
 <view wx:if="{{condition}}" class="citypickers">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">

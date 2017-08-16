@@ -5,6 +5,7 @@ var city = require("../../utils/citys.js");
 var app = getApp()
 Page({
   data: {
+    domain: app.config.domain,
     provinces: [],
     province: "",
     citys: [],
@@ -111,8 +112,38 @@ Page({
       'city': cityData[0].sub[0].name,
       'county': cityData[0].sub[0].sub[0].name
     })
-    console.log('初始化完成');
 
+    console.log("province:" + this.data.province);
+    console.log("provinces:" + this.data.provinces);
+  },
 
+  //保存地址
+  saveAddress:function(){
+    var that = this;
+    wx.request({
+      url: that.data.domain + '/api/useraddress/address',
+      data: {
+        "userId": 16777215, 
+        "consignee": "张晓雪", 
+        "province": 350000, 
+        "city": 350200,
+        "district": 350203, 
+        "address": "瑞景商业广场", 
+        "zipcode": "361000",
+        "mobile": "18850541234",
+        "isDefault": 1 
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+       console.log("保存成功");
+      },
+      fail: function () {
+        console.log("失败");
+      }
+    });
   }
+
 })

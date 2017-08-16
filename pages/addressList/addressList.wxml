@@ -1,16 +1,18 @@
 <!--addressList.wxml-->
 <view class="wrapper">
   <view class="address-list">
-    <view class="address-item dis-box">
-      <view class="receiver-info flex-1">
-        <view>
-          <text class="receiver-name">12刘雪花8</text>
-          <text class="receiver-phone">18850549612</text>
+    <block wx:for="{{addressList}}">
+      <view class="address-item dis-box">
+        <view class="receiver-info flex-1">
+          <view>
+            <text class="receiver-name">{{item.consignee}}</text>
+            <text class="receiver-phone">{{item.mobile}}</text>
+          </view>
+          <view class="address-detail">{{item.address}}</view>
         </view>
-        <view class="address-detail">福建省厦门市思明区</view>
+        <view class="edit-address" src="/../../../images/icon/e1dit-icon.png" data-id="{{item.addressId}}" bindtap="editAddress"></view>
       </view>
-      <view class="edit-address" src="/../../../images/icon/e1dit-icon.png"></view>
-    </view>
+    </block>
   </view>
   <navigator class="add-btn" url="../editAddress/editAddress">+ 添加地址</navigator>
 </view>
