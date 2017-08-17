@@ -10,69 +10,75 @@ Page({
     province: "",
     citys: [],
     city: "",
-    countys: [],
-    county: '',
+    countrys: [],
+    country: '',
     value: [0, 0, 0],
     values: [0, 0, 0],
-    condition: false
+    condition: false,
+    receiverName:"",
+    phone:"",
+    provinceId: 110000,
+    cityId: 110000,
+    districtId: 110101,
+    detailAddress:"",
+    isDefault:0
   },
+
+  //选择省地市
   bindChange: function (e) {
-    //console.log(e);
-    var val = e.detail.value
-    var t = this.data.values;
-    var cityData = this.data.cityData;
+    var val = e.detail.value,
+        t = this.data.values,
+        cityData = this.data.cityData;
 
     if (val[0] != t[0]) {
-      console.log('province no ');
       const citys = [];
-      const countys = [];
+      const countrys = [];
 
       for (let i = 0; i < cityData[val[0]].sub.length; i++) {
-        citys.push(cityData[val[0]].sub[i].name)
+        citys.push({ 'name': cityData[val[0]].sub[i].name, 'code':cityData[val[0]].sub[i].code});
+     //   citys.push(cityData[val[0]].sub[i].name);
       }
       for (let i = 0; i < cityData[val[0]].sub[0].sub.length; i++) {
-        countys.push(cityData[val[0]].sub[0].sub[i].name)
+        countrys.push({ 'name': cityData[val[0]].sub[0].sub[i].name, 'code': cityData[val[0]].sub[0].sub[i].code});
+       // countrys.push(cityData[val[0]].sub[0].sub[i].name);
       }
-
       this.setData({
-        province: this.data.provinces[val[0]],
+        province: this.data.provinces[val[0]]['name'],
         city: cityData[val[0]].sub[0].name,
         citys: citys,
-        county: cityData[val[0]].sub[0].sub[0].name,
-        countys: countys,
+        country: cityData[val[0]].sub[0].sub[0].name,
+        countrys: countrys,
         values: val,
         value: [val[0], 0, 0]
       })
-
       return;
     }
     if (val[1] != t[1]) {
       console.log('city no');
-      const countys = [];
+      const countrys = [];
 
       for (let i = 0; i < cityData[val[0]].sub[val[1]].sub.length; i++) {
-        countys.push(cityData[val[0]].sub[val[1]].sub[i].name)
+        countrys.push({ 'name': cityData[val[0]].sub[val[1]].sub[i].name, 'code': cityData[val[0]].sub[val[1]].sub[i].code});
+     //   countrys.push(cityData[val[0]].sub[val[1]].sub[i].name);
       }
 
       this.setData({
-        city: this.data.citys[val[1]],
-        county: cityData[val[0]].sub[val[1]].sub[0].name,
-        countys: countys,
+        city: this.data.citys[val[1]]['name'],
+        country: cityData[val[0]].sub[val[1]].sub[0].name,
+        countrys: countrys,
         values: val,
         value: [val[0], val[1], 0]
       })
       return;
     }
     if (val[2] != t[2]) {
-      console.log('county no');
+      console.log('country no');
       this.setData({
-        county: this.data.countys[val[2]],
+        country: this.data.countrys[val[2]]['name'],
         values: val
       })
       return;
     }
-
-
   },
   open: function () {
     this.setData({
@@ -82,35 +88,35 @@ Page({
   onLoad: function () {
     console.log("onLoad");
     var that = this;
-
     city.init(that);
-
     var cityData = that.data.cityData;
-
-
     const provinces = [];
     const citys = [];
-    const countys = [];
+    const countrys = [];
 
     for (let i = 0; i < cityData.length; i++) {
-      provinces.push(cityData[i].name);
+      provinces.push({ 'name': cityData[i].name, 'code': cityData[i].code});
+      // provinces.push(cityData[i].name);
+      // provinces.push(cityData[i].code);
     }
     console.log('省份完成');
     for (let i = 0; i < cityData[0].sub.length; i++) {
-      citys.push(cityData[0].sub[i].name)
+      citys.push({ 'name': cityData[0].sub[i].name, 'code': cityData[0].sub[i].code});
+      // citys.push(cityData[0].sub[i].name);
+      // citys.push(cityData[0].sub[i].code);
     }
-    console.log('city完成');
     for (let i = 0; i < cityData[0].sub[0].sub.length; i++) {
-      countys.push(cityData[0].sub[0].sub[i].name)
+      countrys.push({ 'name': cityData[0].sub[0].sub[i].name, 'code': cityData[0].sub[0].sub[i].code});
+      // countrys.push(cityData[0].sub[0].sub[i].name);
+      // countrys.push(cityData[0].sub[0].sub[i].code);
     }
-
     that.setData({
       'provinces': provinces,
       'citys': citys,
-      'countys': countys,
+      'countrys': countrys,
       'province': cityData[0].name,
       'city': cityData[0].sub[0].name,
-      'county': cityData[0].sub[0].sub[0].name
+      'country': cityData[0].sub[0].sub[0].name
     })
 
     console.log("province:" + this.data.province);
@@ -119,6 +125,7 @@ Page({
 
   //保存地址
   saveAddress:function(){
+
     var that = this;
     wx.request({
       url: that.data.domain + '/api/useraddress/address',

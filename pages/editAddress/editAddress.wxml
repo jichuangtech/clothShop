@@ -3,7 +3,7 @@
   <view class="address-info">
     <input class="address-item" type="text" placeholder="收货人"/>
     <input class="address-item" type="text" placeholder="联系电话"/>
-    <input  class="address-item" placeholder="选择" value="{{province}}-{{city}}-{{county}}" focus="{{focus}}" bindfocus="open" />
+    <input  class="address-item" placeholder="选择" value="{{province}}-{{city}}-{{country}}" focus="{{focus}}" bindfocus="open" />
     <input class="address-item" type="text" placeholder="详细地址"/>
     <view class="set-default">设为默认地址</view>
   </view>
@@ -16,13 +16,13 @@
       <view bindtap="open" class="city-true">确定</view>
     </view>
     <picker-view-column>
-      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;" data-id="{{item.code}}">{{item.name}}</view>
     </picker-view-column>
     <picker-view-column>
-      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;"  data-id="{{item.code}}">{{item.name}}</view>
     </picker-view-column>
     <picker-view-column>
-      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+      <view wx:for="{{countrys}}" wx:key="item" style="line-height: 50px;padding-left:10px;" data-id="{{item.code}}">{{item.name}}</view>
     </picker-view-column>
   </picker-view>
 </view>
