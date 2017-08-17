@@ -85,8 +85,8 @@ Page({
       condition: !this.data.condition
     })
   },
-  onLoad: function () {
-    console.log("onLoad");
+  onLoad: function (options) {
+    console.log("类型：" + options.addressId);
     var that = this;
     city.init(that);
     var cityData = that.data.cityData;

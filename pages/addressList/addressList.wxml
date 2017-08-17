@@ -10,7 +10,9 @@
           </view>
           <view class="address-detail">{{item.address}}</view>
         </view>
-        <view class="edit-address" src="/../../../images/icon/e1dit-icon.png" data-id="{{item.addressId}}" bindtap="editAddress"></view>
+        <navigator url="../editAddress/editAddress?addressId={{item.addressId}}">
+          <view class="edit-address" src="/../../../images/icon/e1dit-icon.png"></view>
+        </navigator>
       </view>
     </block>
   </view>

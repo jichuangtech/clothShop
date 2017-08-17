@@ -9,7 +9,7 @@ Page({
   },
 
   onLoad: function (options) {
-  
+    
   },
 
   onReady: function () {
