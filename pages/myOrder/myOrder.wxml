@@ -24,9 +24,10 @@
             <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
             <view class="item-info flex-1">
               <view class="item-desc">{{item.goodsName}}</view>
+              <!-- <view class="item-desc">{{item.color}}</view> -->
               <view class="item-num-price">
                 <text class="item-num i-b">X{{item.goodsNum}}</text>
-                <text>￥{{item.shopPrice}}/件</text>
+                <text>￥{{item.shopPrice}}/{{item.specName}}</text>
               </view>
             </view>
           </view>
@@ -36,7 +37,8 @@
           <view class="i-b">
             金额：<text class="main-color">￥{{item.totalAmount}}</text>
           </view>
-          <view class="item-btn i-b fr">立即支付</view>
+          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==1}}">立即支付</view>
+          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==3}}">确认收货</view>
         </view>
 
       </view>

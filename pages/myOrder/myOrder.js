@@ -49,7 +49,7 @@ Page({
       success: function (res) {
         
         that.setData({
-          orderList: res.data
+          orderList: res.data.data
         });
         if (that.data.orderList.length!=0){
           that.setData({
