@@ -16,6 +16,31 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+function formatPhone(phone){
+  if (!(/^1[34578]\d{9}$/.test(phone))) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function formatName(name){
+  var mark = /^[\u4E00-\u9FA5]{1,20}$/.test(name);
+  if(mark) {
+    return true;
+  }else{
+    mark = /^[a-zA-Z]{1,20}$/.test(name);
+    if(mark) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  formatPhone: formatPhone,
+  formatName: formatName
 }

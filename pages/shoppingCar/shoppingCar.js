@@ -9,6 +9,7 @@ Page({
       // { name: '专人配送', value: '1', checked: false, price: 12, num: 2 },
       // { name: '精品品牌', value: '2', checked: false, price: 10.2, num: 3 }
     ],
+    savePro:[],
     allMoney:0.00,
     allSelect:false,
     editObj:{
@@ -49,11 +50,12 @@ Page({
       method: 'GET',
       success: function (res) {
         if(res.data.length!=0){
-          for(var i=0;i<res.data.length;i++){
-            res.data[i]['value'] = i;
-          }
+          // for(var i=0;i<res.data.length;i++){
+          //   res.data[i]['value'] = i;
+          // }
           that.setData({
-            pro: res.data
+            pro: res.data,
+            savePro:res.data
           });
           loadMark = false;
         }
@@ -90,7 +92,7 @@ Page({
         console.log("相加");
         console.log(i + "");
         pro[i].checked = true;
-        console.log("当前");
+        console.log("当前1");
         allMoney = (parseFloat(allMoney) + parseFloat(pro[i].goodsNum * pro[i].shopPrice)).toFixed(2);
         
         pro[i].checked = true;
@@ -134,17 +136,34 @@ Page({
 
   //编辑购物车
   editCarList:function(){
-    var editMark = false,
+    var that = this,
+        editMark = false,
         editText =  "编辑";
-    console.log("测试："+this.data.editObj.editMark);
-    if (this.data.pro.length == 0) {
+    console.log("测试："+that.data.editObj.editMark);
+    if (that.data.pro.length == 0) {
       return false;
     }
-    if(!this.data.editObj.editMark){
+    if(!that.data.editObj.editMark){//切换至可编辑状态
         editMark = true;
         editText = "完成";
+    }else{
+      if (that.data.pro.length != 0){//判断是否有修改数量
+        var editPro = [];
+        for(var i = 0; i <that.data.pro.length;i++){
+          for (var j = 0; j < that.data.savePro.length;j++){
+            if (pro[i]['goodsNum'] != savePro[j]['goodsNum']){
+              editPro.push(pro[i]["goodsCartId"]);
+              editPro.push(pro[i]["goodsNum"]);
+              break;
+            }
+          }
+        }
+        if(editPro.length!=0){//数量有修改
+          that.editCarItem(editPro);
+        }
+      }
     }
-    this.setData({
+    that.setData({
       editObj:{
         editMark: editMark,
         editText: editText
@@ -153,7 +172,7 @@ Page({
         btnText:"删除"
       }
     })
-    this.selectAll();
+    that.selectAll();
   },
 
   //删除购物车
@@ -169,7 +188,7 @@ Page({
       success: function (res) {
         if(res.data.statusCode==200){
           app.showToast('删除成功', that, 3000);
-          that.onReady()
+          that.onReady();
         }else{
           app.showToast('删除失败', that, 3000);
         }
@@ -180,24 +199,54 @@ Page({
     });
   },
 
+  //编辑购物车
+  editCarItem: function (params) {
+    var that = this;
+    wx.request({
+      url: that.data.domain + '/api/goodsCart/goodsNumber',
+      data:{
+        obj: params
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'DELETE',
+      success: function (res) {
+        if (res.data.statusCode == 200) {
+          console.log("修改数量成功");
+          that.onReady();
+        } else {
+          console.log("修改数量成功");
+        }
+      },
+      fail: function () {
+        console.log("注册失败");
+      }
+    });
+  },
   //购买数量增减
   setNum: function (e) {
-    let type = e.currentTarget.dataset.type,
-        num = this.data.inputNum;
-    if (type == 1) {
-      if (this.data.inputNum == 1) {
+    var that = this,
+        btnType = e.currentTarget.dataset.type,
+        index = e.currentTarget.dataset.index,
+        proList = that.data.pro,
+        num = that.data.pro[index]['goodsNum'],
+        storeCount = that.data.pro[index]['storeCount'];
+    if(btnType == 1) {
+      if (num == 1) {
         return false;
       }
       num = num - 1;
-    } else {
+    }else{
       num = num + 1;
     }
-    if (num > parseInt(this.data.storeCount)) {
-      app.showToast('嗷嗷，库存不足哦~', this, 3000);
-      num = this.data.storeCount;
+    if (num > parseInt(storeCount)) {
+      app.showToast('嗷嗷，库存不足哦~', that, 3000);
+      num = storeCount;
     }
-    this.setData({
-      inputNum: num,
+    proList[index]['goodsNum'] = num;
+    that.setData({
+      pro: proList
     })
     console.log("数量赋值：" + JSON.stringify(this.data.goodsVO));
   }
