@@ -151,10 +151,16 @@ Page({
         var editPro = [];
         for(var i = 0; i <that.data.pro.length;i++){
           for (var j = 0; j < that.data.savePro.length;j++){
-            if (pro[i]['goodsNum'] != savePro[j]['goodsNum']){
-              editPro.push(pro[i]["goodsCartId"]);
-              editPro.push(pro[i]["goodsNum"]);
-              break;
+            if(that.data.pro[i]['goodsCartId'] == that.data.savePro[j]['goodsCartId']){
+              if (that.data.pro[i]['goodsNum'] != that.data.savePro[j]['goodsNum']){
+                var newPro = {
+                  goodsCartId: that.data.pro[i]["goodsCartId"],
+                  goodsNum: that.data.pro[i]["goodsNum"]
+                };
+                console.log("修改："+JSON.stringify(newPro));
+                editPro.push(newPro);
+                break;
+              }
             }
           }
         }
@@ -201,16 +207,17 @@ Page({
 
   //编辑购物车
   editCarItem: function (params) {
+    console.log("修改数组params:"+params);
     var that = this;
     wx.request({
       url: that.data.domain + '/api/goodsCart/goodsNumber',
       data:{
-        obj: params
+        cartNumberVOList: params
       },
       header: {
         'content-type': 'application/json'
       },
-      method: 'DELETE',
+      method: 'POST',
       success: function (res) {
         if (res.data.statusCode == 200) {
           console.log("修改数量成功");
