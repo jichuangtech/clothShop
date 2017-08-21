@@ -148,5 +148,44 @@ Page({
         }
       });
     }
-  }
+  },
+
+  //立即购买
+  buyNow:function(){
+  //   if (this.data.colorActive == -1) {
+  //     app.showToast('请选择颜色分类~', this, 3000);
+  //   } else if (this.data.priceTypeActive == -1) {
+  //     app.showToast('请选择价格规格~', this, 3000);
+  //   } else {
+  //     var that = this;
+  //     wx.request({
+  //       url: that.data.domain + '/api/goodsCart',
+  //       data: {
+  //         goodsVO:{
+
+  //         }
+  //         "userId": 12,
+  //         "goodsId": this.data.productId,
+  //         "colorId": this.data.colorActive,
+  //         "goodsNum": this.data.inputNum,
+  //         "specId": this.data.priceTypeActive
+  //       },
+  //       header: {
+  //         'content-type': 'application/json'
+  //       },
+  //       method: 'POST',
+  //       success: function (res) {
+  //         if (res.data.statusCode == 200) {
+  //           that.hideDialog();
+  //           app.showToast('添加成功，在购物车等亲~', that, 5000);
+  //         } else {
+  //           app.showToast('嗷嗷，购物车添加失败~', that, 3000);
+  //         }
+  //       },
+  //       fail: function () {
+  //         console.log("失败");
+  //       }
+  //     });
+  //   }
+   }
 })

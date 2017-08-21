@@ -5,7 +5,7 @@
 <view class="wrapper">
   <!-- 1顶部广告栏-->
   <swiper class="swiper-wrapper" indicator-dots="true" autoplay="true" interval="2000" duration="1000">
-    <block wx:for="{{recommendList}}">
+    <block wx:for="{{recommendList}}" wx:key="{{index}}" >
       <swiper-item>
         <navigator  url="../productDetail/productDetail?id={{item.goodsId}}">
           <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg==''?'../res/img/product-default.png':item.originalImg}}" class="swiper-img"/>

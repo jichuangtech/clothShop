@@ -73,7 +73,7 @@
   </view>
   <view class="dialog-btns dis-box">
     <view class="car-btn dialog-btn flex-1" bindtap="addShoppingCar">加入购物车</view>
-    <view class="buy-btn dialog-btn flex-1">立即购买</view>
+    <view class="buy-btn dialog-btn flex-1"bindtap="buyNow" >立即购买</view>
   </view>
 </view>
 

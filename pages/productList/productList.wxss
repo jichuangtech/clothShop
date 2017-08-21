@@ -19,7 +19,6 @@
   margin: 10px 0 5px;
 }
 .list-item .item-price{ 
-  color: #F40;
   float: left;
 }
 .list-item .item-btn{ 

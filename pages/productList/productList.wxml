@@ -12,7 +12,9 @@
           <view class="item-info flex-1">
             <view class="item-desc">{{item.goodsContent}}</view>
             <view class="">
-              <view class="item-price">￥10</view>
+              <block wx:for="{{item.goodsSpecs}}">
+                <view class="item-price main-color">￥{{item.specPrice}}/{{item.specName}}</view>
+              </block>
               <navigator class="item-btn" url="../productDetail/productDetail?id={{item.goodsId}}">去看看</navigator>
             </view>
           </view>

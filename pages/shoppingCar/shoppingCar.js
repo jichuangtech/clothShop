@@ -20,9 +20,7 @@ Page({
       loadTip: "正在加载购物车...",
       loadMark:true
     },
-    footerBtn:{
-      btnText:"结算"
-    },
+    btnText:"结算",
     toast:{
       toastMark:false,
       toastText:""
@@ -32,9 +30,9 @@ Page({
   
   },
   onReady: function () {
-    this.getShoppingCar();
   },
   onShow: function () {
+    this.getShoppingCar();
   },
 
   //请求购物车
@@ -49,17 +47,22 @@ Page({
       },
       method: 'GET',
       success: function (res) {
+        var data = res.data;
         if(res.data.length!=0){
-          // for(var i=0;i<res.data.length;i++){
-          //   res.data[i]['value'] = i;
-          // }
-          that.setData({
-            pro: res.data,
-            savePro:res.data
-          });
           loadMark = false;
+        }else{
+          that.setData({
+            allSelect:false,
+            editObj: {
+              editMark: false,
+              editText: "编辑"
+            },
+            btnText:"结算"
+          })
         }
         that.setData({
+          pro: data,
+          savePro: data,
           load: {
             loadMark: loadMark,
             loadTip: loadTip
@@ -138,7 +141,8 @@ Page({
   editCarList:function(){
     var that = this,
         editMark = false,
-        editText =  "编辑";
+        editText =  "编辑",
+        btnText = "结算";
     console.log("测试："+that.data.editObj.editMark);
     if (that.data.pro.length == 0) {
       return false;
@@ -146,6 +150,7 @@ Page({
     if(!that.data.editObj.editMark){//切换至可编辑状态
         editMark = true;
         editText = "完成";
+        btnText = "删除";
     }else{
       if (that.data.pro.length != 0){//判断是否有修改数量
         var editPro = [];
@@ -174,9 +179,7 @@ Page({
         editMark: editMark,
         editText: editText
       },
-      footerBtn:{
-        btnText:"删除"
-      }
+      btnText: btnText
     })
     that.selectAll();
   },
@@ -193,10 +196,11 @@ Page({
       method: 'DELETE',
       success: function (res) {
         if(res.data.statusCode==200){
-          app.showToast('删除成功', that, 3000);
+          app.showToast('删除成功', that);
           that.onReady();
+          that.onShow();
         }else{
-          app.showToast('删除失败', that, 3000);
+          app.showToast('删除失败', that);
         }
       },
       fail: function () {

@@ -25,7 +25,10 @@
                 <input class="num-input fl" type="num" value="{{item.goodsNum}}" bindblur="inputNum"/>
                 <text class="add-btn set-btn fl" data-type="2"  data-index="{{index}}" bindtap="setNum">+</text>
               </view>
-              <view class="name {{editObj.editMark?'none':''}}">{{item.goodsName}}</view>
+              <view class="name {{editObj.editMark?'none':''}}">
+                <view>{{item.goodsName}}</view>
+                <view>{{item.color}}</view>
+              </view>
               <view class="item-info-bottom">
                 <text class="main-color i-b">￥{{item.shopPrice}}/{{item.specName}}</text>
                 <text class="num i-b">X{{item.goodsNum}}</text>
@@ -44,7 +47,7 @@
       全选
     </view>
     <view class="count-money flex-1">合计：￥{{allMoney}}</view>
-    <view class="buy-btn  {{allMoney==0?'':'active'}}">{{footerBtn.btnText}}</view>
+    <view class="buy-btn {{allMoney==0?'':'active'}} {{editObj.editMark?'active':''}}">{{btnText}}</view>
   </view>
 </view>
 <view  class='fullbg' wx:if="{{toast.toastMark}}">

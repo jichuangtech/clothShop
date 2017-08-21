@@ -53,6 +53,7 @@ image{
 }
 .main-color{
   color: #F40;
+  font-size: 14px;
 }
 .fl{
   float: left;
