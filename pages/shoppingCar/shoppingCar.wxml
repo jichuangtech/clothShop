@@ -1,53 +1,64 @@
 <!--shoppingCar.wxml-->
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
-  <view class="wrapper-top dis-box">
-    <view class="store-name flex-1">
-      <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
-      店门
-    </view>
-    <view class="edit-list" bindtap="editCarList">{{editObj.editText}}</view>
-  </view>
+<!--显示购物车列表 begin -->
+  <view class="car-content" wx:if="{{pro.length!=0}}">
 
-  <view class="wrapper-content car-list">
-    <checkbox-group  bindchange="selectPro">   
-      <block wx:for="{{pro}}" wx:key="{{index}}">
-          <view class="car-item dis-box">
-            <view class="item-select">
-              <label class="select-radio {{item.checked ? 'active':'unactive'}}">
-                <checkbox  value="{{index}}" data-num="{{item.goodsNum}}" checked="{{item.checked}}" hidden="true"></checkbox>
-              </label>
-            </view>
-            <image class="item-image" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
-            <view class="item-info flex-1">
-              <view class="set-num {{editObj.editMark?'':'none'}}">
-                <text class="sub-btn set-btn fl {{item.goodsNum==1?'unactive':''}}" data-type="1" data-index="{{index}}" bindtap="setNum">-</text>
-                <input class="num-input fl" type="num" value="{{item.goodsNum}}" bindblur="inputNum"/>
-                <text class="add-btn set-btn fl" data-type="2"  data-index="{{index}}" bindtap="setNum">+</text>
-              </view>
-              <view class="name {{editObj.editMark?'none':''}}">
-                <view>{{item.goodsName}}</view>
-                <view>{{item.color}}</view>
-              </view>
-              <view class="item-info-bottom">
-                <text class="main-color i-b">￥{{item.shopPrice}}/{{item.specName}}</text>
-                <text class="num i-b">X{{item.goodsNum}}</text>
-              </view>
-            </view>
-            <view class="del-btn {{editObj.editMark?'':'none'}}" data-carid="{{item.goodsCartId}}" bindtap="delCarItem">删除</view>
-          </view>
-      </block>
-    </checkbox-group> 
-    <view class="load-tip" wx-if="{{load.loadMark}}">{{load.loadTip}}</view>
-  </view>
-
-  <view class="wrapper-footer dis-box">
-    <view class="select-all">
-      <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
-      全选
+    <view class="wrapper-top dis-box">
+      <view class="store-name flex-1">
+        <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
+        金凤针织
+      </view>
+      <view class="edit-list" bindtap="editCarList">{{editObj.editText}}</view>
     </view>
-    <view class="count-money flex-1">合计：￥{{allMoney}}</view>
-    <view class="buy-btn {{allMoney==0?'':'active'}} {{editObj.editMark?'active':''}}">{{btnText}}</view>
+
+    <view class="wrapper-content car-list">
+      <checkbox-group  bindchange="selectPro">   
+        <block wx:for="{{pro}}" wx:key="{{index}}">
+            <view class="car-item dis-box">
+              <view class="item-select">
+                <label class="select-radio {{item.checked ? 'active':'unactive'}}">
+                  <checkbox  value="{{index}}" data-num="{{item.goodsNum}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                </label>
+              </view>
+              <image class="item-image" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+              <view class="item-info flex-1">
+                <view class="set-num {{editObj.editMark?'':'none'}}">
+                  <text class="sub-btn set-btn fl {{item.goodsNum==1?'unactive':''}}" data-type="1" data-index="{{index}}" bindtap="setNum">-</text>
+                  <input class="num-input fl" type="num" value="{{item.goodsNum}}" bindblur="inputNum"/>
+                  <text class="add-btn set-btn fl" data-type="2"  data-index="{{index}}" bindtap="setNum">+</text>
+                </view>
+                <view class="name {{editObj.editMark?'none':''}}">
+                  <view>{{item.goodsName}}</view>
+                  <view>{{item.color}}</view>
+                </view>
+                <view class="item-info-bottom">
+                  <text class="main-color i-b">￥{{item.shopPrice}}/{{item.specName}}</text>
+                  <text class="num i-b">X{{item.goodsNum}}</text>
+                </view>
+              </view>
+              <view class="del-btn {{editObj.editMark?'':'none'}}" data-carid="{{item.goodsCartId}}" bindtap="delCarItem">删除</view>
+            </view>
+        </block>
+      </checkbox-group> 
+      <view class="load-tip" wx-if="{{load.loadMark}}">{{load.loadTip}}</view>
+    </view>
+
+    <view class="wrapper-footer dis-box">
+      <view class="select-all">
+        <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
+        全选
+      </view>
+      <view class="count-money flex-1">合计：￥{{allMoney}}</view>
+      <view class="buy-btn {{allMoney==0?'':'active'}} {{editObj.editMark?'active':''}}">{{btnText}}</view>
+    </view>
+
+  </view>
+<!--显示购物车列表 end  -->
+
+  <view class="car-none"  wx:if="{{pro.length==0}}">
+      <view>购物车空空如也</view>
+      <view>快去挑挑你喜欢的~</view>
   </view>
 </view>
 <view  class='fullbg' wx:if="{{toast.toastMark}}">

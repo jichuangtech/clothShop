@@ -81,3 +81,9 @@
   background-color: #F40;
   color:#fff;
 }
+.car-none{
+  font-size: 18px;
+  line-height: 25px;
+  padding-top: 100px;
+  text-align: center;
+}

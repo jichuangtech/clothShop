@@ -19,14 +19,12 @@
 }
 .save-btn{
   position: absolute;
-  bottom: 30px;
-  left: 5%;
+  bottom: 0;
   background-color: #F40;
-  border-radius: 5px;
   color: #fff;
   text-align: center;
   padding: 8px 0;
-  width: 90%;
+  width: 100%;
 }
 
 /*插件样式  */

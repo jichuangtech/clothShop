@@ -3,12 +3,7 @@ var app = getApp();
 Page({
   data: {
     domain: app.config.domain,
-    test:false,
-    pro:[
-      // { name: '专人配送', value: '0', checked: false,price:12.12,num:1 },
-      // { name: '专人配送', value: '1', checked: false, price: 12, num: 2 },
-      // { name: '精品品牌', value: '2', checked: false, price: 10.2, num: 3 }
-    ],
+    pro:[],
     savePro:[],
     allMoney:0.00,
     allSelect:false,
@@ -117,13 +112,12 @@ Page({
 
   },
   //全选或反选
-  selectAll:function(){
+  selectAll: function (selectMark){
+    console.log("selectMark:" + selectMark);
     var pro = this.data.pro,
         mark = false,
-        allSelect = false;
-    if (this.data.pro.length == 0) {
-      return false;
-    }
+        allSelect = selectMark ? true:false;
+   
     if (!this.data.allSelect){
       mark = true;//全部选中
       allSelect = true;
@@ -131,6 +125,8 @@ Page({
     for (var i = 0; i < pro.length; i++) {
       pro[i].checked = mark;
     }
+    console.log("allSelect:" + allSelect);
+    
     this.setData({
       pro: pro,
       allSelect: allSelect
@@ -142,15 +138,14 @@ Page({
     var that = this,
         editMark = false,
         editText =  "编辑",
-        btnText = "结算";
-    console.log("测试："+that.data.editObj.editMark);
-    if (that.data.pro.length == 0) {
-      return false;
-    }
-    if(!that.data.editObj.editMark){//切换至可编辑状态
+        btnText = "结算",
+        allSelect = 0;
+    
+    if(!that.data.editObj.editMark){//文案由'编辑'-》'完成'状态
         editMark = true;
         editText = "完成";
         btnText = "删除";
+        allSelect = 1;
     }else{
       if (that.data.pro.length != 0){//判断是否有修改数量
         var editPro = [];
@@ -179,9 +174,10 @@ Page({
         editMark: editMark,
         editText: editText
       },
-      btnText: btnText
+      btnText: btnText,
+      allSelect: allSelect
     })
-    that.selectAll();
+    that.selectAll(allSelect);
   },
 
   //删除购物车

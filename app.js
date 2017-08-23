@@ -29,7 +29,7 @@ App({
   //toast
   showToast: function (text, o, count) {
     var _this = o;
-    count = parseInt(count) ? parseInt(count) : 3000;
+    count = parseInt(count) ? parseInt(count) : 2000;
     _this.setData({
       toastText: text,
       isShowToast: true,
