@@ -11,19 +11,20 @@
   <view class="pro-info">
 
     <view class="pro-item dis-box">
-      <image src="../res/img/benchi.jpg"></image>
-      <view class="item-info  flex-1">
-        <view class="item-desc">说明什么什么</view>
+      <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{proDetail.originalImg}}"></image>
+      <view class="item-info flex-1">
+        <view class="item-desc">{{proDetail.goodsContent}}</view>
+        <view>{{colorInfo.colorName}}</view>
         <view class="item-num-price dis-box">
-          <text class="item-price main-color">￥12/件</text>
-          <text>X3</text>
+          <text class="item-price main-color">￥{{priceInfo.specPrice}}/{{priceInfo.specName}}</text>
+          <text>X{{proNum}}</text>
         </view>
       </view>
     </view>
 
   </view>
   <view class="wrapper-footer dis-box">
-    <view class="count-money flex-1">合计：39.9</view>
+    <view class="count-money flex-1">合计：￥{{allMoney}}</view>
     <view class="confirm-btn">提交订单</view>
   </view>
 

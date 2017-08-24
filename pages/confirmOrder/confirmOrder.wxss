@@ -24,7 +24,7 @@
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 8px;
-  padding: 0 10px;
+  padding: 10px 10px;
   position: relative;
   box-sizing: border-box;
 }
@@ -34,20 +34,21 @@
   margin-right: 15px;
 }
 .pro-item .item-info{
-  height: 50px;
+  font-size: 14px;
+  /* height: 50px; */
   position: relative;
   width: 100%;
 }
 .pro-item  .item-desc{
   color: #3d3d3d;
-  position: absolute;
-  top:0;
+  /* position: absolute;
+  top:0; */
 }
 .pro-item  .item-num-price{
   text-align: right;
   width: 100%;
-  position: absolute;
-  bottom:0;
+  /* position: absolute;
+  bottom:0; */
 }
 .pro-item  .item-num-price text{
  display: block;

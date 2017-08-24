@@ -23,7 +23,7 @@
         <view class="remain-num">剩余：{{productInfo.storeCount}}</view>
       </view>
     </view>
-    <view class="choose-colors" bindtap="chooseColors">选择 颜色分类</view>
+    <view class="choose-colors" bindtap="openDialog">选择 颜色分类</view>
     <view class="product-detail">
       <view class="detail-title"></view>
       <block wx:for="{{productInfo.goodsDetailImages}}">
@@ -31,7 +31,12 @@
       </block>
     </view>
   </view>
+  <view class="btns dis-box">
+    <view class="car-btn flex-1" data-type="1" bindtap="openDialog">加入购物车</view>
+    <view class="buy-btn flex-1" data-type="2" bindtap="openDialog" >立即购买</view>
+  </view>
 </view>
+<!--选择弹框begin  -->
 <view class="choose-dialog {{dialogMark==0?'none':''}}" catchtap="hideDialog"></view>
 <view class="dialog-wrapper {{dialogMark==0?'none':''}}">
   <view class="dialog-top dialog-item dis-box">
@@ -71,9 +76,11 @@
       <text class="add-btn set-btn fl" data-type="2" bindtap="setNum">+</text>
     </view>
   </view>
-  <view class="dialog-btns dis-box">
-    <view class="car-btn dialog-btn flex-1" bindtap="addShoppingCar">加入购物车</view>
-    <view class="buy-btn dialog-btn flex-1"bindtap="buyNow" >立即购买</view>
+  <view class="confirm-btn"  bindtap="confirmDialog" wx:if="{{btnObj.btnType}}">确定</view> 
+  <view class="btns dis-box" wx:if="{{!btnObj.btnType}}">
+    <view class="car-btn flex-1" data-type="1" bindtap="addShoppingCar">加入购物车</view>
+    <view class="buy-btn flex-1" data-type="2" bindtap="confirmOrder" >立即购买</view>
   </view>
 </view>
+<!--选择弹框 end  -->
 

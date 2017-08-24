@@ -64,6 +64,22 @@
   height: 120px;
   margin-bottom: 5px;
 }
+.btns{
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+}
+.btns .car-btn{
+  background-color: #fe7000;
+}
+.btns .buy-btn{
+  background-color: #F40;
+}
 
 /*弹框  */
 .choose-dialog{
@@ -146,19 +162,14 @@
   height: 30px;
   width: 30px;
 }
-.dialog-wrapper .dialog-btns{
-  color: #fff;
-  height: 40px;
-  line-height: 40px;
+.dialog-wrapper  .confirm-btn{
   position: absolute;
+  bottom: 0;
+  background-color: #fe7000;
+  color: #fff;
+  height:40px;
+  line-height:40px;
+  text-align: center;
   left: 0;
   right: 0;
-  bottom: 0;
-  text-align: center;
-}
-.dialog-wrapper  .car-btn{
-  background-color: #fe7000;
-}
-.dialog-wrapper  .buy-btn{
-  background-color: #F40;
 }

@@ -87,17 +87,13 @@ Page({
     console.log("checkArr:" +checkArr);
     for (var i = 0; i < pro.length; i++) {
       if (checkArr.indexOf(i + "") != -1) {
-        console.log("相加");
         console.log(i + "");
         pro[i].checked = true;
-        console.log("当前1");
         allMoney = (parseFloat(allMoney) + parseFloat(pro[i].goodsNum * pro[i].shopPrice)).toFixed(2);
         
         pro[i].checked = true;
-        console.log("选中");
         countIndx++
       } else {
-        console.log("未选中");
         pro[i].checked = false;
       }
     }
@@ -112,15 +108,25 @@ Page({
 
   },
   //全选或反选
-  selectAll: function (selectMark){
-    console.log("selectMark:" + selectMark);
-    var pro = this.data.pro,
+  selectAll: function (e){
+    var selectType = ""
+    if(e){
+      selectType = e.currentTarget.dataset.type;
+      console.log("selectType:" + JSON.stringify(e));
+      console.log("selectType:" + selectType);
+    }
+    var that = this,
+        pro = this.data.pro,
         mark = false,
-        allSelect = selectMark ? true:false;
+        allSelect = false,
+        allMoney = 0;
    
     if (!this.data.allSelect){
       mark = true;//全部选中
       allSelect = true;
+      for (var i = 0; i < pro.length; i++) {
+        allMoney = (parseFloat(allMoney) + parseFloat(pro[i].goodsNum * pro[i].shopPrice)).toFixed(2);
+      }
     }
     for (var i = 0; i < pro.length; i++) {
       pro[i].checked = mark;
@@ -129,7 +135,8 @@ Page({
     
     this.setData({
       pro: pro,
-      allSelect: allSelect
+      allSelect: allSelect,
+      allMoney: allMoney
     })
   },
 
@@ -145,7 +152,6 @@ Page({
         editMark = true;
         editText = "完成";
         btnText = "删除";
-        allSelect = 1;
     }else{
       if (that.data.pro.length != 0){//判断是否有修改数量
         var editPro = [];
@@ -174,10 +180,8 @@ Page({
         editMark: editMark,
         editText: editText
       },
-      btnText: btnText,
-      allSelect: allSelect
+      btnText: btnText
     })
-    that.selectAll(allSelect);
   },
 
   //删除购物车
