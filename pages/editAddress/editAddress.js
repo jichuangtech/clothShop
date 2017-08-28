@@ -171,7 +171,7 @@ Page({
         cityName = cityData[0].sub[0].name,
         cityId = cityData[0].sub[0].code,
         districtName = cityData[0].sub[0].sub[0].name,
-        districtId = districtId;
+        districtId = cityData[0].sub[0].sub[0].code;
     that.setData({
       'provinces': provinces,
       'citys': citys,
@@ -195,18 +195,32 @@ Page({
         return false
       }
     }
+    
+    console.log("that.data.districtId:" + JSON.stringify({
+      "address": that.data.infoObj[2]['text'],
+      "addressId": that.data.editId,
+      "consignee": that.data.infoObj[0]['text'],
+      "isDefault": 1,
+      "mobile": that.data.infoObj[1]['text'],
+      "userId": 16777215,
+      "zipcode": "361000",
+      "province": that.data.provinceId,
+      "city": that.data.cityId,
+      "district": that.data.districtId,
+    }));
     wx.request({
       url: that.data.domain + '/api/useraddress/address',
       data: {
-        "userId": 16777215,
+        "address": that.data.infoObj[2]['text'],
+        "addressId": that.data.editId,
         "consignee": that.data.infoObj[0]['text'],
+        "isDefault": 1,
+        "mobile": that.data.infoObj[1]['text'],
+        "userId": 16777215,
+        "zipcode": "361000",
         "province": that.data.provinceId,
         "city": that.data.cityId,
-        "district": that.data.districtId,
-        "address": that.data.infoObj[2]['text'],
-        "zipcode": "361000",
-        "mobile": that.data.infoObj[1]['text'],
-        "isDefault": 1
+        "district": that.data.districtId
       },
       header: {
         'content-type': 'application/json'
@@ -238,13 +252,16 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.statusCode == 200) {
+          console.log("详细地址：" + res.data.data.province);
+          console.log("详细地址：" + res.data.data.city);
+          console.log("详细地址：" + res.data.data.district);
          that.setData({
-            province: "测试",
-            provinceId: res.data.data.province,
-            city: "测试",
-            cityId: res.data.data.city,
-            country: "测试",
-            districtId: res.data.data.district,
+           province: res.data.data.provinceName,
+           provinceId: res.data.data.provinceCode,
+            city: res.data.data.cityName,
+            cityId: res.data.data.cityCode,
+            country: res.data.data.districtName,
+            districtId: res.data.data.districtCode,
             infoObj: [
               {
                 text: res.data.data.consignee,
@@ -261,7 +278,7 @@ Page({
                 mark: true,
                 tip: "详细地址不能为空"
               },
-            ],
+            ]
          })
         console.log('成功');
         }

@@ -52,7 +52,7 @@ Page({
       return false;
     }
     wx.request({
-      url: that.data.domain + '/api/useraddress/address/' + id+'',
+      url: that.data.domain + '/api/useraddress/16777215/address/' + id+'',
       header: {
         'content-type': 'application/json'
       },

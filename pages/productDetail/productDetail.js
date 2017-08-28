@@ -161,7 +161,7 @@ Page({
       success: function (res) {
         if (res.data.statusCode == 200) {
           that.hideDialog();
-          this.setDefalutDia();
+          that.setDefalutDia();
           app.showToast('添加成功，在购物车等亲~', that);
         } else {
           app.showToast('嗷嗷，购物车添加失败~', that);

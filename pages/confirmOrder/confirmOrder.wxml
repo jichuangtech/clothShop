@@ -3,10 +3,10 @@
 
   <navigator class="wrapper-top receive-address" url="../addressList/addressList">
     <view class="dis-box">
-      <view class="receiver-name flex-1">收货人：刘雪花</view>
-      <view class="receiver-phone">18850549612</view>
+      <view class="receiver-name flex-1">收货人：{{defalutAddreee.consignee}}</view>
+      <view class="receiver-phone">{{defalutAddreee.mobile}}</view>
     </view>
-    <view class="address-detail">收货地址：厦门市思明区瑞景商业广场</view>
+    <view class="address-detail">收货地址：{{defalutAddreee.address}}</view>
   </navigator>
   <view class="pro-info">
 

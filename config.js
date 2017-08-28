@@ -5,7 +5,7 @@ var config = function(ENV){
 	config.ENV = ENV;
 	switch(ENV){
 		case 'dev':
-      config.domain = 'http://www.jichuangtech.site/clothshopserver';
+      config.domain = 'https://www.jichuangtech.site/clothshopserver';
 			break;
 		case 'test':
       config.domain = 'http://106.15.179.23';

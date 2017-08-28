@@ -12,10 +12,12 @@ Page({
     priceType:"",
     colorInfo:"",
     priceInfo: "",
-    allMoney:0
+    allMoney:0,
+    addressId:""
   },
 
   onLoad: function (options) {
+   
     console.log("商品Id:"+options.proId);
     console.log("商品数量:" + options.proNum);
     console.log("商品颜色:" + options.colorId);
@@ -24,21 +26,30 @@ Page({
       proId: options.proId,
       proNum: options.proNum,
       colorId: options.colorId,
-      priceType: options.priceType
+      priceType: options.priceType,
+      addressId: options.addressId
     });
   },
 
   onReady: function () {
-    this.getDefaultAddress();
+    console.log("onReady");
   },
-
   onShow: function () {
-    this.getProDetail();
+    console.log("onLoad");
+    if (this.data.addressId) {
+      this.getAddressDetail();
+    } else {
+      this.getDefaultAddress();
+    }
+    console.log("onShow");
+    
+  //  this.getProDetail();
   },
 
   //请求默认地址
   getDefaultAddress(){
-    var that = this;
+    var that = this,
+        addressInfo = "";
     wx.request({
       url: that.data.domain + '/api/useraddress/16777215/defaultaddress',
       header: {
@@ -46,7 +57,38 @@ Page({
       },
       method: 'GET',
       success: function (res) {
+        if (res.data.statusCode==200){
+          that.setData({
+            defalutAddreee:res.data.data
+          });
+        }
         console.log("成功");
+      },
+      fail: function () {
+        console.log("失败");
+      }
+    });
+  },
+
+  //请求地址
+  getAddressDetail:function(){
+    var that = this,
+        addressInfo = "";
+    wx.request({
+      url: that.data.domain + '/api/useraddress/address/' + that.data.addressId + '',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.data.statusCode == 200) {
+          addressInfo = res.data.data;
+          addressInfo['address'] = res.data.data['provinceName'] + res.data.data['cityName'] + res.data.data['districtName']+res.data.data['address'];
+          that.setData({
+            defalutAddreee: addressInfo
+          })
+          console.log('成功');
+        }
       },
       fail: function () {
         console.log("失败");

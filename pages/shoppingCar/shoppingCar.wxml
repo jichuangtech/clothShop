@@ -50,7 +50,7 @@
         全选
       </view>
       <view class="count-money flex-1">合计：￥{{allMoney}}</view>
-      <view class="buy-btn {{allMoney==0?'':'active'}}">{{btnText}}</view>
+      <view class="buy-btn {{allMoney==0?'':'active'}}" bindtap="carBtn">{{btnText}}</view>
     </view>
 
   </view>

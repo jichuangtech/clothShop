@@ -105,7 +105,6 @@ Page({
       allMoney: allMoney,
       allSelect: allSelect
     })
-
   },
   //全选或反选
   selectAll: function (e){
@@ -185,21 +184,27 @@ Page({
   },
 
   //删除购物车
-  delCarItem:function(e){
-    var that = this,
-        carId = e.currentTarget.dataset.carid;
+  delCar:function(param){
+    var that = this;
+    console.log("param:" + param);
     wx.request({
-      url: that.data.domain + '/api/goodsCart/' + carId+'',
+      url: that.data.domain + '/api/goodsCart/',
+      data:{
+        cartIds: param
+      },
       header: {
         'content-type': 'application/json'
       },
       method: 'DELETE',
       success: function (res) {
-        if(res.data.statusCode==200){
+        if (res.data.statusCode == 200) {
           app.showToast('删除成功', that);
-          that.onReady();
+          that.setData({
+            allMoney:0
+          })
+          // that.onReady();
           that.onShow();
-        }else{
+        } else {
           app.showToast('删除失败', that);
         }
       },
@@ -207,6 +212,14 @@ Page({
         console.log("注册失败");
       }
     });
+  },
+  //点击每一项删除
+  delCarItem:function(e){
+    var that = this,
+        carId = e.currentTarget.dataset.carid,
+        proIds = [];
+    proIds.push(carId);
+    that.delCar(proIds);
   },
 
   //编辑购物车
@@ -260,5 +273,31 @@ Page({
       pro: proList
     })
     console.log("数量赋值：" + JSON.stringify(this.data.goodsVO));
+  },
+
+  //结算或是删除
+  carBtn:function(){
+    var that = this,
+        pro = that.data.pro,
+        countIndx = 0,
+        proIds = [];
+    for (var i = 0; i < pro.length; i++) {
+      if (pro[i].checked) {
+        countIndx++;
+        proIds.push(pro[i]['goodsCartId']);
+        console.log("选中了:"+countIndx);
+      } 
+    }
+    if(countIndx==0){
+      app.showToast('请勾选商品', that);
+      return false;
+    }
+    
+    if (that.data.editObj.editMark){//
+      that.delCar(proIds);
+      console.log("删除");
+    }else{
+      console.log("结算");
+    }
   }
 })
