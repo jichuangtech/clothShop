@@ -297,6 +297,9 @@ Page({
       that.delCar(proIds);
       console.log("删除");
     }else{
+      wx.navigateTo({
+        url: "../confirmOrder/confirmOrder"
+      })
       console.log("结算");
     }
   }

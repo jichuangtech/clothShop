@@ -18,10 +18,10 @@ Page({
 
   onLoad: function (options) {
    
-    console.log("商品Id:"+options.proId);
-    console.log("商品数量:" + options.proNum);
-    console.log("商品颜色:" + options.colorId);
-    console.log("商品价格:" + options.priceType);
+    console.log("09090" +(options));
+    console.log("proInfo" + JSON.stringify(options.proInfo));
+    console.log("取值" + (options.proInfo[0].productId));
+   
     this.setData({
       proId: options.proId,
       proNum: options.proNum,

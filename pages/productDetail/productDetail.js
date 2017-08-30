@@ -175,8 +175,17 @@ Page({
 
   //订单确认页面
   confirmOrder:function(){
+    var proInfo = [];
+    var proItem = {
+      productId: this.data.productId,
+      proNum: this.data.inputNum,
+      colorId: this.data.colorActive,
+      priceType: this.data.priceTypeActive
+    }
+    proInfo.push(proItem);
+    console.log(proInfo);
     wx.navigateTo({
-        url: "../confirmOrder/confirmOrder?proId=" + this.data.productId + "&proNum=" + this.data.inputNum + "&colorId=" + this.data.colorActive + "&priceType=" + this.data.priceTypeActive
+      url: "../confirmOrder/confirmOrder?proInfo="+proInfo
     })
   },
 
