@@ -1,4 +1,5 @@
 <!--myOrder.wxml-->
+<include src="../widget/toast.wxml" />
 <view class="wrapper">
 
   <view class="wrapper-top">
@@ -37,8 +38,8 @@
           <view class="i-b">
             金额：<text class="main-color">￥{{item.totalAmount}}</text>
           </view>
-          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==1}}">立即支付</view>
-          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==3}}">确认收货</view>
+          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==1}}" data-id="{{item.orderId}}">立即支付</view>
+          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==3}}" data-id="{{item.orderId}}" bindtap="changeStatus">确认收货</view>
         </view>
 
       </view>

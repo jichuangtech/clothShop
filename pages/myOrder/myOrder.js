@@ -69,5 +69,30 @@ Page({
         });
       }
     });
+  },
+
+  //确认收货
+  changeStatus:function(e){
+    var that = this,
+      orderId = e.currentTarget.dataset.id;
+    wx.request({
+      
+      url: that.data.domain + '/api/order/16777215/orderstatus/'+orderId+'/3',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.statusCode==200){
+          app.showToast('确认成功', that);
+          that.getOrderList();
+        }else{
+          app.showToast('确认失败', that);
+        }
+      },
+      fail: function () {
+        console.log("确认收货fail");
+      }
+    });
   }
 })

@@ -43,7 +43,7 @@
     <view class="dialog-img"><image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/cloth_goods_3_title"></image></view> 
     <view class="flex-1">
       <block wx:for="{{productInfo.goodsSpecs}}">
-          <view class="main-color">￥{{item.specPrice}}/{{item.specName}}</view>
+        <view class="main-color">￥{{item.specPrice}}/{{item.specName}}</view>
       </block>
       <view>库存{{productInfo.storeCount}}件</view>
       <view>选择 颜色分类</view>
@@ -53,7 +53,7 @@
     <view>颜色分类</view>
     <view class="colors-area">
       <block wx:for="{{productInfo.goodsColors}}">
-        <text class="color-item {{colorActive==item.colorId?'color-active':''}}" data-id='{{item.colorId}}' data-type="1" bindtap="chooseType">{{item.colorName}}</text>
+        <text class="color-item {{colorActive==item.colorId?'color-active':''}}" data-id='{{item.colorId}}'  data-name='{{item.colorName}}' data-type="1" bindtap="chooseType">{{item.colorName}}</text>
       </block>
     </view>
   </view>
@@ -62,7 +62,7 @@
     <view class="price-type dis-box">
       <block wx:for="{{productInfo.goodsSpecs}}">
         <view class="flex-1">
-          <view class="select-radio {{priceTypeActive==item.specId?'active':'unactive'}}" data-id='{{item.specId}}' data-name='{{item.specName}}' data-type="2" bindtap="chooseType"></view>
+          <view class="select-radio {{priceTypeActive==item.specId?'active':'unactive'}}" data-id='{{item.specId}}' data-name='{{item.specName}}'  data-price='{{item.specPrice}}' data-type="2" bindtap="chooseType"></view>
           {{item.specName}}
         </view>
       </block> 

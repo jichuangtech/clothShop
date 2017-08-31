@@ -280,11 +280,13 @@ Page({
     var that = this,
         pro = that.data.pro,
         countIndx = 0,
-        proIds = [];
+        proIds = [],
+        proSubmit = [];
     for (var i = 0; i < pro.length; i++) {
       if (pro[i].checked) {
         countIndx++;
         proIds.push(pro[i]['goodsCartId']);
+        proSubmit.push(pro[i]);
         console.log("选中了:"+countIndx);
       } 
     }
@@ -297,10 +299,10 @@ Page({
       that.delCar(proIds);
       console.log("删除");
     }else{
+      wx.setStorageSync("proInfo", proSubmit);
       wx.navigateTo({
         url: "../confirmOrder/confirmOrder"
       })
-      console.log("结算");
     }
   }
 })

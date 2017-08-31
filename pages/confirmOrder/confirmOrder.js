@@ -5,29 +5,22 @@ Page({
   data: {
     domain: app.config.domain,
     defalutAddreee:"",
-    proId: "",
-    proNum:"",
-    proDetail:"",
-    colorId:"",
-    priceType:"",
-    colorInfo:"",
-    priceInfo: "",
-    allMoney:0,
-    addressId:""
+    addressId:"",
+    proInfo:"",
+    allMoney:0
   },
 
   onLoad: function (options) {
-   
-    console.log("09090" +(options));
-    console.log("proInfo" + JSON.stringify(options.proInfo));
-    console.log("取值" + (options.proInfo[0].productId));
-   
+    console.log("onLoad");
+    var allMoney = 0;
+    var proInfo = wx.getStorageSync('proInfo');
+    console.log("参数:" + JSON.stringify(proInfo[0]));
+    for(var i=0;i<proInfo.length;i++){
+      allMoney = (parseFloat(allMoney) + parseFloat(proInfo[i].proNum * proInfo[i].shopPrice)).toFixed(2);
+    }
     this.setData({
-      proId: options.proId,
-      proNum: options.proNum,
-      colorId: options.colorId,
-      priceType: options.priceType,
-      addressId: options.addressId
+      proInfo: proInfo,
+      allMoney: allMoney
     });
   },
 
@@ -35,15 +28,12 @@ Page({
     console.log("onReady");
   },
   onShow: function () {
-    console.log("onLoad");
-    if (this.data.addressId) {
+    console.log("onShow");
+    if(this.data.addressId) {
       this.getAddressDetail();
     } else {
       this.getDefaultAddress();
     }
-    console.log("onShow");
-    
-  //  this.getProDetail();
   },
 
   //请求默认地址
@@ -59,7 +49,8 @@ Page({
       success: function (res) {
         if (res.data.statusCode==200){
           that.setData({
-            defalutAddreee:res.data.data
+            defalutAddreee:res.data.data,
+            addressId: res.data.data.addressId
           });
         }
         console.log("成功");
@@ -96,80 +87,46 @@ Page({
     });
   },
 
-  //获取商品详情
-  getProDetail:function(){
-    var that = this;
+  //提交订单
+  submitOrder: function () {
+    var that = this,
+      addressInfo = [
+        {
+          "colorId": 1,
+          "goodsId": 2,
+          "goodsNum": 5,
+          "specId": 2
+        },
+        {
+          "colorId": 1,
+          "goodsId": 2,
+          "goodsNum": 5,
+          "specId": 2
+        }
+      ];
+    console.log(typeof addressInfo);
+    console.log("长度："+addressInfo.length);
     wx.request({
-      url: that.data.domain + '/api/goods/' + that.data.proId + '',
+      url: that.data.domain + '/api/order/16777215',
       header: {
         'content-type': 'application/json'
       },
-      method: 'GET',
+      data:{
+        addressId: that.data.addressId,
+        goodsReqVOList: addressInfo,
+        userId: 16777215
+      },
+      method: 'POST',
       success: function (res) {
-        var priceInfo = res.data.goodsSpecs;
-        var colorInfo = res.data.goodsColors;
-        console.log("res.data.goodsSpecs:" + JSON.stringify(res.data.goodsSpecs));
-        console.log("res.data.goodsSpecs:" + that.data.priceType);
-        
-        for (var i = 0; i < priceInfo.length;i++){
-          if (priceInfo[i]["specId"] == that.data.priceType){
-            priceInfo = priceInfo[i];
-          }
+        if (res.data.statusCode == 200) {
+          app.showToast("订单提交成功", that);
+        }else{
+          app.showToast("订单提交失败", that);
         }
-        for (var i = 0; i < colorInfo.length; i++) {
-          if (colorInfo[i]["colorId"] == that.data.colorId) {
-            colorInfo = colorInfo[i];
-          }
-        }
-        that.setData({
-          colorInfo: colorInfo,
-          priceInfo: priceInfo,
-          proDetail: res.data,
-          allMoney: parseFloat(parseInt(that.data.proNum) * parseFloat(priceInfo['specPrice']))
-        });
       },
       fail: function () {
-        console.log("注册失败");
+        console.log("失败");
       }
     });
-  },
-
-  //立即购买
-  buyNow: function () {
-    //   if (this.data.colorActive == -1) {
-    //     app.showToast('请选择颜色分类~', this, 3000);
-    //   } else if (this.data.priceTypeActive == -1) {
-    //     app.showToast('请选择价格规格~', this, 3000);
-    //   } else {
-    //     var that = this;
-    //     wx.request({
-    //       url: that.data.domain + '/api/goodsCart',
-    //       data: {
-    //         goodsVO:{
-
-    //         }
-    //         "userId": 12,
-    //         "goodsId": this.data.productId,
-    //         "colorId": this.data.colorActive,
-    //         "goodsNum": this.data.inputNum,
-    //         "specId": this.data.priceTypeActive
-    //       },
-    //       header: {
-    //         'content-type': 'application/json'
-    //       },
-    //       method: 'POST',
-    //       success: function (res) {
-    //         if (res.data.statusCode == 200) {
-    //           that.hideDialog();
-    //           app.showToast('添加成功，在购物车等亲~', that, 5000);
-    //         } else {
-    //           app.showToast('嗷嗷，购物车添加失败~', that, 3000);
-    //         }
-    //       },
-    //       fail: function () {
-    //         console.log("失败");
-    //       }
-    //     });
-    //   }
   },
 })

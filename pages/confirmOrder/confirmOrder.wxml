@@ -1,4 +1,5 @@
 <!--confirmOrder.wxml-->
+<include src="../widget/toast.wxml" />
 <view class="wrapper">
 
   <navigator class="wrapper-top receive-address" url="../addressList/addressList">
@@ -9,23 +10,24 @@
     <view class="address-detail">收货地址：{{defalutAddreee.address}}</view>
   </navigator>
   <view class="pro-info">
-
-    <view class="pro-item dis-box">
-      <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{proDetail.originalImg}}"></image>
-      <view class="item-info flex-1">
-        <view class="item-desc">{{proDetail.goodsContent}}</view>
-        <view>{{colorInfo.colorName}}</view>
-        <view class="item-num-price dis-box">
-          <text class="item-price main-color">￥{{priceInfo.specPrice}}/{{priceInfo.specName}}</text>
-          <text>X{{proNum}}</text>
+    <block wx:for="{{proInfo}}">
+      <view class="pro-item dis-box">
+        <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+        <view class="item-info flex-1">
+          <view class="item-desc">{{item.goodsName}}</view>
+          <view>{{item.color}}</view>
+          <view class="item-num-price dis-box">
+            <text class="item-price main-color">￥{{item.shopPrice}}/{{item.specName}}</text>
+            <text>X{{item.proNum}}</text>
+          </view>
         </view>
       </view>
-    </view>
+    </block>
 
   </view>
   <view class="wrapper-footer dis-box">
     <view class="count-money flex-1">合计：￥{{allMoney}}</view>
-    <view class="confirm-btn">提交订单</view>
+    <view class="confirm-btn" bindtap="submitOrder">提交订单</view>
   </view>
 
 </view>

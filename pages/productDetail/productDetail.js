@@ -8,8 +8,11 @@ Page({
     storeCount:0,
     inputNum:1,
     productId:"",
-    colorActive:-1,
-    priceTypeActive:-1,
+    colorActive: -1,
+    colorName:"",
+    priceTypeActive: -1,
+    price:0,
+    priceTypeName:"",
     btnObj:{
       btnType:-1,
       btnMark:false
@@ -113,15 +116,20 @@ Page({
 
   //选择颜色与价格规格
   chooseType:function(e){
-    let id = e.currentTarget.dataset.id,
-        type = e.currentTarget.dataset.type;
-    if(type==1){
+    var id = e.currentTarget.dataset.id,
+        name = e.currentTarget.dataset.name,
+        price = e.currentTarget.dataset.price,
+        clickType = e.currentTarget.dataset.type;
+    if (clickType==1){
       this.setData({
-        colorActive: id
+        colorActive: id,
+        colorName: name
       })
     }else{
       this.setData({
-        priceTypeActive: id
+        priceTypeActive: id,
+        priceTypeName: name,
+        price: price
       })
     }
   },
@@ -177,15 +185,20 @@ Page({
   confirmOrder:function(){
     var proInfo = [];
     var proItem = {
-      productId: this.data.productId,
+      productId: this.data.productInfo.goodsId,
+      goodsName: this.data.productInfo.goodsName,
+      originalImg: this.data.productInfo.originalImg,
       proNum: this.data.inputNum,
       colorId: this.data.colorActive,
-      priceType: this.data.priceTypeActive
-    }
+      color: this.data.colorName,
+      specId: this.data.priceTypeActive,
+      specName: this.data.priceTypeName,
+      shopPrice: this.data.price
+    };
     proInfo.push(proItem);
-    console.log(proInfo);
+    wx.setStorageSync('proInfo', proInfo);
     wx.navigateTo({
-      url: "../confirmOrder/confirmOrder?proInfo="+proInfo
+      url: "../confirmOrder/confirmOrder"
     })
   },
 

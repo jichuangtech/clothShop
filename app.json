@@ -2,11 +2,11 @@
   "pages": [
     "pages/home/home",
     "pages/confirmOrder/confirmOrder",
-    "pages/shoppingCar/shoppingCar",
     "pages/addressList/addressList",
+    "pages/shoppingCar/shoppingCar",
+    "pages/productDetail/productDetail",
     "pages/editAddress/editAddress",
     "pages/myOrder/myOrder",
-    "pages/productDetail/productDetail",
     "pages/profile/profile",
     "pages/productList/productList",
     "pages/index/index",
