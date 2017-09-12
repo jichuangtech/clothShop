@@ -51,7 +51,7 @@ Page({
         that.setData({
           orderList: res.data.data
         });
-        if (that.data.orderList.length!=0){
+        if (that.data.orderList){
           that.setData({
             loadMark: false
           });
@@ -77,7 +77,7 @@ Page({
       orderId = e.currentTarget.dataset.id;
     wx.request({
       
-      url: that.data.domain + '/api/order/16777215/orderstatus/'+orderId+'/3',
+      url: that.data.domain + '/api/order/16777215/orderstatus/'+orderId+'/4',
       header: {
         'content-type': 'application/json'
       },

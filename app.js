@@ -11,16 +11,38 @@ App({
   },
 
   getUserInfo: function(cb) {
-    var that = this
+    var that = this;
+    console.log("测试:"+this.globalData.userInfo);
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
+      console.log("测试调用");
       //调用登录接口
-      wx.getUserInfo({
-        withCredentials: false,
-        success: function(res) {
-          that.globalData.userInfo = res.userInfo
-          typeof cb == "function" && cb(that.globalData.userInfo)
+      wx.login({
+        success: function (r) {
+          console.log("login:" + JSON.stringify(r));
+          wx.getUserInfo({
+            withCredentials: false,
+            success: function(res) {
+              console.log("用户信息成功");
+              that.globalData.userInfo = res.userInfo
+              typeof cb == "function" && cb(that.globalData.userInfo)
+            },
+            complete:function(){
+              console.log("用户信息完成");
+            },
+            fail:function(res){//弹出警告
+              wx.openSetting({
+                success: function (res) {
+                    if (!res.authSetting["scope.userInfo"] || !res.authSetting["scope.userLocation"]) {
+                      that.globalData.userInfo = res.userInfo
+                      typeof cb == "function" && cb(that.globalData.userInfo)
+                    }
+                  }
+                })
+              console.log("用户信息失败"+JSON.stringify(res));
+            }
+          })
         }
       })
     }

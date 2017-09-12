@@ -16,7 +16,7 @@ Page({
     var proInfo = wx.getStorageSync('proInfo');
     console.log("参数:" + JSON.stringify(proInfo[0]));
     for(var i=0;i<proInfo.length;i++){
-      allMoney = (parseFloat(allMoney) + parseFloat(proInfo[i].proNum * proInfo[i].shopPrice)).toFixed(2);
+      allMoney = (parseFloat(allMoney) + parseFloat(proInfo[i].goodsNum * proInfo[i].shopPrice)).toFixed(2);
     }
     this.setData({
       proInfo: proInfo,

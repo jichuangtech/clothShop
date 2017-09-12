@@ -7,9 +7,18 @@
     </view>
   </view>
   <view class="wrapper-content menu-list b-l">
-    <navigator class="menu-item b-l" data-rel="auto" url="../myOrder/myOrder">我的订单</navigator>
-    <navigator class="menu-item b-l" url="../addressList/addressList">收获地址</navigator>
-    <view class="service-item menu-item b-l" bindtap="phoneCall">联系客服</view>
+    <navigator class="menu-item dis-box b-l" data-rel="auto" url="../myOrder/myOrder">
+      <image src='../../images/icon/order-icon.png'></image>
+      <view class='flex-1'>我的订单</view>
+      </navigator>
+    <navigator class="menu-item dis-box b-l" url="../addressList/addressList">
+      <image src="../../images/icon/address-icon.png"></image>
+      <view class='flex-1'>收获地址</view>
+    </navigator>
+    <view class="service-item menu-item dis-box b-l" bindtap="phoneCall">
+      <image src="../../images/icon/service-icon.png"></image>
+      <view class='flex-1'>联系客服</view>
+    </view>
   </view>
   <!-- <view class="usermotto">
     <text class="user-motto">{{motto}}</text>

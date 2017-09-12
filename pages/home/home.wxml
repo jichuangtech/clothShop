@@ -5,10 +5,10 @@
 <view class="wrapper">
   <!-- 1顶部广告栏-->
   <swiper class="swiper-wrapper" indicator-dots="true" autoplay="true" interval="2000" duration="1000">
-    <block wx:for="{{recommendList}}" wx:key="{{index}}" >
+    <block wx:for="{{recommendList}}">
       <swiper-item>
         <navigator  url="../productDetail/productDetail?id={{item.goodsId}}">
-          <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg==''?'../res/img/product-default.png':item.originalImg}}" class="swiper-img"/>
+          <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}" class="swiper-img"/>
         </navigator>
       </swiper-item>
     </block>
@@ -16,14 +16,14 @@
 
   <!-- 2中间的产品菜单-->
   <view class="product-menu" >
-    <template wx:for="{{productType}}" wx:key="{{index}}" wx:for-item="menuItemData" is="menuItem" data="{{...menuItemData}}"/>
+    <template wx:for="{{productType}}" wx:for-item="menuItemData" is="menuItem" data="{{...menuItemData}}"/>
     <view class="load-tip" wx-if="{{loadMark}}">{{loadTip}}</view>
   </view>
  <!-- 3底部进行 scroll-view 的 热门产品展示 -->
   <view class="hot-product">
     <block  wx:for="{{hotProList}}" wx:key="{{index}}">
       <view class="hot-item">
-        <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg==''?'../res/img/product-default.png':item.originalImg}}"></image> 
+        <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image> 
         <view class="item-desc">{{item.goodsContent}}</view>
         <view class="dis-box">
           <view class="main-color flex-1">

@@ -1,7 +1,7 @@
 /**home.wxss**/
 .swiper-wrapper {
   width: 100%;
-  height:22%;
+  height:150px;
 }
 .swiper-wrapper navigator{
   height: 100%;

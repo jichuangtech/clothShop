@@ -1,0 +1,21 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class="wrapper">
+  <view class="wrapper-top receive-address">
+    <view class="dis-box">
+      <view class="receiver-name flex-1">收货人：{{addressInfo.consignee}}</view>
+      <view class="receiver-phone">{{addressInfo.mobile}}</view>
+    </view>
+    <view class="address-detail">收货地址：{{addressInfo.address}}</view>
+  </view>
+</view>
+
+addressInfo
+
+
+
+
+
+
+
+
+

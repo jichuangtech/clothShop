@@ -12,7 +12,7 @@
 
   <view class="wrapper-content">
     <block wx:for="{{orderList}}">
-      <view class="order-item">
+      <navigator class="order-item" url="../orderDetail/orderDetail?orderid={{item.orderId}}">
 
         <view class="item-top">
           <view class="order-id i-b">
@@ -42,7 +42,7 @@
           <view class="item-btn i-b fr" wx:if="{{item.orderStatus==3}}" data-id="{{item.orderId}}" bindtap="changeStatus">确认收货</view>
         </view>
 
-      </view>
+      </navigator>
     </block>
     <view class="load-tip" wx:if="{{loadMark}}">{{loadTip}}</view>
   </view>

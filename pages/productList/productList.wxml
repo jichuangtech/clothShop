@@ -8,7 +8,7 @@
     <view class="product-list">
       <block wx:for="{{list}}" wx:key="{{index}}">
         <view class="list-item dis-box">
-          <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg==''?'../res/img/product-default.png':item.originalImg}}"></image>
+          <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
           <view class="item-info flex-1">
             <view class="item-desc">{{item.goodsContent}}</view>
             <view class="">

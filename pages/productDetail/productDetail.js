@@ -188,7 +188,7 @@ Page({
       productId: this.data.productInfo.goodsId,
       goodsName: this.data.productInfo.goodsName,
       originalImg: this.data.productInfo.originalImg,
-      proNum: this.data.inputNum,
+      goodsNum: this.data.inputNum,
       colorId: this.data.colorActive,
       color: this.data.colorName,
       specId: this.data.priceTypeActive,

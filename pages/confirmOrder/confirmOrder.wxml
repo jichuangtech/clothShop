@@ -2,12 +2,13 @@
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
 
-  <navigator class="wrapper-top receive-address" url="../addressList/addressList">
-    <view class="dis-box">
-      <view class="receiver-name flex-1">收货人：{{defalutAddreee.consignee}}</view>
+  <navigator class="wrapper-top receive-address dis-box" url="../addressList/addressList">
+    <image src="../../images/icon/address-icon.png"></image>
+    <view class="flex-1">
+      <view class="receiver-name">收货人：{{defalutAddreee.consignee}}</view>
       <view class="receiver-phone">{{defalutAddreee.mobile}}</view>
+      <view class="address-detail">收货地址：{{defalutAddreee.address}}</view>
     </view>
-    <view class="address-detail">收货地址：{{defalutAddreee.address}}</view>
   </navigator>
   <view class="pro-info">
     <block wx:for="{{proInfo}}">
@@ -18,7 +19,7 @@
           <view>{{item.color}}</view>
           <view class="item-num-price dis-box">
             <text class="item-price main-color">￥{{item.shopPrice}}/{{item.specName}}</text>
-            <text>X{{item.proNum}}</text>
+            <text>X{{item.goodsNum}}</text>
           </view>
         </view>
       </view>
