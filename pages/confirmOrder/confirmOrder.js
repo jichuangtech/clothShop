@@ -20,7 +20,8 @@ Page({
     }
     this.setData({
       proInfo: proInfo,
-      allMoney: allMoney
+      allMoney: allMoney,
+      addressId: options.id
     });
   },
 

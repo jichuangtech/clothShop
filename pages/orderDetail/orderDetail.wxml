@@ -1,16 +1,43 @@
 <!--pages/orderDetail/orderDetail.wxml-->
 <view class="wrapper">
-  <view class="wrapper-top receive-address">
+  <view class='order-status'>{{orderStatus[orderInfo.orderStatus]}}</view>
+  <view class="receive-address">
     <view class="dis-box">
-      <view class="receiver-name flex-1">收货人：{{addressInfo.consignee}}</view>
-      <view class="receiver-phone">{{addressInfo.mobile}}</view>
+      <view class="receiver-name flex-1">收货人：{{orderInfo.consignee}}</view>
+      <view class="receiver-phone">{{orderInfo.mobile}}</view>
     </view>
-    <view class="address-detail">收货地址：{{addressInfo.address}}</view>
+    <view class="address-detail">收货地址：{{orderInfo.address}}</view>
   </view>
+
+    <view class="pro-info">
+      <block wx:for="{{orderInfo.goodsVO}}">
+        <view class="pro-item dis-box">
+          <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+          <view class="item-info flex-1">
+            <view class="item-desc">{{item.goodsName}}</view>
+            <view>{{item.color}}</view>
+            <view class="item-num-price dis-box">
+              <text class="item-price main-color">￥{{item.shopPrice}}/{{item.specName}}</text>
+              <text>X{{item.goodsNum}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='total-money detail-item dis-box'>
+      <view>订单总价：</view>
+      <view>￥{{orderInfo.totalAmount}}</view>
+    </view>
+    <view class='detail-item dis-box' wx:if="{{orderInfo.orderStatus==1}}">
+      <view>需付款：</view>
+      <view class='main-color'>￥{{orderInfo.totalAmount}}</view>
+    </view>
+    <view wx:if="{{orderInfo.orderStatus==1}}">
+      <view class="item-btn" data-id="{{orderInfo.orderId}}">立即支付</view>
+      <navigator class="item-btn" data-id="{{orderInfo.orderId}}" url="../addressList/addressList?pagetype=1">修改地址</navigator>
+    </view>
+    <view class="item-btn" wx:if="{{orderInfo.orderStatus==3}}" data-id="{{orderInfo.orderId}}">确认收货</view>
 </view>
-
-addressInfo
-
 
 
 

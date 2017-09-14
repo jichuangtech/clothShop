@@ -6,7 +6,8 @@ Page({
   data: {
     domain: app.config.domain,
     orderId:"",
-    addressInfo:""
+    orderInfo:"",
+    orderStatus:['','等待买家付款','等待卖家发货','卖家已发货','交易成功']
   },
 
   onLoad: function (options) {
@@ -28,35 +29,30 @@ Page({
   
   },
 
-  //请求收获地址
-  getAddress: function () {
-    var that = this,
-        addressInfo = "";
+  //订单信息
+  getOrderInfo:function(){
+    var that = this;
     wx.request({
-      url: that.data.domain + '/api/useraddress/address/' + that.data.addressId + '',
+      url: that.data.domain + '/api/order/detail/' + that.data.orderId+'',
       header: {
         'content-type': 'application/json'
       },
       method: 'GET',
       success: function (res) {
         if (res.data.statusCode == 200) {
-          addressInfo = res.data.data;
-          addressInfo['address'] = res.data.data['provinceName'] + res.data.data['cityName'] + res.data.data['districtName'] + res.data.data['address'];
           that.setData({
-            addressInfo: addressInfo
+            orderInfo: res.data.data,
+            test:"刚刚"
           })
-          console.log('成功');
+           console.log('成功' + JSON.stringify(that.data.orderInfo));
+          console.log('成功' + (that.data.orderInfo.address));
+          console.log('成功地址' + (res.data.data.address));
         }
       },
       fail: function () {
         console.log("失败");
       }
     });
-  },
-
-  //订单信息
-  getOrderInfo:function(){
-
   }
 
 })

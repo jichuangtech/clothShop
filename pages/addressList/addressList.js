@@ -5,11 +5,15 @@ Page({
 
   data: {
     domain: app.config.domain,
-    addressList:[]
+    addressList:[],
+    pageType:""//0 确认订单页； 2 订单详情页
   },
 
   onLoad: function (options) {
-    
+    console.log("获取："+options.pagetype);
+    this.setData({
+      pageType:options.pagetype
+    });
   },
 
   onReady: function () {
@@ -97,5 +101,24 @@ Page({
         console.log("失败");
       }
     });
+  },
+
+  //选择地址后的回调
+  selectAddress:function(e){
+    console.log("这里呀呀呀呀"+this.data.pageType);
+    var addressId = e.currentTarget.dataset.id,
+        url = "../confirmOrder/confirmOrder?id=" + addressId;
+    if (this.data.pageType==1){
+      url = "../orderDetail/orderDetail?id=" + addressId;
+    }
+    wx.redirectTo({
+      url: url,
+      success: function (res) {
+        console.log("跳转"+JSON.stringify(res));
+      },
+      fail: function (res) {
+        console.log("跳转" + JSON.stringify(res));
+      }
+    })
   }
 })

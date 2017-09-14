@@ -4,7 +4,7 @@
   <view class="address-list">
     <block wx:for="{{addressList}}">
       <view class="address-item">
-        <navigator class="address-top" url="../confirmOrder/confirmOrder?addressId={{item.addressId}}">
+        <view class="address-top" data-id="{{item.addressId}}" bindtap='selectAddress'>
             <view class="receiver-info">
               <view>
                 <text class="receiver-name">{{item.consignee}}</text>
@@ -15,7 +15,7 @@
             <!-- <navigator url="../editAddress/editAddress?addressId={{item.addressId}}">
               <view class="edit-address" src="/../../../images/icon/e1dit-icon.png"></view>
             </navigator> -->
-        </navigator>
+        </view>
         <view class="modifiy-address dis-box">
           <view class="set-defalut flex-1" data-id="{{item.addressId}}" data-isdefault="{{item.isDefault}}" bindtap="setDefalut">
             <view class="select-radio {{item.isDefault==0?'active':'unactive'}}"></view>

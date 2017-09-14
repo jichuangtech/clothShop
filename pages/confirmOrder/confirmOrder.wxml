@@ -2,7 +2,7 @@
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
 
-  <navigator class="wrapper-top receive-address dis-box" url="../addressList/addressList">
+  <navigator class="wrapper-top receive-address dis-box" url="../addressList/addressList?pagetype=0">
     <image src="../../images/icon/address-icon.png"></image>
     <view class="flex-1">
       <view class="receiver-name">收货人：{{defalutAddreee.consignee}}</view>
@@ -24,7 +24,6 @@
         </view>
       </view>
     </block>
-
   </view>
   <view class="wrapper-footer dis-box">
     <view class="count-money flex-1">合计：￥{{allMoney}}</view>
