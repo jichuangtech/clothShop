@@ -1,6 +1,7 @@
 <!--addressList.wxml-->
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
+  <view class='none-data' wx:if="{{addressLength==0}}">无收获地址的数据，赶紧添加吧~</view>
   <view class="address-list">
     <block wx:for="{{addressList}}">
       <view class="address-item">
@@ -33,5 +34,5 @@
       </view>
     </block>
   </view>
-  <navigator class="add-btn" url="../editAddress/editAddress">+ 添加地址</navigator>
+  <navigator class="add-btn" url="../editAddress/editAddress?addressLen={{addressLength}}">+ 添加地址</navigator>
 </view>

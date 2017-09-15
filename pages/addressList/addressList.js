@@ -6,7 +6,8 @@ Page({
   data: {
     domain: app.config.domain,
     addressList:[],
-    pageType:""//0 确认订单页； 2 订单详情页
+    pageType:"",//0 确认订单页； 2 订单详情页
+    addressLength: 0
   },
 
   onLoad: function (options) {
@@ -38,9 +39,12 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        that.setData({
-          addressList:res.data.data
-        })
+        if (res.data.statusCode==200 && res.data.data.length!=0){
+          that.setData({
+            addressList:res.data.data,
+            addressLength: res.data.data.length
+          });
+        }
         console.log(JSON.stringify(res.data.data));
       },
       fail: function () {
@@ -52,7 +56,7 @@ Page({
   delAddress:function(e){
     var that = this,
         id = e.currentTarget.dataset.id;
-    if(!id){
+    if (!id || that.data.addressLength==1){
       return false;
     }
     wx.request({

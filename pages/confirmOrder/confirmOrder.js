@@ -7,7 +7,8 @@ Page({
     defalutAddreee:"",
     addressId:"",
     proInfo:"",
-    allMoney:0
+    allMoney:0,
+    defaulMark:false
   },
 
   onLoad: function (options) {
@@ -51,7 +52,8 @@ Page({
         if (res.data.statusCode==200){
           that.setData({
             defalutAddreee:res.data.data,
-            addressId: res.data.data.addressId
+            addressId: res.data.data.addressId,
+            defaulMark:true
           });
         }
         console.log("成功");
@@ -77,7 +79,8 @@ Page({
           addressInfo = res.data.data;
           addressInfo['address'] = res.data.data['provinceName'] + res.data.data['cityName'] + res.data.data['districtName']+res.data.data['address'];
           that.setData({
-            defalutAddreee: addressInfo
+            defalutAddreee: addressInfo,
+            defaulMark: true
           })
           console.log('成功');
         }
@@ -90,6 +93,7 @@ Page({
 
   //提交订单
   submitOrder: function () {
+    
     var that = this,
       addressInfo = [
         {
@@ -105,6 +109,10 @@ Page({
           "specId": 2
         }
       ];
+    if (!that.data.defaulMark) {
+      app.showToast("您还没添加收获地址", that);
+      return false;
+    }
     console.log(typeof addressInfo);
     console.log("长度："+addressInfo.length);
     wx.request({

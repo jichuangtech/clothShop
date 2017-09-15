@@ -144,9 +144,14 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    if (options.addressLen!=0){
+      that.setData({
+        isDefault: 1
+      })
+    }
     if(options.id){
       that.setData({
-        editId: options.id,
+        editId: options.id
       })
       that.getAddressDetail();
     }
@@ -195,26 +200,13 @@ Page({
         return false
       }
     }
-    
-    console.log("that.data.districtId:" + JSON.stringify({
-      "address": that.data.infoObj[2]['text'],
-      "addressId": that.data.editId,
-      "consignee": that.data.infoObj[0]['text'],
-      "isDefault": 1,
-      "mobile": that.data.infoObj[1]['text'],
-      "userId": 16777215,
-      "zipcode": "361000",
-      "province": that.data.provinceId,
-      "city": that.data.cityId,
-      "district": that.data.districtId,
-    }));
     wx.request({
       url: that.data.domain + '/api/useraddress/address',
       data: {
         "address": that.data.infoObj[2]['text'],
         "addressId": that.data.editId,
         "consignee": that.data.infoObj[0]['text'],
-        "isDefault": 1,
+        "isDefault": that.data.isDefault,
         "mobile": that.data.infoObj[1]['text'],
         "userId": 16777215,
         "zipcode": "361000",
@@ -229,7 +221,7 @@ Page({
       success: function (res) {
         if (res.data.statusCode==200){
           app.showToast("保存成功",that);
-          wx.navigateTo({
+          wx.redirectTo({
             url:"../addressList/addressList"
           })
         }
