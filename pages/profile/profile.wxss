@@ -1,7 +1,10 @@
+.wrapper{
+  color:#000;
+}
 .wrapper-top{
   background-color: #fff;
   margin-bottom: 20rpx;
-  padding: 20rpx 0;
+  padding: 99.306rpx 0;
 }
 .userinfo {
   display: flex;
@@ -10,8 +13,8 @@
 }
 
 .userinfo-avatar {
-  width: 200rpx;
-  height: 200rpx;
+  width: 160.417rpx;
+  height: 160.417rpx;
   margin: 0 auto;
   border-radius: 50%;
 }

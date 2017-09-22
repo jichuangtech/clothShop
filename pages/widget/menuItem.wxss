@@ -6,11 +6,12 @@
 }
 .product-menu .menu-icon{
   display: block;
-  height: 50px;
+  height: 104.86rpx;
   margin: 0 auto;
-  width: 50px;
+  width: 104.86rpx;
 }
 .product-menu .menu-name{
-    font-size: 12px;
+    color: #000;
+    font-size: 30.944rpx;
     margin-top: 3px;
 }

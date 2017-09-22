@@ -11,11 +11,11 @@
   </swiper> -->
   <view class="wrapper-content">
     <view class="product-info">
-      <view class="product-desc">{{productInfo.goodsContent}}</view>
-      <view class="product-name">{{productInfo.goodsName}}</view>
-      <view class="product-price">
+      <view class="product-desc product-item">{{productInfo.goodsContent}}</view>
+      <view class="product-name product-item">{{productInfo.goodsName}}</view>
+      <view class="product-price product-item">
         <block wx:for="{{productInfo.goodsSpecs}}">
-            <view class="main-color">￥{{item.specPrice}}/{{item.specName}}</view>
+            <text class="main-color">￥{{item.specPrice}}/{{item.specName}}</text>
         </block>
       </view>
       <view class="product-num dis-box">

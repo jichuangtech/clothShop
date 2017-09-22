@@ -2,15 +2,18 @@
   font-size:14px;
 }
 .wrapper-top{
-  height: 150px;
+  height: 486.111rpx;
 }
 .product-info{
   background-color: #fff;
-  line-height: 1.6;
-  padding: 10px 15px;
+  padding: 36.111rpx 15px;
 }
-.product-info .product-price{
+.product-info .product-item{
+  margin-bottom: 36.111rpx;
+}
+.product-info .product-price text{
   color:#F40;
+  margin-right: 5px;
 }
 .product-info .product-num{
   color: #8d8d8d

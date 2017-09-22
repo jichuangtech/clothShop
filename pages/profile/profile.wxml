@@ -7,10 +7,11 @@
     </view>
   </view>
   <view class="wrapper-content menu-list b-l">
+
     <navigator class="menu-item dis-box b-l" data-rel="auto" url="../myOrder/myOrder">
-      <image src='../../images/icon/order-icon.png'></image>
       <view class='flex-1'>我的订单</view>
-      </navigator>
+      <view>查看更多订单</view>
+    </navigator>
     <navigator class="menu-item dis-box b-l" url="../addressList/addressList">
       <image src="../../images/icon/address-icon.png"></image>
       <view class='flex-1'>收获地址</view>
