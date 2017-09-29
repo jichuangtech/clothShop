@@ -6,6 +6,7 @@
 
 .list-item{
   background-color: #fff;
+  font-size: 14px;
   margin-bottom: 8px;
   padding: 10px 5px;
 }

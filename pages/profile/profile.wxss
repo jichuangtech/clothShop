@@ -22,31 +22,47 @@
   color: #aaa;
   margin-top: 10px;
 }
-.menu-list .menu-item{
+.content-item{
   background-color: #fff;
-  border-top:1px solid #f2f2f2;
-  color:#777;
+  color: #000;
   font-size: 14px;
+  padding: 15px 20px;
+  position: relative;
+}
+.check-more{
+  color: #666;
+}
+.order-status{
+  background-color: #fff;
+  border-top:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
+  color: #333;
+  font-size: 12px;
+  margin: 18rpx 0;
+  padding: 10px 30px;
+}
+.order-status image{
+  display: block;
+  margin:0 auto 5px;
+  height: 25px;
+  width: auto;
+
+}
+.service-item{
+  border-top:1px solid #f2f2f2;
   margin-bottom: 10rpx;
-  padding: 15px;
   position: relative;
   text-align: left;
 }
-.menu-list .menu-item image{
-  height: 21px;
-  width: 21px;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-.menu-list .menu-item::after{
+.content-item::after{
  position: absolute;
  content: "";
  right: 15px;
  top: 50%;
- border-top:1px solid #bbb; 
- border-right:1px solid #bbb; 
- height: 10px;
- width: 10px;
+ border-top:1px solid #c8c8c8; 
+ border-right:1px solid #c8c8c8; 
+ height:8px;
+ width:8px;
  -webkit-transform: rotate(45deg) translateY(-50%);
           transform: rotate(45deg) translateY(-50%);
-}
+} 

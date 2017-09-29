@@ -20,25 +20,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log("获取：" + options.orderStatus);
+    if (options.orderStatus){
+      this.setData({
+        currentId: options.orderStatus
+      });
+    }
+    this.getOrderList();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+   // this.getOrderList();
+  },
+
+  //触发订单状态
+  checkStatus:function(e){
+    if (e) {
+      let id = e.currentTarget.dataset.status;
+      this.setData({
+        currentId: id
+      })
+    }
     this.getOrderList();
   },
 
   //获取订单
   getOrderList:function(e){
-    if(e){
-      let id = e.currentTarget.dataset.status;
-      this.setData({
-        currentId: id
-    })
-    }
-
+    
     var that = this;
     wx.request({
       url: that.data.domain + '/api/order/16777215/'+that.data.currentId+'',

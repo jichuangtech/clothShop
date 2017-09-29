@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/profile/profile",
     "pages/home/home",
+    "pages/profile/profile",
     "pages/confirmOrder/confirmOrder",
     "pages/addressList/addressList",
     "pages/shoppingCar/shoppingCar",
@@ -23,7 +23,7 @@
   },
   "tabBar": {
     "color": "#ccc",
-    "selectedColor": "#35495e",
+    "selectedColor": "#ff4444",
     "borderStyle": "white",
     "backgroundColor": "#f9f9f9",
     "list": [

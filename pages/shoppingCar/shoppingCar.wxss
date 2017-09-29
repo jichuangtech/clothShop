@@ -1,8 +1,11 @@
 /* shoppingCar.wxss */
 .wrapper{
+  background-color: #fff;
+  color: #000;
   font-size: 12px;
 }
 .wrapper-top{
+  border-bottom: 1px solid #e5e5e5;
   height: 40px;
   line-height: 40px;
   padding:0  15px;
@@ -11,10 +14,19 @@
   padding-bottom: 50px;
 }
 .wrapper-content .car-item {
-  background-color: #e5e5e5;
   margin-bottom: 10px;
   padding: 10px 15px;
   position: relative;
+}
+.wrapper-content .car-item::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  right: 0;
+  left: 115px;
+  background-color: #e5e5e5;
+  height: 1px;
+  width: 100%;
 }
 .wrapper-content .car-item .del-btn{
   position: absolute;
@@ -22,7 +34,7 @@
   top:0;
   bottom: 0;
   right: 0;
-  background-color: #FF0000;
+  background-color: #ff4444;
   color: #fff;
   font-size: 16px;
   line-height: 83px;
@@ -50,9 +62,11 @@
   width: 50%;
 }
 .wrapper-content .car-item .item-info .item-info-bottom .num{
+  color: #999;
   text-align: right;
 }
 .wrapper-top  .edit-list{
+  color: #999;
   width:50px;
 }
 .wrapper-footer{
@@ -62,8 +76,9 @@
   right: 0;
   background-color: #fff;
   border-top:1px solid #e5e5e5;
+  color: #999;
   font-size: 12px;
-  height: 50px;
+  height: 115rpx;
   padding-left: 15px;
 }
 .count-money{
@@ -78,7 +93,7 @@
   width: 100px;
 }
 .wrapper-footer .buy-btn.active{
-  background-color: #F40;
+  background-color: #ff4444;
   color:#fff;
 }
 .car-none{

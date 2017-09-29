@@ -5,7 +5,7 @@
   <view class="wrapper-top">
     <scroll-view class="order-tabs" scroll-x="true">
     <block wx:for="{{tabInfo}}">
-      <view class="order-tab {{currentId == item.tabStatus ? 'active': ''}}" data-status="{{item.tabStatus}}"bindtap="getOrderList">{{item.tabName}}</view>
+      <view class="order-tab {{currentId == item.tabStatus ? 'active': ''}}" data-status="{{item.tabStatus}}" bindtap="checkStatus">{{item.tabName}}</view>
       </block>
     </scroll-view>
   </view>
@@ -18,7 +18,7 @@
           <view class="order-id i-b">
             订单编号：<text>{{item.orderSn}}</text>
           </view>
-          <view class="order-status i-b fr" wx:if="{{item.orderStatus==1 || item.orderStatus==3}}">{{tabInfo[item.orderStatus].tabName}}</view>
+          <view class="order-status main-color i-b fr" wx:if="{{item.orderStatus==1 || item.orderStatus==3}}">{{tabInfo[item.orderStatus].tabName}}</view>
         </view>
         <block wx:for="{{item.goodsVO}}">
           <view class="item-middle">
@@ -26,9 +26,9 @@
             <view class="item-info flex-1">
               <view class="item-desc">{{item.goodsName}}</view>
               <!-- <view class="item-desc">{{item.color}}</view> -->
-              <view class="item-num-price">
-                <text class="item-num i-b">X{{item.goodsNum}}</text>
-                <text>￥{{item.shopPrice}}/{{item.specName}}</text>
+              <view class="item-num-price dis-box">
+                <view>￥{{item.shopPrice}}/{{item.specName}}</view>
+                <view class="item-num">X{{item.goodsNum}}</view>
               </view>
             </view>
           </view>
@@ -36,10 +36,10 @@
 
         <view class="item-bottom">
           <view class="i-b">
-            金额：<text class="main-color">￥{{item.totalAmount}}</text>
+            合计：<text class="main-color">￥{{item.totalAmount}}</text>
           </view>
-          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==1}}" data-id="{{item.orderId}}">立即支付</view>
-          <view class="item-btn i-b fr" wx:if="{{item.orderStatus==3}}" data-id="{{item.orderId}}" bindtap="changeStatus">确认收货</view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==1}}" data-id="{{item.orderId}}">立即支付</view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==3}}" data-id="{{item.orderId}}" bindtap="changeStatus">确认收货</view>
         </view>
 
       </navigator>

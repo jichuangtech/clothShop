@@ -1,11 +1,13 @@
 .wrapper{
   font-size:14px;
+  color: #000;
 }
 .wrapper-top{
   height: 486.111rpx;
 }
 .product-info{
   background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
   padding: 36.111rpx 15px;
 }
 .product-info .product-item{
@@ -23,8 +25,9 @@
 }
 .choose-colors{
   background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  margin-top: 5px;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 15px 0;
   padding: 10px 15px;
   position: relative;
 }
@@ -42,10 +45,12 @@
           transform: rotate(-45deg);
 }
 .product-detail {
-  margin-top: 30px;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 15px;
 }
 .product-detail .detail-title{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ababab;
   margin: 0 auto;
   margin-bottom: 20px;
   height: 1px;
@@ -53,7 +58,7 @@
   width: 200px;
 }
 .product-detail .detail-title:after{
-  background-color: #f4f5f7;
+  background-color: #fff;
   position:absolute;
   content: "商品详情";
   left: 50%;
@@ -69,8 +74,8 @@
 }
 .btns{
   color: #fff;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   position: fixed;
   left: 0;
   right: 0;
@@ -78,10 +83,10 @@
   text-align: center;
 }
 .btns .car-btn{
-  background-color: #fe7000;
+  background-color: #ff632a;
 }
 .btns .buy-btn{
-  background-color: #F40;
+  background-color: #ff4444;
 }
 
 /*弹框  */
@@ -168,7 +173,7 @@
 .dialog-wrapper  .confirm-btn{
   position: absolute;
   bottom: 0;
-  background-color: #fe7000;
+  background-color: #ff632a;
   color: #fff;
   height:40px;
   line-height:40px;

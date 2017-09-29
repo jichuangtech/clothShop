@@ -1,7 +1,10 @@
 /* myOrder.wxss */
 .order-tabs{
   background-color: #fff;
+  border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
+  color: #666;
+  font-size: 16px;
   height: 40px;
   line-height: 40px;
   margin-bottom: 15px;
@@ -13,10 +16,13 @@
   text-align: center;
   width: 100px;
 }
+.order-tabs .order-tab.active{
+  color: #ff4444;
+}
 .order-tabs .order-tab.active:after{
   position: absolute;
   content: "";
-  background-color: #1aad19;
+  background-color: #ff4444;
   height: 2px;
   width: 50px;
   left: 25px;
@@ -28,6 +34,8 @@
 .order-item{
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
+  color: #000;
+  font-size: 14px;
   margin-bottom: 8px;
   padding: 0 10px;
   position: relative;
@@ -42,10 +50,13 @@
   background-color: #e5e5e5;
   content: "";
   position: absolute;
-  left: 0;
+  left: -10px;
   right:-10px;
   bottom: 0;
   height: 1px;
+}
+.order-item .item-top .order-id{
+  color: #898989;
 }
 .order-item  .item-middle{
   padding: 5px 0;
@@ -54,15 +65,6 @@
   display: box;
   -webkit-box-align: stretch;
           box-align: stretch;
-}
-.order-item  .item-middle:not(:lasr-child)::after{
-  background-color: #e5e5e5;
-  height: 1px;
-  width: 100%;
-  position: absolute;
-  content: "";
-  left: 0;
-  right: -10px;
 }
 .order-item .item-img{
   height: 50px;
@@ -79,23 +81,30 @@
   top:0;
 }
 .order-item  .item-num-price{
-  text-align: right;
+  color:#ff4400;
   width: 100%;
   position: absolute;
   bottom:0;
 }
 .order-item .item-num{
-  text-align: center;
-  width: 80px;
+ color:#999;
 }
 .order-item  .item-bottom{
   height: 24px;
   padding: 10px 0; 
+  position: relative;
+}
+.order-item  .item-bottom:before{
+  position: absolute;
+  content: "";
+  top:0;
+  left: -10px;
+  right:-10px;
+  height: 1px;
+  background-color: #e5e5e5;
 }
 .order-item .item-btn{ 
-  background-color: #F40;
-  border-radius: 3px;
-  color: #fff;
+  border: 1px solid #ff4444;
   font-size: 12px;
   padding: 5px 0;
   text-align: center;

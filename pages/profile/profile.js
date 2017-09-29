@@ -31,5 +31,15 @@ Page({
     wx.makePhoneCall({
       phoneNumber: "18850549612"
     })
+  },
+
+  //点击订单状态
+  checkOrderStatus:function(e){
+    var that = this,
+      orderStatus = e.currentTarget.dataset.type;
+    console.log(orderStatus);
+    wx.navigateTo({
+      url: "../myOrder/myOrder?orderStatus=" + orderStatus
+    })
   }
 })

@@ -49,7 +49,7 @@
         <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
         全选
       </view>
-      <view class="count-money flex-1">合计：￥{{allMoney}}</view>
+      <view class="count-money flex-1">合计：<text class="main-color">￥{{allMoney}}</text></view>
       <view class="buy-btn {{allMoney==0?'':'active'}}" bindtap="carBtn">{{btnText}}</view>
     </view>
 
