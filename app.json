@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/shoppingCar/shoppingCar",
     "pages/profile/profile",
     "pages/confirmOrder/confirmOrder",
     "pages/addressList/addressList",
-    "pages/shoppingCar/shoppingCar",
     "pages/productDetail/productDetail",
     "pages/editAddress/editAddress",
     "pages/myOrder/myOrder",
@@ -36,8 +36,8 @@
       {
         "pagePath": "pages/shoppingCar/shoppingCar",
         "text": "购物车",
-        "iconPath": "images/icon/note.png",
-        "selectedIconPath": "images/icon/note-actived.png"
+        "iconPath": "images/icon/car.png",
+        "selectedIconPath": "images/icon/car-actived.png"
       },
       {
         "pagePath": "pages/profile/profile",

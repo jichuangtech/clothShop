@@ -34,5 +34,5 @@
       </view>
     </block>
   </view>
-  <navigator class="add-btn" url="../editAddress/editAddress?addressLen={{addressLength}}">+ 添加地址</navigator>
+  <navigator class="add-btn" url="../editAddress/editAddress?addressLen={{addressLength}}">添加地址</navigator>
 </view>

@@ -40,7 +40,8 @@
 .add-btn{
   color: #fff;
   background-color: #F40;
-  padding: 10px 0;
+  height: 100rpx;
+  line-height: 100rpx;
   position: fixed;
   bottom: 0;
   text-align: center;

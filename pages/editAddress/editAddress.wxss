@@ -22,8 +22,9 @@
   bottom: 0;
   background-color: #F40;
   color: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
-  padding: 8px 0;
   width: 100%;
 }
 

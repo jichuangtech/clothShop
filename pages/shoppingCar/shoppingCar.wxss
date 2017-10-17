@@ -2,10 +2,11 @@
 .wrapper{
   background-color: #fff;
   color: #000;
-  font-size: 12px;
+  font-size: 14px;
 }
 .wrapper-top{
   border-bottom: 1px solid #e5e5e5;
+  color: #000;
   height: 40px;
   line-height: 40px;
   padding:0  15px;
@@ -39,21 +40,22 @@
   font-size: 16px;
   line-height: 83px;
   text-align: center;
-  width: 65px;
+  width:120rpx;
 }
 .wrapper-content .car-item .item-select{
   width: 30px;
 }
 .wrapper-content .car-item .item-image{
   margin-right: 10px; 
-  height: 60px;
-  width: 60px;
+  height: 158rpx;
+  width: 158rpx;
 }
 .wrapper-content .car-item .item-info{
-  height: 60px;
+  height:158rpx;
   position: relative;
 }
 .wrapper-content .car-item .item-info .item-info-bottom{
+  font-size: 12px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -76,21 +78,21 @@
   right: 0;
   background-color: #fff;
   border-top:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
   color: #999;
-  font-size: 12px;
-  height: 115rpx;
+  height: 110rpx;
   padding-left: 15px;
 }
 .count-money{
   text-align: right;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 .wrapper-footer .buy-btn{
   background-color: #e5e5e5;
   height: 100%;
-  line-height: 50px;
+  line-height: 110rpx;
   text-align: center;
-  width: 100px;
+  width: 226rpx;
 }
 .wrapper-footer .buy-btn.active{
   background-color: #ff4444;

@@ -1,7 +1,9 @@
 /* confirmOrder.wxss */
 .wrapper-top{
+  background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
-  font-size: 12px;
+  color: #000;
+  font-size: 14px;
   line-height: 18px;
   margin-bottom: 10px;
   padding: 10px;
@@ -34,19 +36,16 @@
   box-sizing: border-box;
 }
 .pro-item image{
-  height: 50px;
-  width: 50px;
+  height: 158rpx;
+  width: 158rpx;
   margin-right: 15px;
 }
 .pro-item .item-info{
-  font-size: 14px;
   position: relative;
   width: 100%;
 }
-.pro-item  .item-desc{
-  color: #3d3d3d;
-}
 .pro-item  .item-num-price{
+  font-size: 12px;
   text-align: right;
   width: 100%;
 }
@@ -59,12 +58,13 @@
 }
 
 .wrapper-footer {
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   border-top:1px solid #e5e5e5;
-  height: 50px;
+  height: 110rpx;
 }
 .wrapper-footer .count-money{
   padding-left: 20px;
@@ -73,7 +73,7 @@
   background-color: #F40;
   color:#fff;
   height: 100%;
-  line-height: 50px;
+  line-height: 110rpx;
   text-align: center;
-  width: 100px; 
+  width: 226rpx; 
 }

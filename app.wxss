@@ -66,11 +66,11 @@ image{
 }
 .select-radio{
   display: inline-block;
-  background-size: 33rpx 33rpx;
+  background-size:32rpx 32rpx;
   background-position: center;
   background-repeat: no-repeat;
-  height: 34rpx;
-  width: 34rpx;
+  height: 32rpx;
+  width: 32rpx;
   vertical-align: middle;
 }
 .select-radio.unactive{
@@ -123,28 +123,31 @@ image{
 .set-num{
   text-align: center;
   width: 122px;
+  overflow: hidden;
 }
 .set-btn{
   border: 1px solid #ababab;
   display: inline-block;
   font-weight: bold;
   font-size: 16px;
-  height: 30px;
-  line-height: 30px;
-  width: 30px;
+  height:47rpx;
+  line-height:47rpx;
+  width:47rpx;
   background-color: rgba(127,127,127,0);
 }
 .sub-btn.unactive{
   border: 1px solid #e8e8e8;
 }
 .num-input{
+  font-size: 10px;
   background-color: rgba(127,127,127,0);
   border-radius: 5px;
   border: 1px solid #ababab;
   display: inline-block;
   margin: 0 3px;
-  height: 30px;
-  width: 50px;
+  height: 47rpx;
+  min-height: 47rpx;
+  width: 120rpx;
 }
 .none-data{
   padding-top: 100px;

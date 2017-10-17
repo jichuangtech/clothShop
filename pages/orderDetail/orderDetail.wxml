@@ -1,6 +1,9 @@
 <!--pages/orderDetail/orderDetail.wxml-->
 <view class="wrapper">
-  <view class='order-status'>{{orderStatus[orderInfo.orderStatus]}}</view>
+  <view class='order-status'>
+    <view>{{orderStatus[orderInfo.orderStatus]}}</view>
+    <!-- <view class="status-time">12小时20分30秒<text class="status-tip">自动关闭</text></view> -->
+  </view>
   <view class="receive-address">
     <view class="dis-box">
       <view class="receiver-name flex-1">收货人：{{orderInfo.consignee}}</view>

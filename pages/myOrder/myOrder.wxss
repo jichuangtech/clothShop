@@ -4,9 +4,9 @@
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   color: #666;
-  font-size: 16px;
-  height: 40px;
-  line-height: 40px;
+  font-size: 29rpx;
+  height: 98rpx;
+  line-height: 98rpx;
   margin-bottom: 15px;
   white-space: nowrap;
 }
@@ -23,7 +23,7 @@
   position: absolute;
   content: "";
   background-color: #ff4444;
-  height: 2px;
+  height: 4rpx;
   width: 50px;
   left: 25px;
   bottom: 0;
@@ -43,7 +43,7 @@
 }
 .order-item .item-top{
   font-size: 12px;
-  padding: 10px 0;
+  padding: 23rpx 0;
   position: relative;
 }
 .order-item .item-top::after{
@@ -76,22 +76,24 @@
   width: 100%;
 }
 .order-item  .item-desc{
-  color: #3d3d3d;
   position: absolute;
   top:0;
 }
 .order-item  .item-num-price{
   color:#ff4400;
+  font-size: 12px;
   width: 100%;
   position: absolute;
   bottom:0;
 }
 .order-item .item-num{
  color:#999;
+ font-size: 14px;
 }
 .order-item  .item-bottom{
+  color: #000;
   height: 24px;
-  padding: 10px 0; 
+  padding: 23rpx 0; 
   position: relative;
 }
 .order-item  .item-bottom:before{
@@ -106,7 +108,8 @@
 .order-item .item-btn{ 
   border: 1px solid #ff4444;
   font-size: 12px;
-  padding: 5px 0;
+  height: 48rpx;
+  line-height: 48rpx;
   text-align: center;
-  width: 60px;
+  width: 140rpx;
 }

@@ -30,6 +30,7 @@
   position: relative;
 }
 .check-more{
+  padding-right: 5px;
   color: #666;
 }
 .order-status{
@@ -44,8 +45,8 @@
 .order-status image{
   display: block;
   margin:0 auto 5px;
-  height: 25px;
-  width: auto;
+  height: 26px;
+  width: 26px;
 
 }
 .service-item{

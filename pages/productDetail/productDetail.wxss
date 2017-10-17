@@ -143,32 +143,34 @@
 }
 .dialog-wrapper .color-item.color-active{
   background-color: #F40;
+  color: #fff;
 }
 .dialog-wrapper  .price-type{
+  font-size: 32rpx;
   margin-top: 10px;
 }
 .dialog-wrapper .set-num{
   text-align: center;
-  width: 96px;
 }
 .dialog-wrapper  .set-btn{
   display: inline-block;
   font-weight: bold;
   font-size: 16px;
-  height: 30px;
-  line-height: 30px;
-  width: 30px;
-  background-color: rgba(127,127,127,0.5);
+  height:47rpx;
+  line-height:47rpx;
+  width:47rpx;
+  border: 1px solid #ababab;
 }
 .dialog-wrapper  .sub-btn.unactive{
-  background-color: rgba(127,127,127,0.2);
+  border: 1px solid #e8e8e8;
 }
 .dialog-wrapper .num-input{
-  background-color: rgba(127,127,127,0.5);
+  border: 1px solid #ababab;
   display: inline-block;
   margin: 0 3px;
-  height: 30px;
-  width: 30px;
+  height: 47rpx;
+  min-height: 47rpx;
+  width: 120rpx;
 }
 .dialog-wrapper  .confirm-btn{
   position: absolute;
