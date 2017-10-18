@@ -4,7 +4,7 @@ var app = getApp();
 Page({
 
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     orderId:"",
     orderInfo:"",
     orderStatus:['','等待买家付款','等待卖家发货','卖家已发货','交易成功']
@@ -54,5 +54,4 @@ Page({
       }
     });
   }
-
 })

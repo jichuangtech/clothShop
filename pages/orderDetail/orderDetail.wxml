@@ -37,7 +37,7 @@
     </view>
     <view wx:if="{{orderInfo.orderStatus==1}}">
       <view class="item-btn" data-id="{{orderInfo.orderId}}">立即支付</view>
-      <navigator class="item-btn" data-id="{{orderInfo.orderId}}" url="../addressList/addressList?pagetype=1">修改地址</navigator>
+       <!-- <navigator class="item-btn" data-id="{{orderInfo.orderId}}" url="../addressList/addressList?pagetype=1">修改地址</navigator>  -->
     </view>
     <view class="item-btn" wx:if="{{orderInfo.orderStatus==3}}" data-id="{{orderInfo.orderId}}">确认收货</view>
 </view>

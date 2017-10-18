@@ -2,7 +2,7 @@
 var app = getApp();
 Page({
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     tabInfo: [
       {tabName: '全部', tabStatus: 0},
       {tabName: '待支付', tabStatus: 1},

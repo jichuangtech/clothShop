@@ -64,7 +64,8 @@ App({
   },
   
   globalData: {
-    userInfo: null
+    userInfo: null,
+    config: config,
+    addressId: ""
   },
-  config: config
 })

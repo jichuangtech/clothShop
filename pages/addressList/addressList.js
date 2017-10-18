@@ -4,7 +4,7 @@ var app = getApp()
 Page({
 
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     addressList:[],
     pageType:"",//0 确认订单页； 2 订单详情页
     addressLength: 0
@@ -115,14 +115,7 @@ Page({
     if (this.data.pageType==1){
       url = "../orderDetail/orderDetail?id=" + addressId;
     }
-    wx.redirectTo({
-      url: url,
-      success: function (res) {
-        console.log("跳转"+JSON.stringify(res));
-      },
-      fail: function (res) {
-        console.log("跳转" + JSON.stringify(res));
-      }
-    })
+    app.globalData.addressId = addressId;
+    wx.navigateBack({})
   }
 })

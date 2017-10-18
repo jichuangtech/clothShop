@@ -4,7 +4,7 @@ var app = getApp();
 
 Page({
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     productType:[],
     recommendList:[],
     adImgRes: ['../res/img/benchi.jpg', '../res/img/iphone.jpg'],

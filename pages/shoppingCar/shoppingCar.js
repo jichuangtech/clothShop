@@ -2,7 +2,7 @@
 var app = getApp();
 Page({
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     pro:[],
     savePro:[],
     allMoney:0.00,

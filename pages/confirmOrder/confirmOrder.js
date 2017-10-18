@@ -3,7 +3,7 @@ var app = getApp();
 Page({
 
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     defalutAddreee:"",
     addressId:"",
     proInfo:"",
@@ -11,8 +11,8 @@ Page({
     defaulMark:false
   },
 
-  onLoad: function (options) {
-    console.log("onLoad");
+  onLoad: function () {
+    console.log("确认订单onLoad");
     var allMoney = 0;
     var proInfo = wx.getStorageSync('proInfo');
     console.log("参数:" + JSON.stringify(proInfo[0]));
@@ -21,17 +21,19 @@ Page({
     }
     this.setData({
       proInfo: proInfo,
-      allMoney: allMoney,
-      addressId: options.id
+      allMoney: allMoney
     });
   },
 
   onReady: function () {
-    console.log("onReady");
+    console.log("确认订单onReady");
   },
   onShow: function () {
-    console.log("onShow");
-    if(this.data.addressId) {
+    console.log("确认订单onShow" + app.globalData.addressId);
+    if (app.globalData.addressId) {
+      this.setData({
+        addressId: app.globalData.addressId
+      });
       this.getAddressDetail();
     } else {
       this.getDefaultAddress();

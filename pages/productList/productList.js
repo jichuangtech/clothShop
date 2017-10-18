@@ -3,7 +3,7 @@ var app = getApp();
 Page({
 
   data: {
-    domain: app.config.domain,
+    domain: app.globalData.config.domain,
     typeId:"",
     title:"",
     list:"",
