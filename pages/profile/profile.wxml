@@ -21,7 +21,7 @@
         <text>待发货</text>
       </view>
       <view bindtap='checkOrderStatus'  data-type="3">
-        <image src="../../images/icon/order-icon3.png"></image>
+        <image class="car-image" src="../../images/icon/order-icon3.png"></image>
         <text>待收货</text>
       </view>
       <view bindtap='checkOrderStatus' data-type="4">

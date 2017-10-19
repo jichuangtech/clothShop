@@ -45,9 +45,12 @@
 .order-status image{
   display: block;
   margin:0 auto 5px;
-  height: 26px;
-  width: 26px;
+  height: 25px;
+  width: 25px;
 
+}
+.order-status image.car-image{
+  width: 28px
 }
 .service-item{
   border-top:1px solid #f2f2f2;
