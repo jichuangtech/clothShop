@@ -46,7 +46,9 @@ Page({
       success: function (res) {
         that.setData({
           productInfo: res.data,
-          storeCount: res.data.storeCount
+          storeCount: res.data.storeCount,
+          colorActive: res.data.goodsColors[0]['colorId'],
+          priceTypeActive: res.data.goodsSpecs[0]['specId']
         });
       },
       fail: function () {

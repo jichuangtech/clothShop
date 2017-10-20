@@ -122,7 +122,6 @@ image{
 /*商品数量输入与删减  */
 .set-num{
   text-align: center;
-  width: 122px;
   overflow: hidden;
 }
 .set-btn{

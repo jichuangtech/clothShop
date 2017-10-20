@@ -14,7 +14,7 @@
 
     <view class="pro-info">
       <block wx:for="{{orderInfo.goodsVO}}">
-        <view class="pro-item dis-box">
+        <navigator class="pro-item dis-box" url="../productDetail/productDetail?id={{item.goodsId}}">
           <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
           <view class="item-info flex-1">
             <view class="item-desc">{{item.goodsName}}</view>
@@ -24,7 +24,7 @@
               <text>X{{item.goodsNum}}</text>
             </view>
           </view>
-        </view>
+        </navigator>
       </block>
     </view>
     <view class='total-money detail-item dis-box'>

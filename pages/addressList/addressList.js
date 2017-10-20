@@ -18,11 +18,11 @@ Page({
   },
 
   onReady: function () {
-    this.getAddressList();
   },
 
   onShow: function () {
-  
+    console.log("show获取");
+    this.getAddressList();
   },
 
   onUnload: function () {
@@ -116,6 +116,6 @@ Page({
       url = "../orderDetail/orderDetail?id=" + addressId;
     }
     app.globalData.addressId = addressId;
-    wx.navigateBack({})
+    wx.navigateBack();
   }
 })

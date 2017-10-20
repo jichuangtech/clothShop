@@ -248,6 +248,7 @@ Page({
       }
     });
   },
+  
   //购买数量增减
   setNum: function (e) {
     var that = this,
@@ -255,7 +256,8 @@ Page({
         index = e.currentTarget.dataset.index,
         proList = that.data.pro,
         num = that.data.pro[index]['goodsNum'],
-        storeCount = that.data.pro[index]['storeCount'];
+        storeCount = that.data.pro[index]['storeCount'],
+        allMoney = that.data.allMoney - num * that.data.pro[index]['shopPrice'];
     if(btnType == 1) {
       if (num == 1) {
         return false;
@@ -268,9 +270,11 @@ Page({
       app.showToast('嗷嗷，库存不足哦~', that, 3000);
       num = storeCount;
     }
+    allMoney = allMoney + num * that.data.pro[index]['shopPrice'];
     proList[index]['goodsNum'] = num;
     that.setData({
-      pro: proList
+      pro: proList,
+      allMoney: allMoney
     })
     console.log("数量赋值：" + JSON.stringify(this.data.goodsVO));
   },

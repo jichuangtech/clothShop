@@ -221,9 +221,10 @@ Page({
       success: function (res) {
         if (res.data.statusCode==200){
           app.showToast("保存成功",that);
-          wx.redirectTo({
-            url:"../addressList/addressList"
-          })
+          wx.navigateBack();
+          // wx.redirectTo({
+          //   url:"../addressList/addressList"
+          // })
         }
         console.log("保存成功");
       },

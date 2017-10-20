@@ -3,7 +3,7 @@
 <view class="wrapper">
   <view class="address-info">
     <input class="address-item" type="text" placeholder="收货人" value="{{infoObj[0].text}}" data-type="0" bindblur="inputInfo"/>
-    <input class="address-item" type="text" placeholder="联系电话" value="{{infoObj[1].text}}" data-type="1" bindblur="inputInfo"/>
+    <input class="address-item" type="number" placeholder="联系电话" value="{{infoObj[1].text}}" data-type="1" bindblur="inputInfo"/>
     <input  class="address-item" placeholder="选择" data-code="{{provinceId}}-{{cityId}}-{{districtId}}" value="{{province}}-{{city}}-{{country}}" focus="{{focus}}" bindfocus="open" />
     <input class="address-item" type="text" placeholder="详细地址" value="{{infoObj[2].text}}" data-type="2" bindblur="inputInfo"/>
     <!-- <view class="set-default">
