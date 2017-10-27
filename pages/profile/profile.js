@@ -63,6 +63,9 @@ Page({
   //   })
   // },
 
+ // },
+  
+
   phoneCall: function (e) {
     console.log(78);
     wx.makePhoneCall({
