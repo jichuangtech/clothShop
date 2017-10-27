@@ -22,7 +22,7 @@
         </view>
         <block wx:for="{{item.goodsVO}}">
           <view class="item-middle">
-            <image class="item-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+            <image class="item-img" src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
             <view class="item-info flex-1">
               <view class="item-desc">{{item.goodsName}}</view>
               <!-- <view class="item-desc">{{item.color}}</view> -->

@@ -3,7 +3,12 @@
   color: #000;
 }
 .wrapper-top{
+  display: flex;
   height: 486.111rpx;
+}
+.wrapper-top image{
+  	flex-grow: 1;
+		object-fit: cover;
 }
 .product-info{
   background-color: #fff;
@@ -48,6 +53,9 @@
   background-color: #fff;
   border-top: 1px solid #e5e5e5;
   padding-top: 15px;
+  min-height: 20px;
+  	display: flex;
+			flex-wrap: wrap;
 }
 .product-detail .detail-title{
   border-bottom: 2px solid #ababab;
@@ -71,6 +79,8 @@
 .product-detail image{
   height: 120px;
   margin-bottom: 5px;
+  	flex-grow: 1;
+			object-fit: cover;
 }
 .btns{
   color: #fff;
@@ -127,11 +137,14 @@
   padding: 1px;
   height: 70px;
   width: 70px;
+  display: flex;
 }
 .dialog-wrapper .dialog-top image{
   border-radius: 5px;
   height: 100%;
   width: 100%;
+  flex-grow: 1;
+  object-fit: cover;
 }
 .dialog-wrapper .color-item{
   display: inline-block;

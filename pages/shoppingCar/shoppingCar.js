@@ -38,7 +38,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/goodsCart/12',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -193,7 +194,8 @@ Page({
         cartIds: param
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'DELETE',
       success: function (res) {
@@ -232,7 +234,8 @@ Page({
         cartNumberVOList: params
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'POST',
       success: function (res) {

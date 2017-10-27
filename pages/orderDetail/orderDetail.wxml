@@ -15,7 +15,7 @@
     <view class="pro-info">
       <block wx:for="{{orderInfo.goodsVO}}">
         <navigator class="pro-item dis-box" url="../productDetail/productDetail?id={{item.goodsId}}">
-          <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+          <image src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
           <view class="item-info flex-1">
             <view class="item-desc">{{item.goodsName}}</view>
             <view>{{item.color}}</view>

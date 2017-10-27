@@ -7,6 +7,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    this.doLogin();
     console.log(" onLaunch path: " + option.path + ", option.scene: " + option.scene);
   },
 
@@ -48,7 +49,6 @@ App({
     }
   },
 
-  //toast
   showToast: function (text, o, count) {
     var _this = o;
     count = parseInt(count) ? parseInt(count) : 2000;
@@ -62,10 +62,52 @@ App({
       });
     }, count);
   },
+
+  doLogin: function () {
+    var self = this;
+    wx.login({
+      success: function (res) {
+        console.log("login success code: " + res.code
+          + ", result msg: " + res.errMsg);
+        wx.setStorageSync('logincode',res.code);
+        self.queryUserId(res.code);
+      },
+      complete: function () {
+        console.log("login complete");
+      }
+    })
+  },
+
+  queryUserId: function (code,callback) {
+    var url = "https://www.jichuangtech.site/clothshopserver/onlogin?code="+code;
+    console.log("queryUserId: " + url);
+
+    wx.request({
+      url: url,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log("queryUserId success code: " + JSON.stringify(res.data));
+        wx.setStorageSync('token', res.data.data.token);
+        wx.setStorageSync('test',12);
+        if(callback === "function"){
+          callback();
+        }
+      },
+      fail: function (res) {
+        console.log("queryUserId fail msg: " + JSON.stringify(res));
+      },
+      complete: function () {
+        console.log("queryUserId complete ");
+      }
+    })
+  },
   
   globalData: {
     userInfo: null,
     config: config,
-    addressId: ""
+    addressId: "",
+    token: wx.getStorageSync("token")
   },
 })

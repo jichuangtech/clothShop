@@ -21,7 +21,8 @@
                   <checkbox  value="{{index}}" data-num="{{item.goodsNum}}" checked="{{item.checked}}" hidden="true"></checkbox>
                 </label>
               </view>
-              <image class="item-image" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.originalImg}}"></image>
+              <image class="item-image" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+              <image class="item-image" wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
               <view class="item-info flex-1">
                 <view class="set-num {{editObj.editMark?'':'none'}}">
                   <text class="sub-btn set-btn fl {{item.goodsNum==1?'unactive':''}}" data-type="1" data-index="{{index}}" data-price="{{item.shopPrice}}" bindtap="setNum" >-</text>

@@ -35,7 +35,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/16777215',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -44,8 +45,13 @@ Page({
             addressList:res.data.data,
             addressLength: res.data.data.length
           });
+        }else if (res.data.statusCode == 101 || res.data.statusCode == 102){
+          app.queryUserId(wx.getStorageSync('logincode'),function(){
+            that.getAddressList();
+        });
+        }else{
+          console.log(JSON.stringify(res.data.data));
         }
-        console.log(JSON.stringify(res.data.data));
       },
       fail: function () {
         console.log("失败");
@@ -62,7 +68,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/16777215/address/' + id+'',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'POST',
       success: function (res) {
@@ -91,7 +98,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/16777215/defaultaddress/'+id+'',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'POST',
       success: function (res) {

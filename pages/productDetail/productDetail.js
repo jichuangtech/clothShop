@@ -40,7 +40,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/goods/' + that.data.productId+'',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -165,7 +166,8 @@ Page({
         "specId": this.data.priceTypeActive
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'POST',
       success: function (res) {

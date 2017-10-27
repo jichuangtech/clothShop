@@ -35,7 +35,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/order/detail/' + that.data.orderId+'',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {

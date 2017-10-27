@@ -215,7 +215,8 @@ Page({
         "district": that.data.districtId
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token 
       },
       method: 'POST',
       success: function (res) {
@@ -240,7 +241,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/address/' + that.data.editId + '',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token        
       },
       method: 'GET',
       success: function (res) {

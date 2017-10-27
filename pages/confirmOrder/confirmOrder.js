@@ -47,7 +47,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/16777215/defaultaddress',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -73,7 +74,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/useraddress/address/' + that.data.addressId + '',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -120,7 +122,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/order/16777215',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       data:{
         addressId: that.data.addressId,

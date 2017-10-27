@@ -50,17 +50,16 @@ Page({
   //获取订单
   getOrderList:function(e){
     var that = this;
-    var token = wx.getStorageSync("token");
+    console.log("app.globalData.token:"+app.globalData.token);
     wx.request({
-      url: 'http://172.20.10.3:8070/api/order/16777215/'+that.data.currentId+'',
-      // url: that.data.domain + '/api/order/16777215/' + that.data.currentId + '',
+      //url: 'http://172.20.10.3:8070/api/order/16777215/'+that.data.currentId+'',
+      url: that.data.domain + '/api/order/16777215/' + that.data.currentId + '',
       header: {
         'content-type': 'application/json',
-        'access_token': token
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
-        console.log("getOrder res.data: " + JSON.stringify(res.data));
         that.setData({
           orderList: res.data.data
         });
@@ -92,7 +91,8 @@ Page({
       
       url: that.data.domain + '/api/order/16777215/orderstatus/'+orderId+'/4',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'POST',
       success: function (res) {

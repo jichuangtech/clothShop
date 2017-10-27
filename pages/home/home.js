@@ -29,7 +29,8 @@ Page({
     wx.request({
       url: that.data.domain +'/api/goodsCategories', 
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -60,7 +61,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/goods/hot',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {
@@ -93,7 +95,8 @@ Page({
     wx.request({
       url: that.data.domain + '/api/goods/recommend',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'access_token': app.globalData.token
       },
       method: 'GET',
       success: function (res) {

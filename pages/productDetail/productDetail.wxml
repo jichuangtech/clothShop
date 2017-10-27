@@ -1,14 +1,9 @@
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
   <view class="wrapper-top">
-    <image class="swiper-img" src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
+    <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+    <image wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
   </view>
-  <!-- <swiper class="swiper-wrapper" indicator-dots="true" autoplay="true" interval="2000" duration="1000">
-      <block wx:for="{{1}}"> 
-        <swiper-item>
-        </swiper-item>
-    </block>  
-  </swiper> -->
   <view class="wrapper-content">
     <view class="product-info">
       <view class="product-desc product-item">{{productInfo.goodsContent}}</view>
@@ -27,7 +22,7 @@
     <view class="product-detail">
       <view class="detail-title"></view>
       <block wx:for="{{productInfo.goodsDetailImages}}">
-        <image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{item.imageUrl}}"></image>
+        <image src="{{domain}}/api/goodsCategories/picture/{{item.imageUrl}}"></image>
       </block>
     </view>
   </view>
@@ -40,7 +35,10 @@
 <view class="choose-dialog {{dialogMark==0?'none':''}}" catchtap="hideDialog"></view>
 <view class="dialog-wrapper {{dialogMark==0?'none':''}}">
   <view class="dialog-top dialog-item dis-box">
-    <view class="dialog-img"><image src="http://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/cloth_goods_3_title"></image></view> 
+    <view class="dialog-img">
+      <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+      <image wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/cloth_goods_3_title"></image>
+    </view> 
     <view class="flex-1">
       <block wx:for="{{productInfo.goodsSpecs}}">
         <view class="main-color">￥{{item.specPrice}}/{{item.specName}}</view>
