@@ -41,7 +41,11 @@ Page({
           that.setData({
             loadMark: false
           });
-        }else{
+        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
+          app.queryUserId(wx.getStorageSync('logincode'), function () {
+            that.getProductType();
+          });
+        } else{
           that.setData({
             loadTip: "暂时没有数据"
           });
@@ -73,6 +77,10 @@ Page({
         if(that.data.hotProList.length != 0) {
           that.setData({
             hotProMark: false
+          });
+        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
+          app.queryUserId(wx.getStorageSync('logincode'), function () {
+            that.getHotProduct();
           });
         }else {
           that.setData({
@@ -108,6 +116,10 @@ Page({
               break;
             }
           }
+        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
+          app.queryUserId(wx.getStorageSync('logincode'), function () {
+            that.getRecommend();
+          });
         }else{
           recommendList = res.data;
         }

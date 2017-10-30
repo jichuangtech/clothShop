@@ -88,7 +88,7 @@ Page({
     console.log("checkArr:" +checkArr);
     for (var i = 0; i < pro.length; i++) {
       if (checkArr.indexOf(i + "") != -1) {
-        console.log(i + "");
+        console.log("要被选");
         pro[i].checked = true;
         allMoney = (parseFloat(allMoney) + parseFloat(pro[i].goodsNum * pro[i].shopPrice)).toFixed(2);
         
@@ -257,24 +257,33 @@ Page({
     var that = this,
         btnType = e.currentTarget.dataset.type,
         index = e.currentTarget.dataset.index,
+        isSelect = e.currentTarget.dataset.select,
         proList = that.data.pro,
         num = that.data.pro[index]['goodsNum'],
+        nowNum = 0,
         storeCount = that.data.pro[index]['storeCount'],
-        allMoney = that.data.allMoney - num * that.data.pro[index]['shopPrice'];
+      //  allMoney = that.data.allMoney - num * that.data.pro[index]['shopPrice'];
+        allMoney = (that.data.allMoney);
     if(btnType == 1) {
       if (num == 1) {
         return false;
       }
-      num = num - 1;
+      nowNum = num - 1;
     }else{
-      num = num + 1;
+      nowNum = num + 1;
     }
-    if (num > parseInt(storeCount)) {
+    if (nowNum > parseInt(storeCount)) {
       app.showToast('嗷嗷，库存不足哦~', that, 3000);
-      num = storeCount;
+      nowNum = storeCount;
     }
-    allMoney = allMoney + num * that.data.pro[index]['shopPrice'];
-    proList[index]['goodsNum'] = num;
+    console.log("isSelect:" + isSelect);
+    console.log("1213131allMoney:" + allMoney);
+    
+    if (isSelect == 1 && nowNum!=num){
+      var nowMoney = (nowNum-num)*(that.data.pro[index]['shopPrice']);
+      allMoney = (parseFloat(allMoney) + parseFloat(nowMoney)).toFixed(2);
+    }
+    proList[index]['goodsNum'] = nowNum;
     that.setData({
       pro: proList,
       allMoney: allMoney

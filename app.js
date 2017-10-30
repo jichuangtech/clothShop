@@ -70,6 +70,7 @@ App({
         console.log("login success code: " + res.code
           + ", result msg: " + res.errMsg);
         wx.setStorageSync('logincode',res.code);
+        console.log("测试部分" + wx.getStorageSync('logincode'));
         self.queryUserId(res.code);
       },
       complete: function () {
@@ -79,6 +80,7 @@ App({
   },
 
   queryUserId: function (code,callback) {
+    console.log("code进入方法:" + code);
     var url = "https://www.jichuangtech.site/clothshopserver/onlogin?code="+code;
     console.log("queryUserId: " + url);
 
