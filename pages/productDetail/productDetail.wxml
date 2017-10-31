@@ -1,8 +1,8 @@
 <include src="../widget/toast.wxml" />
 <view class="wrapper">
   <view class="wrapper-top">
-    <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-    <image wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
+    <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
+    <image wx:if="{{productInfo.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
   </view>
   <view class="wrapper-content">
     <view class="product-info">
@@ -36,8 +36,8 @@
 <view class="dialog-wrapper {{dialogMark==0?'none':''}}">
   <view class="dialog-top dialog-item dis-box">
     <view class="dialog-img">
-      <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-      <image wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/cloth_goods_3_title"></image>
+      <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
+      <image wx:if="{{productInfo.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image>
     </view> 
     <view class="flex-1">
       <block wx:for="{{productInfo.goodsSpecs}}">
