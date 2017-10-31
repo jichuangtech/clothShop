@@ -70,7 +70,7 @@
     <view class="">购买数量</view>
     <view class="set-num">
       <text class="sub-btn set-btn fl {{inputNum==1?'unactive':''}}" data-type="1" bindtap="setNum">-</text>
-      <input class="num-input fl" type="number" value="{{inputNum}}" bindblur="inputNum"/>
+      <input class="num-input fl" type="number" value="{{inputNum}}"  bindinput="bindChange"/>
       <text class="add-btn set-btn fl" data-type="2" bindtap="setNum">+</text>
     </view>
   </view>

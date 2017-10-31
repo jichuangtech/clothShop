@@ -26,7 +26,7 @@
               <view class="item-info flex-1">
                 <view class="set-num {{editObj.editMark?'':'none'}}">
                   <text class="sub-btn set-btn fl {{item.goodsNum==1?'unactive':''}}" data-type="1" data-index="{{index}}" data-price="{{item.shopPrice}}"  data-select="{{item.checked ? '1':'0'}}" bindtap="setNum" >-</text>
-                  <input class="num-input fl" type="number" data-select="{{item.checked ? '1':'0'}}" value="{{item.goodsNum}}" bindblur="inputNum"/>
+                  <input class="num-input fl" type="number" index="{{index}}" select="{{item.checked ? '1':'0'}}" value="{{item.goodsNum}}" bindinput=""/>
                   <text class="add-btn set-btn fl" data-type="2"  data-index="{{index}}"  data-price="{{item.shopPrice}}" data-select="{{item.checked ? '1':'0'}}" bindtap="setNum">+</text>
                 </view>
                 <view class="name {{editObj.editMark?'none':''}}">
@@ -50,7 +50,7 @@
         <view class="select-radio {{allSelect?'active':'unactive'}}" bindtap="selectAll"></view>
         全选
       </view>
-      <view class="count-money flex-1">合计：<text class="main-color">￥{{allMoney}}</text></view>
+      <view class="count-money flex-1" wx:if="{{!editObj.editMark}}">合计：<text class="main-color">￥{{allMoney}}</text></view>
       <view class="buy-btn {{allMoney==0?'':'active'}}" bindtap="carBtn">{{btnText}}</view>
     </view>
 

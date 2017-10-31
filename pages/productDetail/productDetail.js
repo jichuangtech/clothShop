@@ -80,12 +80,13 @@ Page({
   },
 
   //输入框数据
-  inputNum: function (e) {
+  bindChange: function (e) {
     let num = e.detail.value.trim();
     console.log("监听输入："+num);
-    if(!/^[1-9][0-9]$/.test(num)){
-      num = 1;
-    }else if (num > parseInt(this.data.storeCount)) {
+    // if(!/^[1-9][0-9]$/.test(num)){
+    //   num = 1;
+    // }
+    if (num > parseInt(this.data.storeCount)) {
       app.showToast('嗷嗷，库存不足哦~', this);
       num = this.data.storeCount;
     }
@@ -139,11 +140,8 @@ Page({
 
   //加入购物车或是立即购买或是确定
   confirmDialog:function(e){
-   
-    if (this.data.colorActive==-1){
-      app.showToast('请选择颜色分类~', this);
-    }else if (this.data.priceTypeActive==-1){
-      app.showToast('请选择价格规格~', this);
+    if (this.data.inputNum == 0 || this.data.inputNum == ""){
+      app.showToast('请输入数量', this);
     }else{
       if (this.data.btnObj.btnType==1){//加入购物车
         this.addShoppingCar();
@@ -156,6 +154,10 @@ Page({
   //加入购物车
   addShoppingCar(){
     var that = this;
+    if (this.data.inputNum == 0 || this.data.inputNum == "") {
+      app.showToast('请输入数量', this);
+      return false;
+    }
     wx.request({
       url: that.data.domain + '/api/goodsCart',
       data: {
@@ -188,6 +190,10 @@ Page({
   //订单确认页面
   confirmOrder:function(){
     var proInfo = [];
+    if (this.data.inputNum == 0 || this.data.inputNum == "") {
+      app.showToast('请输入数量', this);
+      return false;
+    }
     var proItem = {
       productId: this.data.productInfo.goodsId,
       goodsName: this.data.productInfo.goodsName,

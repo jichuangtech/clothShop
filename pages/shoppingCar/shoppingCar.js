@@ -251,6 +251,29 @@ Page({
       }
     });
   },
+
+  //输入框输入
+  bindChange:function(e){
+    console.log("输入"+JSON.stringify(e));
+    var that = this,
+        num = e.detail.value.trim();
+        index = e.detail.index,
+        isSelect = e.detail.select,
+        proList = that.data.pro,
+       // num = that.data.pro[index]['goodsNum'],
+        storeCount = that.data.pro[index]['storeCount'];
+    if (num > parseInt(storeCount)) {
+      app.showToast('嗷嗷，库存不足哦~', that, 3000);
+      num = storeCount;
+    }
+
+    proList[index]['goodsNum'] = num;
+   
+    that.setData({
+      pro: proList
+    })
+    console.log("数量赋值：" + JSON.stringify(this.data.goodsVO));
+  },
   
   //购买数量增减
   setNum: function (e) {
@@ -261,9 +284,9 @@ Page({
         proList = that.data.pro,
         num = that.data.pro[index]['goodsNum'],
         nowNum = 0,
-        storeCount = that.data.pro[index]['storeCount'],
+        storeCount = that.data.pro[index]['storeCount'];
       //  allMoney = that.data.allMoney - num * that.data.pro[index]['shopPrice'];
-        allMoney = (that.data.allMoney);
+       // allMoney = (that.data.allMoney);
     if(btnType == 1) {
       if (num == 1) {
         return false;
@@ -276,17 +299,18 @@ Page({
       app.showToast('嗷嗷，库存不足哦~', that, 3000);
       nowNum = storeCount;
     }
-    console.log("isSelect:" + isSelect);
-    console.log("1213131allMoney:" + allMoney);
     
-    if (isSelect == 1 && nowNum!=num){
-      var nowMoney = (nowNum-num)*(that.data.pro[index]['shopPrice']);
-      allMoney = (parseFloat(allMoney) + parseFloat(nowMoney)).toFixed(2);
-    }
+    // if (isSelect == 1 && nowNum!=num){
+    //   var nowMoney = (nowNum-num)*(that.data.pro[index]['shopPrice']);
+    //   allMoney = (parseFloat(allMoney) + parseFloat(nowMoney)).toFixed(2);
+    // }
     proList[index]['goodsNum'] = nowNum;
+    // that.setData({
+    //   pro: proList,
+    //   allMoney: allMoney
+    // })
     that.setData({
-      pro: proList,
-      allMoney: allMoney
+      pro: proList
     })
     console.log("数量赋值：" + JSON.stringify(this.data.goodsVO));
   },
