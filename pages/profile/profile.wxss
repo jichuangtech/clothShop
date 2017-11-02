@@ -3,6 +3,7 @@
 }
 .wrapper-top{
   background-color: #fff;
+  border-bottom:1px solid #e5e5e5;
   margin-bottom: 20rpx;
   padding: 99.306rpx 0;
 }
@@ -24,6 +25,8 @@
 }
 .content-item{
   background-color: #fff;
+  border-bottom:1px solid #e5e5e5;
+  border-top:1px solid #e5e5e5;
   color: #000;
   font-size: 14px;
   padding: 15px 20px;
@@ -53,7 +56,6 @@
   width: 28px
 }
 .service-item{
-  border-top:1px solid #f2f2f2;
   margin-bottom: 10rpx;
   position: relative;
   text-align: left;
