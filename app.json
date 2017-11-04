@@ -14,8 +14,8 @@
     "pages/orderDetail/orderDetail"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#35495e",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "金凤针织",
     "backgroundColor": "#fff",
     "backgroundTextStyle": "dark",
