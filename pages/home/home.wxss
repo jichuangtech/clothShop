@@ -2,6 +2,7 @@
 .swiper-wrapper {
   width: 100%;
   height:150px;
+  border-top:1px solid #e5e5e5;
 }
 .swiper-wrapper navigator{
   height: 100%;
