@@ -1,4 +1,5 @@
-const ENV = 'dev';
+const ENV = 'bingotest';
+// const ENV = 'dev';
 
 var config = function(ENV){
 	const config = {};
@@ -11,6 +12,10 @@ var config = function(ENV){
       config.domain = 'http://106.15.179.23';
 			break;
 		case 'pro':
+      break;
+    case 'bingotest':
+      config.domain = 'http://localhost:8070';
+      break;
 		default:
 			config.domain = 'https://www.ktvme.com';
 			break;
