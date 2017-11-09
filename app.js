@@ -63,15 +63,14 @@ App({
     }, count);
   },
 
-  doLogin: function () {
+  doLogin: function (callback) {
     var self = this;
     wx.login({
       success: function (res) {
         console.log("login success code: " + res.code
           + ", result msg: " + res.errMsg);
         wx.setStorageSync('logincode',res.code);
-        console.log("测试部分" + wx.getStorageSync('logincode'));
-        self.queryUserId(res.code);
+        self.queryUserId(res.code, callback);
       },
       complete: function () {
         console.log("login complete");
@@ -80,8 +79,8 @@ App({
   },
 
   queryUserId: function (code,callback) {
-    console.log("code进入方法:" + code);
-    var url = "https://www.jichuangtech.site/clothshopserver/onlogin?code="+code;
+    console.log("queryUserId code:" + code);
+    var url = this.globalData.config.domain + "/onlogin?code="+code;
     console.log("queryUserId: " + url);
 
     wx.request({
@@ -91,10 +90,13 @@ App({
       },
       success: function (res) {
         console.log("queryUserId success code: " + JSON.stringify(res.data));
-        wx.setStorageSync('token', res.data.data.token);
-        wx.setStorageSync('test',12);
-        if(callback === "function"){
-          callback();
+        var response = res.data;
+        if (response.statusCode == 200) {
+          wx.setStorageSync('token', response.data.token);
+          if (typeof (callback) == 'function') {
+            console.log("doLogin success now do callback: " + callback);
+            callback();
+          }
         }
       },
       fail: function (res) {
@@ -110,6 +112,20 @@ App({
     userInfo: null,
     config: config,
     addressId: "",
-    token: wx.getStorageSync("token")
+    token: wx.getStorageSync("token"),
+    servicePhone: "17750224350"
   },
+   
+   getToken: function() {
+     return wx.getStorageSync("token");
+   },
+
+   isShouldLogin :function(statusCode) {
+     return statusCode == 101 || statusCode == 102;
+   },
+
+   isSuccess: function (statusCode) {
+      return statusCode == 200;
+   }
+
 })

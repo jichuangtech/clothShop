@@ -5,6 +5,7 @@ var app = getApp();
 Page({
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     productType:[],
     recommendList:[],
     adImgRes: ['../res/img/benchi.jpg', '../res/img/iphone.jpg'],
@@ -30,20 +31,18 @@ Page({
       url: that.data.domain +'/api/goodsCategories', 
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        that.setData({
-          productType:res.data
-        });
-        if (that.data.productType.length!=0){
-          that.setData({
-            loadMark: false
-          });
-        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
-          app.queryUserId(wx.getStorageSync('logincode'), function () {
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function () {
             that.getProductType();
+          });
+        } else if (app.isSuccess(res.data.statusCode)) {
+          that.setData({
+            loadMark: false,
+            productType: res.data.data
           });
         } else{
           that.setData({
@@ -66,23 +65,21 @@ Page({
       url: that.data.domain + '/api/goods/hot',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
         console.log(JSON.stringify(res.data));
-        that.setData({
-          hotProList: res.data
-        });
-        if(that.data.hotProList.length != 0) {
-          that.setData({
-            hotProMark: false
-          });
-        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
-          app.queryUserId(wx.getStorageSync('logincode'), function () {
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function () {
             that.getHotProduct();
           });
-        }else {
+        } else if (app.isSuccess(res.data.statusCode)) {
+          that.setData({
+            hotProMark: false,
+            hotProList: res.data.data
+          });
+        } else {
           that.setData({
             hotProTip: "暂时无热销商品"
           });
@@ -104,25 +101,23 @@ Page({
       url: that.data.domain + '/api/goods/recommend',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        if (res.data.length > 3) {
-          for (var i= 0; i < res.data.length; i++) {
-            recommendList[i] = res.data[i];
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function () {
+            that.getRecommend();
+          });
+        } else if (app.isSuccess(res.data.statusCode)) {
+          for (var i = 0; i < res.data.data.length; i++) {
+            recommendList[i] = res.data.data[i];
             i++;
-            if(i==3){
+            if (i == 3) {
               break;
             }
           }
-        } else if (res.data.statusCode == 101 || res.data.statusCode == 102) {
-          app.queryUserId(wx.getStorageSync('logincode'), function () {
-            that.getRecommend();
-          });
-        }else{
-          recommendList = res.data;
-        }
+        } 
         that.setData({
           recommendList: recommendList
         });

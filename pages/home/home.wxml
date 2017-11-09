@@ -9,7 +9,7 @@
       <swiper-item>
         <navigator  url="../productDetail/productDetail?id={{item.goodsId}}">
           <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-          <image wx:if="{{item.originalImg}}"  src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}" class="swiper-img"/>
+          <image wx:if="{{item.originalImg}}"  src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}" class="swiper-img"/>
         </navigator>
       </swiper-item>
     </block>
@@ -25,7 +25,7 @@
     <block  wx:for="{{hotProList}}" wx:key="{{index}}">
       <navigator class="hot-item"  url="../productDetail/productDetail?id={{item.goodsId}}">
         <image class="item-img" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-        <image class="item-img" wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
+        <image class="item-img" wx:if="{{item.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
         <view class="item-desc">{{item.goodsContent}}</view>
         <view class="dis-box">
           <view class="item-price main-color flex-1">

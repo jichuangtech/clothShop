@@ -36,21 +36,23 @@ Page({
       url: that.data.domain + '/api/useraddress/16777215',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        if (res.data.statusCode==200 && res.data.data.length!=0){
+        var statusCode = res.data.statusCode;
+        if (app.isShouldLogin(statusCode)) {
+          app.doLogin(function() {
+            that.getAddressList();
+          });
+        } else if(app.isSuccess(statusCode)) {
           that.setData({
-            addressList:res.data.data,
+            addressList: res.data.data,
             addressLength: res.data.data.length
           });
-        }else if (res.data.statusCode == 101 || res.data.statusCode == 102){
-          app.queryUserId(wx.getStorageSync('logincode'),function(){
-            that.getAddressList();
-        });
-        }else{
-          console.log(JSON.stringify(res.data.data));
+        } else {
+          app.showToast("嗷嗷，收货地址获取失败~~", that);
+          console.log(" get address list error msg: " + res.data.msg);
         }
       },
       fail: function () {
@@ -69,15 +71,21 @@ Page({
       url: that.data.domain + '/api/useraddress/16777215/address/' + id+'',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.statusCode==200){
+        var statusCode = res.data.statusCode;
+        if(app.isShouldLogin(statusCode)) {
+          app.doLogin(function() {
+            that.delAddress();
+          });
+        } else if(app.isSuccess(statusCode)) {
           app.showToast('删除成功', that);
           that.getAddressList();
+        } else {
+          console.error("del address error msg: " + res.data.msg);
         }
-        console.log('成功');
       },
       fail: function () {
         console.log("失败");
@@ -99,18 +107,25 @@ Page({
       url: that.data.domain + '/api/useraddress/16777215/defaultaddress/'+id+'',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.statusCode == 200) {
+
+        var statusCode = res.data.statusCode;
+        if (app.isShouldLogin(statusCode)) {
+          app.doLogin(function () {
+            that.setDefalut();
+          });
+        } else if (app.isSuccess(statusCode)) {
           app.showToast('设置成功', that);
           that.getAddressList();
+        } else {
+          console.error("set default address error msg: " + res.data.msg);
         }
-        console.log('成功');
       },
       fail: function () {
-        console.log("失败");
+        console.error("失败");
       }
     });
   },

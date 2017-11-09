@@ -3,6 +3,7 @@ var app = getApp();
 Page({
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     tabInfo: [
       {tabName: '全部', tabStatus: 0},
       {tabName: '待支付', tabStatus: 1},
@@ -11,7 +12,7 @@ Page({
       {tabName: '已完成', tabStatus: 4},
     ],
     orderList:[],
-    currentId:0,
+    orderStatus:0,
     loadMark:true,
     loadTip:"正在加载数据..."
   },
@@ -23,7 +24,7 @@ Page({
     console.log("获取：" + options.orderStatus);
     if (options.orderStatus){
       this.setData({
-        currentId: options.orderStatus
+        orderStatus: options.orderStatus
       });
     }
     this.getOrderList();
@@ -41,7 +42,7 @@ Page({
     if (e) {
       let id = e.currentTarget.dataset.status;
       this.setData({
-        currentId: id
+        orderStatus: id
       })
     }
     this.getOrderList();
@@ -50,28 +51,36 @@ Page({
   //获取订单
   getOrderList:function(e){
     var that = this;
-    console.log("app.globalData.token:"+app.globalData.token);
     wx.request({
-      //url: 'http://172.20.10.3:8070/api/order/16777215/'+that.data.currentId+'',
-      url: that.data.domain + '/api/order/16777215/' + that.data.currentId + '',
+      url: that.data.domain + '/api/order/16777215/' + that.data.orderStatus + '',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        that.setData({
-          orderList: res.data.data
-        });
-        if (that.data.orderList){
-          that.setData({
-            loadMark: false
+        var statusCode = res.data.statusCode;
+        if(app.isShouldLogin(statusCode)) {
+          app.doLogin(function() {
+            that.getOrderList();
           });
-        }else{
-          that.setData({
-            loadMark: true,
-            loadTip: "暂时无对应的数据"
-          });
+        } else if (app.isSuccess(statusCode)) {
+          
+          if(res.data.data.length != 0) {
+            that.setData({
+              orderList: res.data.data,
+              loadMark: false
+            });
+          } else {
+            that.setData({
+              orderList: res.data.data,
+              loadMark: true,
+              loadTip: "暂时无对应的数据"
+            });
+          }
+        } else {
+          app.showToast('嗷嗷，订单查询失败~', that);
+          console.error("get order error msg: " + res.data.msg);
         }
       },
       fail: function () {

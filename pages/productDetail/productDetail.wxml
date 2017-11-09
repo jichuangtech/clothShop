@@ -2,7 +2,7 @@
 <view class="wrapper">
   <view class="wrapper-top">
     <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
-    <image wx:if="{{productInfo.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
+    <image wx:if="{{productInfo.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
   </view>
   <view class="wrapper-content">
     <view class="product-info">
@@ -22,7 +22,7 @@
     <view class="product-detail">
       <view class="detail-title"></view>
       <block wx:for="{{productInfo.goodsDetailImages}}">
-        <image src="{{domain}}/api/goodsCategories/picture/{{item.imageUrl}}"></image>
+        <image src="{{photoDomain}}/api/goodsCategories/picture/{{item.imageUrl}}"></image>
       </block>
     </view>
   </view>
@@ -37,7 +37,7 @@
   <view class="dialog-top dialog-item dis-box">
     <view class="dialog-img">
       <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
-      <image wx:if="{{productInfo.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image>
+      <image wx:if="{{productInfo.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image>
     </view> 
     <view class="flex-1">
       <block wx:for="{{productInfo.goodsSpecs}}">

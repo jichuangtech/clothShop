@@ -3,6 +3,7 @@ var app = getApp();
 Page({
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     pro:[],
     savePro:[],
     allMoney:0.00,
@@ -39,31 +40,40 @@ Page({
       url: that.data.domain + '/api/goodsCart/12',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
         var data = res.data;
-        if(res.data.length!=0){
-          loadMark = false;
-        }else{
+        if (app.isShouldLogin(res.data.statusCode)){
+          app.doLogin(function() {
+            that.getShoppingCar();
+          });
           that.setData({
-            allSelect:false,
+            allSelect: false,
             editObj: {
               editMark: false,
               editText: "编辑"
             },
-            btnText:"结算"
+            btnText: "结算"
           })
+        } else if(app.isSuccess(res.data.statusCode)) {
+          that.setData({
+            pro: data.data,
+            savePro: data.data,
+            load: {
+              loadMark: false,
+              loadTip: loadTip
+            }
+          });
+        } else {
+          that.setData({
+            load: {
+              loadMark: true,
+              loadTip: data.msg
+            }
+          });
         }
-        that.setData({
-          pro: data,
-          savePro: data,
-          load: {
-            loadMark: loadMark,
-            loadTip: loadTip
-          }
-        });
       },
       fail: function () {
         loadMark = false;

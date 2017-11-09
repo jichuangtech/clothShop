@@ -1,9 +1,10 @@
-const ENV = 'bingotest';
-// const ENV = 'dev';
+// const ENV = 'bingotest';
+const ENV = 'dev';
 
 var config = function(ENV){
 	const config = {};
 	config.ENV = ENV;
+  config.photoDomain = 'https://www.jichuangtech.site/clothshopserver';
 	switch(ENV){
 		case 'dev':
       config.domain = 'https://www.jichuangtech.site/clothshopserver';

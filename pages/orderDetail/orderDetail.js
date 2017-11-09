@@ -5,6 +5,7 @@ Page({
 
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     orderId:"",
     orderInfo:"",
     orderStatus:['','等待买家付款','等待卖家发货','卖家已发货','交易成功']
@@ -36,18 +37,24 @@ Page({
       url: that.data.domain + '/api/order/detail/' + that.data.orderId+'',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        if (res.data.statusCode == 200) {
+        var statusCode = res.data.statusCode;
+
+        if(app.isShouldLogin(statusCode)) {
+          app.doLogin(function() {
+            that.getOrderInfo();
+          });
+        } else if(app.isSuccess(statusCode)) {
           that.setData({
             orderInfo: res.data.data,
-            test:"刚刚"
+            test: "刚刚"
           })
-           console.log('成功' + JSON.stringify(that.data.orderInfo));
-          console.log('成功' + (that.data.orderInfo.address));
-          console.log('成功地址' + (res.data.data.address));
+        } else {
+          app.showToast("嗷嗷，获取订单详情失败~~", that);
+          console.error("get order detail error msg: " + res.data.msg);
         }
       },
       fail: function () {

@@ -3,6 +3,7 @@ var app = getApp();
 Page({
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     productInfo:{},
     dialogMark:0,
     storeCount:0,
@@ -41,19 +42,29 @@ Page({
       url: that.data.domain + '/api/goods/' + that.data.productId+'',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
-        that.setData({
-          productInfo: res.data,
-          storeCount: res.data.storeCount,
-          colorActive: res.data.goodsColors[0]['colorId'],
-          priceTypeActive: res.data.goodsSpecs[0]['specId']
-        });
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function () {
+            that.getProductDetail();
+          });
+        } else if (app.isSuccess(res.data.statusCode)){
+          let goods = res.data.data;
+          that.setData({
+            productInfo: goods,
+            storeCount: goods.storeCount,
+            colorActive: goods.goodsColors[0]['colorId'],
+            priceTypeActive: goods.goodsSpecs[0]['specId']
+          });
+        } else {
+          app.showToast('商品数据获取失败：' + res.data.msg , that);
+          console.error("获取商品失败, msg: " + res.data.msg);
+        }
       },
       fail: function () {
-        console.log("注册失败");
+        console.log("获取商品详情失败");
       }
     });
   },
@@ -169,20 +180,25 @@ Page({
       },
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.statusCode == 200) {
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function() {
+            that.addShoppingCar();
+          });
+        } else if (app.isSuccess(res.data.statusCode)) {
           that.hideDialog();
           that.setDefalutDia();
           app.showToast('添加成功，在购物车等亲~', that);
         } else {
           app.showToast('嗷嗷，购物车添加失败~', that);
+          console.error("add goods cart error msg: " + res.data.msg);
         }
       },
       fail: function () {
-        console.log("失败");
+        console.error("失败");
       }
     });
   },
