@@ -4,10 +4,14 @@ const config = require('config.js');
 App({
   onLaunch: function(option) {
     //调用API从本地缓存中获取数据
+    var that = this;
     var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.doLogin();
+    this.getUserInfo(function() {
+      that.doLogin();
+    });
+    
     console.log(" onLaunch path: " + option.path + ", option.scene: " + option.scene);
   },
 
@@ -25,7 +29,7 @@ App({
           wx.getUserInfo({
             withCredentials: false,
             success: function(res) {
-              console.log("用户信息成功");
+              console.log("用户信息成功 json: " + JSON.stringify(res.userInfo));
               that.globalData.userInfo = res.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
             },
@@ -80,18 +84,20 @@ App({
 
   queryUserId: function (code,callback) {
     console.log("queryUserId code:" + code);
-    var url = this.globalData.config.domain + "/onlogin?code="+code;
-    console.log("queryUserId: " + url);
-
+    var that = this;
+    var url = this.globalData.config.domain + "/onlogin?code=" + code;
+    console.log("queryUserId: " + url + ", userinfo: " + JSON.stringify(that.globalData.userInfo));
     wx.request({
       url: url,
       header: {
         'content-type': 'application/json'
       },
+      data: that.globalData.userInfo,
+      method:'POST',
       success: function (res) {
         console.log("queryUserId success code: " + JSON.stringify(res.data));
         var response = res.data;
-        if (response.statusCode == 200) {
+        if (that.isSuccess(res.data.statusCode)) {
           wx.setStorageSync('token', response.data.token);
           if (typeof (callback) == 'function') {
             console.log("doLogin success now do callback: " + callback);
@@ -109,11 +115,20 @@ App({
   },
   
   globalData: {
-    userInfo: null,
+    userInfo: {},
     config: config,
     addressId: "",
     token: wx.getStorageSync("token"),
-    servicePhone: "17750224350"
+    servicePhone: "17750224350",
+    defUserInfo: {
+      "nickName": "",
+      "gender": 1,
+      "language": "",
+      "city": "",
+      "province": "",
+      "country": "",
+      "avatarUrl": ""
+    }
   },
    
    getToken: function() {
