@@ -101,7 +101,7 @@ Page({
       url: that.data.domain + '/api/order/16777215/orderstatus/'+orderId+'/4',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {

@@ -141,6 +141,7 @@ App({
 
    isSuccess: function (statusCode) {
       return statusCode == 200;
-   }
+   },
+   
 
 })

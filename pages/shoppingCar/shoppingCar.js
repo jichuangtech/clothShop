@@ -29,6 +29,7 @@ Page({
   },
   onShow: function () {
     this.getShoppingCar();
+    
   },
 
   //请求购物车
@@ -205,7 +206,7 @@ Page({
       },
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'DELETE',
       success: function (res) {
@@ -245,7 +246,7 @@ Page({
       },
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {

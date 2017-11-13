@@ -48,7 +48,7 @@ Page({
       url: that.data.domain + '/api/useraddress/16777215/defaultaddress',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
@@ -75,7 +75,7 @@ Page({
       url: that.data.domain + '/api/useraddress/address/' + that.data.addressId + '',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
@@ -95,47 +95,56 @@ Page({
     });
   },
 
+  getOrderInfos: function() {
+    var orderInfos = [];
+    //注意这块的代码书写
+    for (var index in this.data.proInfo) {
+      var orderInfo = this.data.proInfo[index];
+      var item = {
+        colorId: orderInfo.colorId,
+        goodsId: orderInfo.productId,
+        goodsNum: orderInfo.goodsNum,
+        specId: orderInfo.specId
+      };
+      
+      orderInfos.push(item);
+    }
+    return orderInfos;
+  },
   //提交订单
   submitOrder: function () {
     
-    var that = this,
-      addressInfo = [
-        {
-          "colorId": 1,
-          "goodsId": 2,
-          "goodsNum": 5,
-          "specId": 2
-        },
-        {
-          "colorId": 1,
-          "goodsId": 2,
-          "goodsNum": 5,
-          "specId": 2
-        }
-      ];
+    var that = this;
     if (!that.data.defaulMark) {
       app.showToast("您还没添加收获地址", that);
       return false;
     }
-    console.log(typeof addressInfo);
-    console.log("长度："+addressInfo.length);
     wx.request({
       url: that.data.domain + '/api/order/16777215',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token
+        'access_token': app.getToken()
       },
       data:{
         addressId: that.data.addressId,
-        goodsReqVOList: addressInfo,
+        goodsReqVOList: that.getOrderInfos(),
         userId: 16777215
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.statusCode == 200) {
-          app.showToast("订单提交成功", that);
-        }else{
-          app.showToast("订单提交失败", that);
+        console.info("订单创建成功 msg: " + JSON.stringify(res.data));
+        let statusCode = res.data.statusCode;
+        if (app.isShouldLogin(statusCode)) {
+          app.doLogin(function() {
+            that.submitOrder();
+          });
+        } else if (app.isSuccess(statusCode)) {
+          console.log("订单创建成功，然后利用订单号进行支付 msg: " 
+          + JSON.stringify(res.data.data));           
+          that.doWxPay(res.data.data);
+        } else {
+          app.shoToast("订单创建失败");
+          console.log("订单创建失败 msg: " + res.data.msg);           
         }
       },
       fail: function () {
@@ -143,4 +152,69 @@ Page({
       }
     });
   },
+
+  doWxPay: function (orderInfo) {
+    var that = this;
+    var payUrl = this.data.domain + "/api/pay"
+    wx.request({
+      url: payUrl,
+      header: {
+        'content-type': 'application/json',
+        'access_token': app.getToken()
+      },
+      data: {
+        totalAmount: orderInfo.totalAmount,
+        orderSn: orderInfo.orderSn,
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data.statusCode + ", msg: " + res.data.msg);
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function() {
+            that.doWxPay(orderInfo);
+          });
+          console.log("pref pay token invalid ...");
+        } else if (app.isSuccess(res.data.statusCode)) {
+          that.pay(res.data.data);
+          console.log("pref pay success ...");
+        } else {
+          console.log("pref pay error ...");
+        }
+      }
+    });
+  },
+  pay: function (payInfo) {
+    console.log("doWxPay payInfo: " + JSON.stringify(payInfo));
+    //小程序发起微信支付
+    wx.requestPayment({
+      //记住，这边的timeStamp一定要是字符串类型的，
+      //不然会报错，我这边在java后端包装成了字符串类型了
+      timeStamp: payInfo.timeStamp,
+      nonceStr: payInfo.nonceStr,
+      package: payInfo.packageStr,
+      signType: 'MD5',
+      paySign: payInfo.paySign,
+      success: function (event) {
+        // success   
+        console.log(event);
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      fail: function (error) {
+        // fail   
+        console.log("支付失败")
+        console.log(error)
+      },
+      complete: function () {
+        // complete   
+        console.log("pay complete")
+      }
+    });
+  }
+
+
+
 })

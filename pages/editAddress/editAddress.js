@@ -216,7 +216,7 @@ Page({
       },
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token 
+        'access_token': app.getToken()
       },
       method: 'POST',
       success: function (res) {
@@ -242,7 +242,7 @@ Page({
       url: that.data.domain + '/api/useraddress/address/' + that.data.editId + '',
       header: {
         'content-type': 'application/json',
-        'access_token': app.globalData.token        
+        'access_token': app.getToken()
       },
       method: 'GET',
       success: function (res) {
