@@ -87,12 +87,14 @@ App({
     var that = this;
     var url = this.globalData.config.domain + "/onlogin?code=" + code;
     console.log("queryUserId: " + url + ", userinfo: " + JSON.stringify(that.globalData.userInfo));
+    var tempUserInfo = that.globalData.userInfo == null 
+      ? that.globalData.defUserInfo : that.globalData.userInfo;
     wx.request({
       url: url,
       header: {
         'content-type': 'application/json'
       },
-      data: that.globalData.userInfo,
+      data: tempUserInfo,
       method:'POST',
       success: function (res) {
         console.log("queryUserId success code: " + JSON.stringify(res.data));
@@ -115,7 +117,7 @@ App({
   },
   
   globalData: {
-    userInfo: {},
+    userInfo: null,
     config: config,
     addressId: "",
     token: wx.getStorageSync("token"),

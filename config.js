@@ -1,5 +1,5 @@
-const ENV = 'bingotest';
-// const ENV = 'dev';
+// const ENV = 'bingotest';
+const ENV = 'dev';
 
 var config = function(ENV){
 	const config = {};
