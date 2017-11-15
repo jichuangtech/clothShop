@@ -12,7 +12,7 @@
 
   <view class="wrapper-content">
     <block wx:for="{{orderList}}">
-      <navigator class="order-item" url="../orderDetail/orderDetail?orderid={{item.orderId}}">
+      <view class="order-item">
 
         <view class="item-top">
           <view class="order-id i-b">
@@ -20,6 +20,7 @@
           </view>
           <view class="order-status main-color i-b fr" wx:if="{{item.orderStatus==1 || item.orderStatus==3}}">{{tabInfo[item.orderStatus].tabName}}</view>
         </view>
+        <navigator url="../orderDetail/orderDetail?orderid={{item.orderId}}">
         <block wx:for="{{item.goodsVO}}">
           <view class="item-middle">
             <image class="item-img" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
@@ -33,16 +34,20 @@
             </view>
           </view>
          </block>
+         </navigator>
 
         <view class="item-bottom">
           <view class="i-b">
             合计：<text class="main-color">￥{{item.totalAmount}}</text>
           </view>
-          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==1}}" data-id="{{item.orderId}}">立即支付</view>
-          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==3}}" data-id="{{item.orderId}}" bindtap="changeStatus">确认收货</view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==1}}" 
+          data-info="{{item}}"  bindtap="pay">立即支付</view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==3}}" 
+          data-id="{{item.orderId}}" 
+          bindtap="changeStatus">确认收货</view>
         </view>
-
-      </navigator>
+      </view>
+      
     </block>
     <view class="load-tip" wx:if="{{loadMark}}">{{loadTip}}</view>
   </view>

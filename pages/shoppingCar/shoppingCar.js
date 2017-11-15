@@ -351,8 +351,9 @@ Page({
       console.log("删除");
     }else{
       wx.setStorageSync("proInfo", proSubmit);
+      console.log("proSubmit 数据: " + JSON.stringify(proSubmit));
       wx.navigateTo({
-        url: "../confirmOrder/confirmOrder"
+        url: "../confirmOrder/confirmOrder?from=goodsCart"
       })
     }
   }

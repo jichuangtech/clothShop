@@ -17,7 +17,7 @@
     <block wx:for="{{proInfo}}">
       <view class="pro-item dis-box">
         <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-        <image wx:if="{{item.originalImg}}" src="{{domain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
+        <image wx:if="{{item.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
         <view class="item-info flex-1">
           <view class="item-desc">{{item.goodsName}}</view>
           <view>{{item.color}}</view>

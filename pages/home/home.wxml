@@ -29,7 +29,7 @@
         <view class="item-desc">{{item.goodsContent}}</view>
         <view class="dis-box">
           <view class="item-price main-color flex-1">
-            <block wx:for="{{item.goodsSpecs}}">
+            <block wx:for="{{item.goodsSpecs}}" wx:key="{{item.goodsSpecs}}">
               <text class="">￥{{item.specPrice}}/{{item.specName}}</text>
             </block>
           </view>

@@ -211,7 +211,7 @@ Page({
       return false;
     }
     var proItem = {
-      productId: this.data.productInfo.goodsId,
+      goodsId: this.data.productInfo.goodsId,
       goodsName: this.data.productInfo.goodsName,
       originalImg: this.data.productInfo.originalImg,
       goodsNum: this.data.inputNum,

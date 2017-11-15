@@ -4,6 +4,7 @@ Page({
 
   data: {
     domain: app.globalData.config.domain,
+    photoDomain: app.globalData.config.photoDomain,
     defalutAddreee:"",
     addressId:"",
     proInfo:"",
@@ -11,17 +12,29 @@ Page({
     defaulMark:false
   },
 
-  onLoad: function () {
-    console.log("确认订单onLoad");
+  onLoad: function (option) {
+    console.log("确认订单onLoad option: " + JSON.stringify(option));
+    var from = option.from;
+    var isFromGoodsCart = false;
+    if (from != undefined && from == "goodsCart") {
+      isFromGoodsCart = true;
+    }
+    console.log("确认订单onLoad option from: " + from + ", isFromGoodsCart: " + isFromGoodsCart);
+
     var allMoney = 0;
+    var goodsCartIds = [];
     var proInfo = wx.getStorageSync('proInfo');
-    console.log("参数:" + JSON.stringify(proInfo[0]));
+    console.log("确认订单参数:" + JSON.stringify(proInfo[0]));
     for(var i=0;i<proInfo.length;i++){
       allMoney = (parseFloat(allMoney) + parseFloat(proInfo[i].goodsNum * proInfo[i].shopPrice)).toFixed(2);
+      goodsCartIds[i] = proInfo[i].goodsCartId;
     }
+    console.log("确认订单参数 ids: " + goodsCartIds);
     this.setData({
       proInfo: proInfo,
-      allMoney: allMoney
+      allMoney: allMoney,
+      isFromGoodsCart: isFromGoodsCart,
+      goodsCartIds: goodsCartIds
     });
   },
 
@@ -102,7 +115,7 @@ Page({
       var orderInfo = this.data.proInfo[index];
       var item = {
         colorId: orderInfo.colorId,
-        goodsId: orderInfo.productId,
+        goodsId: orderInfo.goodsId,
         goodsNum: orderInfo.goodsNum,
         specId: orderInfo.specId
       };
@@ -141,9 +154,9 @@ Page({
         } else if (app.isSuccess(statusCode)) {
           console.log("订单创建成功，然后利用订单号进行支付 msg: " 
           + JSON.stringify(res.data.data));           
-          that.doWxPay(res.data.data);
+          that.pay(res.data.data);
         } else {
-          app.shoToast("订单创建失败");
+          app.showToast("订单创建失败", that);
           console.log("订单创建失败 msg: " + res.data.msg);           
         }
       },
@@ -153,68 +166,60 @@ Page({
     });
   },
 
-  doWxPay: function (orderInfo) {
+  //删除购物车
+  delCarts: function () {
     var that = this;
-    var payUrl = this.data.domain + "/api/pay"
+    console.log("delCarts:" + this.data.goodsCartIds);
     wx.request({
-      url: payUrl,
+      url: that.data.domain + '/api/goodsCart/',
+      data: {
+        cartIds: that.data.goodsCartIds
+      },
       header: {
         'content-type': 'application/json',
         'access_token': app.getToken()
       },
-      data: {
-        totalAmount: orderInfo.totalAmount,
-        orderSn: orderInfo.orderSn,
-      },
-      method: 'POST',
+      method: 'DELETE',
       success: function (res) {
-        console.log(res.data.statusCode + ", msg: " + res.data.msg);
         if (app.isShouldLogin(res.data.statusCode)) {
-          app.doLogin(function() {
-            that.doWxPay(orderInfo);
+          that.doLogin(function() {
+            that.delCarts();
           });
-          console.log("pref pay token invalid ...");
-        } else if (app.isSuccess(res.data.statusCode)) {
-          that.pay(res.data.data);
-          console.log("pref pay success ...");
-        } else {
-          console.log("pref pay error ...");
+        } else if (app.isSuccess(res.data.statusCode)){
+          console.log("确认订单 from goodcart del success");
         }
+      },
+      fail: function () {
+        console.log("确认订单 from goodcart del error");
       }
     });
   },
-  pay: function (payInfo) {
-    console.log("doWxPay payInfo: " + JSON.stringify(payInfo));
-    //小程序发起微信支付
-    wx.requestPayment({
-      //记住，这边的timeStamp一定要是字符串类型的，
-      //不然会报错，我这边在java后端包装成了字符串类型了
-      timeStamp: payInfo.timeStamp,
-      nonceStr: payInfo.nonceStr,
-      package: payInfo.packageStr,
-      signType: 'MD5',
-      paySign: payInfo.paySign,
-      success: function (event) {
-        // success   
-        console.log(event);
-        wx.showToast({
-          title: '支付成功',
-          icon: 'success',
-          duration: 2000
-        });
-      },
-      fail: function (error) {
-        // fail   
-        console.log("支付失败")
-        console.log(error)
-      },
-      complete: function () {
-        // complete   
-        console.log("pay complete")
+
+  pay: function (orderInfo) {
+    var that = this;
+    app.doWxPay(orderInfo, 
+    function() {
+      wx.showToast({
+        title: '支付成功',
+        icon: 'success',
+        duration: 2000
+      });
+
+      setTimeout(function() {
+        wx.navigateBack();
+      }, 2000);
+
+    },
+    function() {
+      wx.redirectTo({
+        url: "../orderDetail/orderDetail?orderid=" + orderInfo.orderId
+      })
+    },
+    function() {
+      if (that.data.isFromGoodsCart) {
+        that.delCarts(that.data.goodsCartIds);
       }
     });
   }
-
-
-
+  
 })

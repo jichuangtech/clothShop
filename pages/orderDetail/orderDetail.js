@@ -61,5 +61,21 @@ Page({
         console.log("失败");
       }
     });
+  },
+
+  pay: function () {
+    app.doWxPay(this.data.orderInfo,
+      function () {
+        wx.navigateBack();
+
+      },
+      function () {
+        wx.redirectTo({
+          url: "../orderDetail/orderDetail?orderid=" + orderInfo.orderId
+        })
+        console.error("order Detail pay error");
+      });
   }
+
+
 })

@@ -116,5 +116,17 @@ Page({
         console.log("确认收货fail");
       }
     });
+  },
+
+  pay: function (event) {
+    var that = this;
+    var orderInfo = event.target.dataset.info;
+    app.doWxPay(orderInfo,
+      function () {
+        that.getOrderList();
+      },
+      function () {
+        console.error("order Detail pay error");
+      });
   }
 })
