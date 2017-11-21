@@ -19,6 +19,25 @@ Page({
   onLoad: function () {
     
   },
+
+  onShareAppMessage: function(res) {
+    if (res.from == 'menu') {
+      console.log("右上角的菜单跳转");
+    }
+
+    return {
+      title: '金凤针织',
+      path: '/page/home',
+      imageUrl:'/images/icon/home.png',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
+
   onReady:function(){
     this.getProductType();
     this.getHotProduct();

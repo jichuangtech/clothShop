@@ -15,8 +15,8 @@ var config = function(ENV){
 		case 'pro':
       break;
     case 'bingotest':
-      config.domain = 'http://172.20.10.3:8070';
-      // config.domain = 'http://localhost:8070';
+      // config.domain = 'http://172.20.10.3:8070';
+      config.domain = 'http://localhost:8070';
       break;
 		default:
 			config.domain = 'https://www.ktvme.com';
