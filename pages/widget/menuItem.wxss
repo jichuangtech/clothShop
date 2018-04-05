@@ -1,0 +1,17 @@
+.product-menu .menu-item{
+    display: inline-block;
+    height: 80px;
+    width: 33.3%;
+    text-align: center
+}
+.product-menu .menu-icon{
+  display: block;
+  height: 104.86rpx;
+  margin: 0 auto;
+  width: 104.86rpx;
+}
+.product-menu .menu-name{
+    color: #000;
+    font-size: 30.944rpx;
+    margin-top: 3px;
+}

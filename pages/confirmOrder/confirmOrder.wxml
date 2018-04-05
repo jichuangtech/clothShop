@@ -1,0 +1,37 @@
+<!--confirmOrder.wxml-->
+<include src="../widget/toast.wxml" />
+<view class="wrapper">
+  <navigator url="../addressList/addressList?pagetype=0">
+  <view class="wrapper-top receive-address" wx:if="{{!defaulMark}}">记得添加收获地址哦~</view>
+  <view  class="wrapper-top receive-address dis-box"  wx:if="{{defaulMark}}">
+    <image src="../../images/icon/address-icon.png"></image>
+    <view class="flex-1">
+      <view class="receiver-name">收货人：{{defalutAddreee.consignee}}</view>
+      <view class="receiver-phone">{{defalutAddreee.mobile}}</view>
+      <view class="address-detail">收货地址：{{defalutAddreee.address}}</view>
+    </view>
+  </view>
+  
+  </navigator>
+  <view class="pro-info">
+    <block wx:for="{{proInfo}}">
+      <view class="pro-item dis-box">
+        <image wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+        <image wx:if="{{item.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
+        <view class="item-info flex-1">
+          <view class="item-desc">{{item.goodsName}}</view>
+          <view>{{item.color}}</view>
+          <view class="item-num-price dis-box">
+            <text class="item-price main-color">￥{{item.shopPrice}}/{{item.specName}}</text>
+            <text>X{{item.goodsNum}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="wrapper-footer dis-box">
+    <view class="count-money flex-1">合计：￥{{allMoney}}</view>
+    <view class="confirm-btn" bindtap="submitOrder">提交订单</view>
+  </view>
+
+</view>

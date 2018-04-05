@@ -1,0 +1,38 @@
+<!--addressList.wxml-->
+<include src="../widget/toast.wxml" />
+<view class="wrapper">
+  <view class='none-data' wx:if="{{addressLength==0}}">无收获地址的数据，赶紧添加吧~</view>
+  <view class="address-list">
+    <block wx:for="{{addressList}}">
+      <view class="address-item">
+        <view class="address-top" data-id="{{item.addressId}}" bindtap='selectAddress'>
+            <view class="receiver-info">
+              <view>
+                <text class="receiver-name">{{item.consignee}}</text>
+                <text class="receiver-phone">{{item.mobile}}</text>
+              </view>
+              <view class="address-detail">{{item.address}}</view>
+            </view>
+            <!-- <navigator url="../editAddress/editAddress?addressId={{item.addressId}}">
+              <view class="edit-address" src="/../../../images/icon/e1dit-icon.png"></view>
+            </navigator> -->
+        </view>
+        <view class="modifiy-address dis-box">
+          <view class="set-defalut flex-1" data-id="{{item.addressId}}" data-isdefault="{{item.isDefault}}" bindtap="setDefalut">
+            <view class="select-radio {{item.isDefault==0?'active':'unactive'}}"></view>
+            设为默认
+          </view>
+          <navigator class="edit-address set-icon" url="../editAddress/editAddress?id={{item.addressId}}">
+            <image src="../../images/icon/edit-icon.png"></image>
+            编辑
+          </navigator>
+          <view class="del-address set-icon" data-id="{{item.addressId}}" bindtap="delAddress">
+            <image src="../../images/icon/delete-icon.png"></image>
+            删除
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <navigator class="add-btn" url="../editAddress/editAddress?addressLen={{addressLength}}">添加地址</navigator>
+</view>

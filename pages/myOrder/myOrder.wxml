@@ -1,0 +1,56 @@
+<!--myOrder.wxml-->
+<include src="../widget/toast.wxml" />
+<view class="wrapper">
+
+  <view class="wrapper-top">
+    <scroll-view class="order-tabs" scroll-x="true">
+    <block wx:for="{{tabInfo}}">
+      <view class="order-tab {{orderStatus == item.tabStatus ? 'active': ''}}" data-status="{{item.tabStatus}}" bindtap="checkStatus">{{item.tabName}}</view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view class="wrapper-content">
+    <block wx:for="{{orderList}}">
+      <view class="order-item">
+
+        <view class="item-top">
+          <view class="order-id i-b">
+            订单编号：<text>{{item.orderSn}}</text>
+          </view>
+          <view class="order-status main-color i-b fr" wx:if="{{item.orderStatus==1 || item.orderStatus==3}}">{{tabInfo[item.orderStatus].tabName}}</view>
+        </view>
+        <navigator url="../orderDetail/orderDetail?orderid={{item.orderId}}">
+        <block wx:for="{{item.goodsVO}}">
+          <view class="item-middle">
+            <image class="item-img" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
+            <view class="item-info flex-1">
+              <view class="item-desc">{{item.goodsName}}</view>
+              <!-- <view class="item-desc">{{item.color}}</view> -->
+              <view class="item-num-price dis-box">
+                <view>￥{{item.shopPrice}}/{{item.specName}}</view>
+                <view class="item-num">X{{item.goodsNum}}</view>
+              </view>
+            </view>
+          </view>
+         </block>
+         </navigator>
+
+        <view class="item-bottom">
+          <view class="i-b">
+            合计：<text class="main-color">￥{{item.totalAmount}}</text>
+          </view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==1}}" 
+          data-info="{{item}}"  bindtap="pay">立即支付</view>
+          <view class="item-btn main-color i-b fr" wx:if="{{item.orderStatus==3}}" 
+          data-id="{{item.orderId}}" 
+          bindtap="changeStatus">确认收货</view>
+        </view>
+      </view>
+      
+    </block>
+    <view class="load-tip" wx:if="{{loadMark}}">{{loadTip}}</view>
+  </view>
+</view>
+
+

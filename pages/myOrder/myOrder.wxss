@@ -1,0 +1,115 @@
+/* myOrder.wxss */
+.order-tabs{
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  color: #666;
+  font-size: 29rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  margin-bottom: 15px;
+  white-space: nowrap;
+}
+.order-tabs .order-tab{
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 100px;
+}
+.order-tabs .order-tab.active{
+  color: #ff4444;
+}
+.order-tabs .order-tab.active:after{
+  position: absolute;
+  content: "";
+  background-color: #ff4444;
+  height: 4rpx;
+  width: 50px;
+  left: 25px;
+  bottom: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.order-item{
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  color: #000;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 0 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+.order-item .item-top{
+  font-size: 12px;
+  padding: 23rpx 0;
+  position: relative;
+}
+.order-item .item-top::after{
+  background-color: #e5e5e5;
+  content: "";
+  position: absolute;
+  left: -10px;
+  right:-10px;
+  bottom: 0;
+  height: 1px;
+}
+.order-item .item-top .order-id{
+  color: #898989;
+}
+.order-item  .item-middle{
+  padding: 5px 0;
+  position: relative;
+  display: -webkit-box;
+  display: box;
+  -webkit-box-align: stretch;
+          box-align: stretch;
+}
+.order-item .item-img{
+  height: 50px;
+  width: 50px;
+  margin-right: 15px;
+}
+.order-item .item-info{
+  position: relative;
+  width: 100%;
+}
+.order-item  .item-desc{
+  position: absolute;
+  top:0;
+}
+.order-item  .item-num-price{
+  color:#ff4400;
+  font-size: 12px;
+  width: 100%;
+  position: absolute;
+  bottom:0;
+}
+.order-item .item-num{
+ color:#999;
+ font-size: 14px;
+}
+.order-item  .item-bottom{
+  color: #000;
+  height: 24px;
+  padding: 23rpx 0; 
+  position: relative;
+}
+.order-item  .item-bottom:before{
+  position: absolute;
+  content: "";
+  top:0;
+  left: -10px;
+  right:-10px;
+  height: 1px;
+  background-color: #e5e5e5;
+}
+.order-item .item-btn{ 
+  border: 1px solid #ff4444;
+  font-size: 12px;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  width: 140rpx;
+}

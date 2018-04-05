@@ -1,0 +1,13 @@
+/**demo.wxss**/
+
+.root-view-style {
+    width: 100%;
+    height: 100rem;
+}
+
+.scroll-item-style {
+    width: 50%;
+    height: 10%;
+    background-color: #ff0;
+    margin-top: 10%;
+}

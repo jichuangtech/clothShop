@@ -1,0 +1,36 @@
+<!--profile.wxml-->
+<view class="wrapper">
+  <view class="wrapper-top">
+    <view  bindtap="bindViewTap" class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="wrapper-content">
+    <navigator class="my-order content-item dis-box" data-rel="auto" url="../myOrder/myOrder">
+      <view class='flex-1'>我的订单</view>
+      <view class='check-more'>查看更多订单</view>
+    </navigator>
+    <view  class="dis-box order-status">
+      <view bindtap='checkOrderStatus' data-type="1">
+        <image src="../../images/icon/order-icon1.png"></image>
+        <text>待支付</text>
+      </view>
+      <view bindtap='checkOrderStatus' data-type="2">
+        <image src="../../images/icon/order-icon2.png"></image>
+        <text>待发货</text>
+      </view>
+      <view bindtap='checkOrderStatus'  data-type="3">
+        <image class="car-image" src="../../images/icon/order-icon3.png"></image>
+        <text>待收货</text>
+      </view>
+      <view bindtap='checkOrderStatus' data-type="4">
+        <image src="../../images/icon/order-icon4.png"></image>
+        <text>已完成</text>
+      </view>
+    </view>
+    <view class="service-item  content-item" bindtap="phoneCall">
+      <view class='flex-1'>联系客服</view>
+    </view>
+  </view>
+</view>

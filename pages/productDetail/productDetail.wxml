@@ -1,0 +1,84 @@
+<include src="../widget/toast.wxml" />
+<view class="wrapper">
+  <view class="wrapper-top">
+    <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
+    <image wx:if="{{productInfo.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image> 
+  </view>
+  <view class="wrapper-content">
+    <view class="product-info">
+      <view class="product-desc product-item">{{productInfo.goodsContent}}</view>
+      <view class="product-name product-item">{{productInfo.goodsName}}</view>
+      <view class="product-price product-item">
+        <block wx:for="{{productInfo.goodsSpecs}}">
+            <text class="main-color">￥{{item.specPrice}}/{{item.specName}}</text>
+        </block>
+      </view>
+      <view class="product-num dis-box">
+        <view class="flex-1">运费：免运费</view>
+        <view class="remain-num">剩余：{{productInfo.storeCount}}</view>
+      </view>
+    </view>
+    <view class="choose-colors" bindtap="openDialog">选择 颜色分类</view>
+    <view class="product-detail">
+      <view class="detail-title"></view>
+      <block wx:for="{{productInfo.goodsDetailImages}}">
+        <image src="{{photoDomain}}/api/goodsCategories/picture/{{item.imageUrl}}"></image>
+      </block>
+    </view>
+  </view>
+  <view class="btns dis-box">
+    <view class="car-btn flex-1" data-type="1" bindtap="openDialog">加入购物车</view>
+    <view class="buy-btn flex-1" data-type="2" bindtap="openDialog" >立即购买</view>
+  </view>
+</view>
+<!--选择弹框begin  -->
+<view class="choose-dialog {{dialogMark==0?'none':''}}" catchtap="hideDialog"></view>
+<view class="dialog-wrapper {{dialogMark==0?'none':''}}">
+  <view class="dialog-top dialog-item dis-box">
+    <view class="dialog-img">
+      <image wx:if="{{!productInfo.originalImg}}" src="../../images/no_pic.png"></image>
+      <image wx:if="{{productInfo.originalImg}}" src="{{photoDomain}}/api/goodsCategories/picture/{{productInfo.originalImg}}"></image>
+    </view> 
+    <view class="flex-1">
+      <block wx:for="{{productInfo.goodsSpecs}}">
+        <view class="main-color">￥{{item.specPrice}}/{{item.specName}}</view>
+      </block>
+      <view>库存{{productInfo.storeCount}}件</view>
+      <view>选择 颜色分类</view>
+    </view>
+  </view>
+  <view class="colors-select dialog-item">
+    <view>颜色分类</view>
+    <view class="colors-area">
+      <block wx:for="{{productInfo.goodsColors}}">
+        <text class="color-item {{colorActive==item.colorId?'color-active':''}}" data-id='{{item.colorId}}'  data-name='{{item.colorName}}' data-type="1" bindtap="chooseType">{{item.colorName}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="dialog-item">
+    <view>规格</view>
+    <view class="price-type dis-box">
+      <block wx:for="{{productInfo.goodsSpecs}}">
+        <view class="flex-1">
+          <view class="select-radio {{priceTypeActive==item.specId?'active':'unactive'}}" data-id='{{item.specId}}' data-name='{{item.specName}}'  data-price='{{item.specPrice}}' data-type="2" bindtap="chooseType"></view>
+          {{item.specName}}
+        </view>
+      </block> 
+    </view>
+  </view>
+  <view class="buy-num dialog-item dis-box">
+    <view class="">购买数量</view>
+    <view class="set-num">
+      <text class="sub-btn set-btn fl {{inputNum==1?'unactive':''}}" data-type="1" bindtap="setNum">-</text>
+      <input class="num-input fl" type="number" value="{{inputNum}}"  bindinput="bindChange"/>
+      <text class="add-btn set-btn fl" data-type="2" bindtap="setNum">+</text>
+    </view>
+  </view>
+  <view class="confirm-btn"  bindtap="confirmDialog" wx:if="{{btnObj.btnType}}">确定</view> 
+  <view class="btns dis-box" wx:if="{{!btnObj.btnType}}">
+    <view class="car-btn flex-1" data-type="1" bindtap="addShoppingCar">加入购物车</view>
+    <view class="buy-btn flex-1" data-type="2" bindtap="confirmOrder" >立即购买</view>
+  </view>
+</view>
+<!--选择弹框 end  -->
+

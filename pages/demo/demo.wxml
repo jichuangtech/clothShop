@@ -1,0 +1,58 @@
+<!--index.wxml-->
+<view class="root-view-style">
+
+<icon type="success_no_circle" size="20"/>
+
+<progress percent="20" active activeColor="#ff0" backgroundColor="#00f"/>
+
+<button
+  style="width:80%; margin-top:5%"
+  type="warn"
+  loading="true"
+  open-type="contact"
+  bindtap="chooseImg"
+>
+  选择图片
+</button>
+
+
+
+<button
+  style="width:80%; margin-top:5%"
+  type="warn"
+  loading="true"
+  open-type="contact"
+  bindtap="prevImg"
+>
+  预览图片
+</button>
+
+
+<button
+  style="width:80%; margin-top:5%"
+  type="warn"
+  loading="true"
+  open-type="contact"
+  bindtap="showLoading"
+>
+  加载
+</button>
+
+<!-- scroll-view 要设置一个固定的高度-->
+  <scroll-view class="root-view-style"
+    scroll-y="true"
+    enable-back-to-top="true"
+  >
+
+    <view  class="scroll-item-style"></view>
+
+    <view  class="scroll-item-style"></view>
+
+    <view  class="scroll-item-style"></view>
+
+    <view  class="scroll-item-style"></view>
+  </scroll-view>
+
+</view>
+
+

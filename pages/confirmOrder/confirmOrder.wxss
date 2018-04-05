@@ -1,0 +1,79 @@
+/* confirmOrder.wxss */
+.wrapper-top{
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  color: #000;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
+}
+.wrapper-top image{
+  margin-right: 5px;
+  height: 21px;
+  width: 21px;
+}
+.wrapper-top:after{
+    position: absolute;
+    content: "";
+    right: 15px;
+    top: 50%;
+    border-top:1px solid #bbb; 
+    border-right:1px solid #bbb; 
+    height:8px;
+    width:8px;
+    -webkit-transform: rotate(45deg) translateY(-50%);
+              transform: rotate(45deg) translateY(-50%);
+}
+/*商品信息  */
+.pro-item {
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 8px;
+  padding: 10px 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+.pro-item image{
+  height: 158rpx;
+  width: 158rpx;
+  margin-right: 15px;
+}
+.pro-item .item-info{
+  position: relative;
+  width: 100%;
+}
+.pro-item  .item-num-price{
+  font-size: 12px;
+  text-align: right;
+  width: 100%;
+}
+.pro-item  .item-num-price text{
+ display: block;
+ width: 50%;
+}
+.pro-item .item-price{
+  text-align: left;
+}
+
+.wrapper-footer {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top:1px solid #e5e5e5;
+  height: 110rpx;
+}
+.wrapper-footer .count-money{
+  padding-left: 20px;
+}
+.wrapper-footer .confirm-btn{
+  background-color: #F40;
+  color:#fff;
+  height: 100%;
+  line-height: 110rpx;
+  text-align: center;
+  width: 226rpx; 
+}

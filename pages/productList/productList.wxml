@@ -1,0 +1,24 @@
+<!--productList.wxml-->
+<view class="wrapper">
+  <view class="wrapper-content">
+
+    <view class="product-list">
+      <block wx:for="{{list}}" wx:key="{{index}}">
+        <navigator class="list-item dis-box" url="../productDetail/productDetail?id={{item.goodsId}}">
+          <image class="item-img" src="{{photoDomain}}/api/goodsCategories/picture/{{item.originalImg}}"></image>
+          <view class="item-info flex-1">
+            <view class="item-desc">{{item.goodsContent}}</view>
+            <view class="">
+              <block wx:for="{{item.goodsSpecs}}">
+                <view class="item-price main-color">￥{{item.specPrice}}/{{item.specName}}</view>
+              </block>
+              <!-- <navigator class="item-btn" url="../productDetail/productDetail?id={{item.goodsId}}">去看看</navigator> -->
+            </view>
+          </view>
+        </navigator>
+      </block>
+      <view class="load-tip" wx:if="{{loadMark}}">{{loadTip}}</view>
+    </view>
+
+  </view>
+</view>

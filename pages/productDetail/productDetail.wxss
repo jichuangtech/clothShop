@@ -1,0 +1,198 @@
+.wrapper{
+  font-size:14px;
+  color: #000;
+}
+.wrapper-top{
+  display: flex;
+  height: 486.111rpx;
+}
+.wrapper-top image{
+  	flex-grow: 1;
+		object-fit: cover;
+}
+.product-info{
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 36.111rpx 15px;
+}
+.product-info .product-item{
+  margin-bottom: 36.111rpx;
+}
+.product-info .product-price text{
+  color:#F40;
+  margin-right: 5px;
+}
+.product-info .product-num{
+  color: #8d8d8d
+}
+.product-info .remain-num{
+  min-width:100px;
+}
+.choose-colors{
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 15px 0;
+  padding: 10px 15px;
+  position: relative;
+}
+.choose-colors:after{
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  border: 1px solid transparent;
+  border-bottom-color: #969696;
+  border-right-color: #969696;
+  right: 15px;
+  top:13px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.product-detail {
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 15px;
+  min-height: 20px;
+  	display: flex;
+			flex-wrap: wrap;
+}
+.product-detail .detail-title{
+  border-bottom: 2px solid #ababab;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  height: 1px;
+  position: relative;
+  width: 200px;
+}
+.product-detail .detail-title:after{
+  background-color: #fff;
+  position:absolute;
+  content: "商品详情";
+  left: 50%;
+  top:50%;
+  padding: 0 15px;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+
+}
+.product-detail image{
+  height: 120px;
+  margin-bottom: 5px;
+  	flex-grow: 1;
+			object-fit: cover;
+}
+.btns{
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+}
+.btns .car-btn{
+  background-color: #ff632a;
+}
+.btns .buy-btn{
+  background-color: #ff4444;
+}
+
+/*弹框  */
+.choose-dialog{
+    background: rgba(0, 0, 0, 0.62);
+    height: 100%;
+    font-size: 14px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+.dialog-wrapper{
+  background-color: #fff;
+  font-size: 14px;
+  height: 350px;
+  padding: 0 10px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index:5;
+}
+.dialog-wrapper .dialog-item{
+  border-bottom:1px solid rgba(0,0,0,.07);
+  padding: 10px 0;
+}
+.dialog-wrapper .dialog-top{
+  position: relative;
+}
+.dialog-wrapper  .dialog-img{
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top:-15px;
+  margin-right: 10px;
+  padding: 1px;
+  height: 70px;
+  width: 70px;
+  display: flex;
+}
+.dialog-wrapper .dialog-top image{
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  object-fit: cover;
+}
+.dialog-wrapper .color-item{
+  display: inline-block;
+  background-color: rgba(127,127,127,0.5);
+  border-radius: 5px;
+  font-size: 12px;
+  margin: 10px 10px 0 0;
+  padding: 4px 6px;
+}
+.dialog-wrapper .color-item.color-active{
+  background-color: #F40;
+  color: #fff;
+}
+.dialog-wrapper  .price-type{
+  font-size: 32rpx;
+  margin-top: 10px;
+}
+.dialog-wrapper .set-num{
+  text-align: center;
+}
+.dialog-wrapper  .set-btn{
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  height:47rpx;
+  line-height:47rpx;
+  width:47rpx;
+  border: 1px solid #ababab;
+}
+.dialog-wrapper  .sub-btn.unactive{
+  border: 1px solid #e8e8e8;
+}
+.dialog-wrapper .num-input{
+  border: 1px solid #ababab;
+  display: inline-block;
+  margin: 0 3px;
+  height: 47rpx;
+  min-height: 47rpx;
+  width: 120rpx;
+}
+.dialog-wrapper  .confirm-btn{
+  position: absolute;
+  bottom: 0;
+  background-color: #ff632a;
+  color: #fff;
+  height:40px;
+  line-height:40px;
+  text-align: center;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,7 @@
+<template name="menuItem" >
+
+  <navigator class="menu-item" url="../productList/productList?productName={{name}}&&id={{id}}">
+    <image class="menu-icon" src="https://www.jichuangtech.site/clothshopserver/api/goodsCategories/picture/{{image==''?'../res/img/product-default.png':image}}" />
+    <text class="menu-name">{{name}}</text>
+  </navigator>
+</template>
