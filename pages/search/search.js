@@ -1,19 +1,25 @@
 // pages/search/search.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    domain: app.globalData.config.domain,
+    loadTip: '',
     inputValue: '',
     getSearch: [],
-    modalHidden: true
+    modalHidden: true,
+    searchList: [],
+    s: []
   },
 
   bindInput: function (e) {
     this.setData({
       inputValue: e.detail.value
     })
+    wx.setStorageSync('inputValue', e.detail.value);
   },
 
   setSearchStorage: function () {
@@ -22,12 +28,40 @@ Page({
       var length = searchData.length
       searchData[length] = this.data.inputValue
       wx.setStorageSync('searchData', searchData)
-      wx.navigateTo({
-        url: '../result/result'
-      })
+      this.getSearchList();
     } else {
       console.log('输入不能为空')
     }
+  },
+
+  getSearchList: function () {
+    var that = this;
+    wx.request({
+      url: that.data.domain + '/api/info/goods',
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      success: function (res) {
+        if (app.isShouldLogin(res.data.statusCode)) {
+          app.doLogin(function () {
+            that.getSearchList();
+          });
+        } else if (app.isSuccess(res.data.statusCode)) {
+          that.setData({
+            searchList: res.data.data
+          });
+          wx.setStorageSync('searchList', res.data.data);
+          wx.navigateTo({
+            url: '../result/result',
+          })         
+        }else {
+          that.setData({
+            loadTip: "暂时没有数据"
+          });
+        }
+      }
+    })
   },
 
   modalChangeConfirm: function () {
@@ -50,6 +84,7 @@ Page({
       modalHidden: false
     })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */

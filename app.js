@@ -130,7 +130,7 @@ App({
       "province": "",
       "country": "",
       "avatarUrl": ""
-    }
+    },
   },
    
    getToken: function() {
