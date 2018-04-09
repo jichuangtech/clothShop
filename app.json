@@ -11,7 +11,10 @@
     "pages/productList/productList",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/orderDetail/orderDetail"
+
+    "pages/orderDetail/orderDetail",
+    "pages/search/search",
+    "pages/result/result"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -44,6 +47,12 @@
         "text": "我的信息",
         "iconPath": "images/icon/profile.png",
         "selectedIconPath": "images/icon/profile-actived.png"
+
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索"
+
       }
     ]
   },

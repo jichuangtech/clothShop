@@ -1,0 +1,20 @@
+/* pages/search/search.wxss */
+.page{
+  margin-left: 5%
+}
+.board{
+  width: 65%
+}
+.clearInput{
+  width: 10%;
+  font-size: 27rpx
+}
+.sousuo{
+  width: 20%;
+  font-size: 27rpx
+}
+.clear_h{
+  margin-top: 20rpx;
+  margin-left: 28%;
+  font-size: 35rpx
+}

@@ -47,7 +47,7 @@ Page({
   getProductType:function(){
     var that = this;
     wx.request({
-      url: that.data.domain +'/api/goodsCategories', 
+      url: that.data.domain +'/api/info/goodsCategories', 
       header: {
         'content-type': 'application/json',
         'access_token': app.getToken()
@@ -81,7 +81,7 @@ Page({
   getHotProduct:function(){
     var that = this;
     wx.request({
-      url: that.data.domain + '/api/goods/hot',
+      url: that.data.domain + '/api/info/goods/hot',
       header: {
         'content-type': 'application/json',
         'access_token': app.getToken()

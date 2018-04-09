@@ -1,50 +1,51 @@
 {
-	"description": "项目配置文件。",
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true
-	},
-	"compileType": "weapp",
-	"libVersion": "1.5.3",
-	"appid": "wx9f2312ddb9ae2498",
-	"projectname": "%E9%95%BF%E4%B9%90%E5%B8%82%E9%87%91%E5%87%A4%E9%92%88%E7%BB%87",
-	"condition": {
-		"weapp": {
-			"current": -1,
-			"list": [
-				{
-					"name": "test",
-					"pathName": "COMPONENT/music",
-					"query": "a=哈哈",
-					"scene": 1044,
-					"shareInfo": {},
-					"referrerInfo": {}
-				}
-			]
-		},
-		"search": {
-			"current": -1,
-			"list": [
-				{
-					"name": "test",
-					"pathName": "",
-					"title": "",
-					"cacheKey": ""
-				}
-			]
-		},
-		"conversation": {
-			"current": 0,
-			"list": [
-				{
-					"name": "test",
-					"query": "",
-					"boxQI": "",
-					"service": {}
-				}
-			]
-		}
-	}
+  "description": "项目配置文件。",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "1.5.3",
+  "appid": "wx9f2312ddb9ae2498",
+  "projectname": "%E9%95%BF%E4%B9%90%E5%B8%82%E9%87%91%E5%87%A4%E9%92%88%E7%BB%87",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": [
+        {
+          "name": "test",
+          "pathName": "",
+          "title": "",
+          "cacheKey": ""
+        }
+      ]
+    },
+    "conversation": {
+      "current": 0,
+      "list": [
+        {
+          "name": "test",
+          "query": "",
+          "boxQI": "",
+          "service": {}
+        }
+      ]
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "name": "test",
+          "pathName": "COMPONENT/music",
+          "query": "a=哈哈",
+          "scene": 1044,
+          "shareInfo": {},
+          "referrerInfo": {}
+        }
+      ]
+    }
+  }
 }

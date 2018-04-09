@@ -1,0 +1,21 @@
+<!--pages/search/search.wxml-->
+<view class="page">
+    <view class="search"> 
+        <view class="board" style="display:inline-block" >
+            <input class="search-input" placeholder="请输入搜索的商品" auto-focus
+            bindinput="bindInput"  bindchange="bindchange" style="inline-block" value="{{inputValue}}"/>
+        </view>
+        <button class="clearInput" style="display:inline-block" bindtap="clearInput">×</button>
+        <button  class="sousuo" style="display:inline-block" bindtap="setSearchStorage">搜索</button>
+    </view>
+  <view class="record">
+    <view class="local" wx:for="{{getSearch}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx" >
+      <view wx:if="{{itemName != ''}}"> {{itemName}} </view>
+    </view>
+    <modal class="modal" hidden="{{modalHidden}}" bindconfirm="modalChangeConfirm" bindcancel="modalChangeCancel">
+      <view> 是否删除历史记录 </view>
+    </modal>
+    <button class="clear_h" style="display:inline-block" bindtap="clearSearchStorage">清空浏览记录</button>
+  </view>
+</view>
+

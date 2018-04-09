@@ -1,0 +1,20 @@
+<!--pages/result/result.wxml-->
+<view class='page'>
+  <view class="search-product">
+    <block  wx:for="{{searchList}}" wx:key="{{index}}">
+      <navigator class="search-item"  url="../productDetail/productDetail?id={{item.goodsId}}">
+        <image class="item-img" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+        <view class="item-desc">{{item.goodsContent}}</view>
+        <view class="dis-box">
+          <view class="item-price main-color flex-1">
+            <block wx:for="{{item.goodsSpecs}}" wx:key="{{item.goodsSpecs}}">
+              <text class="">￥{{item.specPrice}}/{{item.specName}}</text>
+            </block>
+          </view>
+        </view>
+      </navigator>
+    </block>
+    
+  </view>
+</view>
+
