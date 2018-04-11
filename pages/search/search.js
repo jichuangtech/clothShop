@@ -7,11 +7,14 @@ Page({
    */
   data: {
     domain: app.globalData.config.domain,
+    para1: '',
+    para2: 'none',
     loadTip: '',
     inputValue: '',
     getSearch: [],
     modalHidden: true,
     searchList: [],
+    search: [],
     s: []
   },
 
@@ -22,8 +25,16 @@ Page({
     wx.setStorageSync('inputValue', e.detail.value);
   },
 
+  bindfocus: function () {
+    this.setData({
+      para1: '',
+      para2: 'none'
+    })
+  },
+
   setSearchStorage: function () {
-    if (this.data.inputValue != '') {
+    var that = this;
+    if (that.data.inputValue != '') {
       var searchData = wx.getStorageSync('searchData') || []
       var length = searchData.length
       searchData[length] = this.data.inputValue
@@ -32,6 +43,13 @@ Page({
     } else {
       console.log('输入不能为空')
     }
+  },
+
+  setInputValue: function (e) {
+    var that=this;
+    that.setData({
+      inputValue: e.currentTarget.dataset.name
+    })
   },
 
   getSearchList: function () {
@@ -52,9 +70,10 @@ Page({
             searchList: res.data.data
           });
           wx.setStorageSync('searchList', res.data.data);
-          wx.navigateTo({
-            url: '../result/result',
-          })         
+          that.setData({
+            para1: 'none',
+            para2: ''
+          });       
         }else {
           that.setData({
             loadTip: "暂时没有数据"
@@ -62,6 +81,7 @@ Page({
         }
       }
     })
+    that.selectResult();
   },
 
   modalChangeConfirm: function () {
@@ -82,6 +102,22 @@ Page({
   clearSearchStorage: function () {
     this.setData({
       modalHidden: false
+    })
+  },
+  
+  selectResult: function () {
+    var that=this;
+    var s = wx.getStorageSync('searchList');
+    var i = wx.getStorageSync('inputValue');
+    console.log(s[4].goodsContent+'00000');
+    var search = [];
+    for (var x in s) {
+      if ((s[x].goodsContent).indexOf(i) >= 0) {
+        search.push(s[x]);
+      }
+    }
+    that.setData({
+      search: search
     })
   },
   

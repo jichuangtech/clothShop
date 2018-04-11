@@ -1,9 +1,9 @@
 /* pages/search/search.wxss */
-.page{
-  margin-left: 5%
+.page-first{
+  margin-left: 5%;
 }
 .board{
-  width: 65%
+  width: 65%;
 }
 .clearInput{
   width: 10%;
@@ -17,4 +17,22 @@
   margin-top: 20rpx;
   margin-left: 28%;
   font-size: 35rpx
+}
+
+.inline{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  padding-left: 3%;
+}
+.item-img{
+  height: 5%;
+  width: 5%;
+  margin-right: 5%;
+}
+.item-desc{
+  font-size: 32rpx;
+  width: 74%;
 }

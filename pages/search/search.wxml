@@ -1,21 +1,42 @@
 <!--pages/search/search.wxml-->
 <view class="page">
+  <view class="page-first">
     <view class="search"> 
         <view class="board" style="display:inline-block" >
             <input class="search-input" placeholder="请输入搜索的商品" auto-focus
-            bindinput="bindInput"  bindchange="bindchange" style="inline-block" value="{{inputValue}}"/>
+            bindinput="bindInput" bindfocus="bindfocus" style="inline-block" value="{{inputValue}}"/>
         </view>
         <button class="clearInput" style="display:inline-block" bindtap="clearInput">×</button>
         <button  class="sousuo" style="display:inline-block" bindtap="setSearchStorage">搜索</button>
     </view>
-  <view class="record">
-    <view class="local" wx:for="{{getSearch}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx" >
-      <view wx:if="{{itemName != ''}}"> {{itemName}} </view>
+    <view class="record" style='display:{{para1}}'>
+      <view class="local" wx:for="{{getSearch}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+        <view wx:if="{{itemName != ''}}" data-name="{{itemName}}" bindtap="setInputValue"> {{itemName}} </view>
+      </view>
+      <modal class="modal" hidden="{{modalHidden}}" bindconfirm="modalChangeConfirm" bindcancel="modalChangeCancel">
+        <view> 是否删除历史记录 </view>
+      </modal>
+      <button class="clear_h" style="display:inline-block" bindtap="clearSearchStorage">清空浏览记录</button>
     </view>
-    <modal class="modal" hidden="{{modalHidden}}" bindconfirm="modalChangeConfirm" bindcancel="modalChangeCancel">
-      <view> 是否删除历史记录 </view>
-    </modal>
-    <button class="clear_h" style="display:inline-block" bindtap="clearSearchStorage">清空浏览记录</button>
   </view>
+
+    <view class="page-second" style='display:{{para2}}'>
+      <block  wx:for="{{search}}" wx:key="{{index}}">
+        <navigator class="search-item"  url="../productDetail/productDetail?id={{item.goodsId}}">
+          <image class="item-img" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+          <view class='inline'>
+            <image class="item-img" wx:if="{{item.originalImg}}" src="{{domain}}/api/info/picture/{{item.originalImg}}" style="width: 140rpx; height: 140rpx"></image>
+            <view class='item-desc'>
+              <view class="item-desc-1">{{item.goodsContent}}</view>
+              <view class="item-price main-color flex-1">
+                <block class="item-desc-2" wx:for="{{item.goodsSpecs}}" wx:key="{{item.goodsSpecs}}">
+                  <text class="">￥{{item.specPrice}}/{{item.specName}}</text>
+                </block>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>  
+    </view>
 </view>
 
