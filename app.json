@@ -12,8 +12,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/orderDetail/orderDetail",
-    "pages/search/search",
-    "pages/result/result"
+    "pages/search/search"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -36,6 +35,12 @@
         "selectedIconPath": "images/icon/home-actived.png"
       },
       {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "images/icon/search.png",
+        "selectedIconPath": "images/icon/search-selected.png"
+      },
+      {
         "pagePath": "pages/shoppingCar/shoppingCar",
         "text": "购物车",
         "iconPath": "images/icon/car.png",
@@ -46,10 +51,6 @@
         "text": "我的信息",
         "iconPath": "images/icon/profile.png",
         "selectedIconPath": "images/icon/profile-actived.png"
-      },
-      {
-        "pagePath": "pages/search/search",
-        "text": "搜索"
       }
     ]
   },
