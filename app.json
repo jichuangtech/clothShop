@@ -11,11 +11,12 @@
     "pages/productList/productList",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/orderDetail/orderDetail",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/orderDetail/orderDetail"
+    
   ],
   "window": {
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#808080",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "金凤针织",
     "backgroundColor": "#fff",

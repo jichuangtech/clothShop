@@ -1,42 +1,63 @@
 <!--pages/search/search.wxml-->
 <view class="page">
+
   <view class="page-first">
-    <view class="search"> 
-        <view class="board" style="display:inline-block" >
-            <input class="search-input" placeholder="请输入搜索的商品" auto-focus
-            bindinput="bindInput" bindfocus="bindfocus" style="inline-block" value="{{inputValue}}"/>
-        </view>
-        <button class="clearInput" style="display:inline-block" bindtap="clearInput">×</button>
-        <button  class="sousuo" style="display:inline-block" bindtap="setSearchStorage">搜索</button>
+
+    <view class="search">   
+      <view class="board">
+        <icon class="search" type='search' size='15'></icon>
+        <input class="search-input" placeholder="请输入搜索的商品" confirm-type="search" auto-focus
+         bindinput="bindInput" bindfocus="bindfocus" value="{{inputValue}}"/>
+        <icon class="clearInput" bindtap="clearInput" type='clear' size='12'></icon>
+      </view>
+      <view class="sousuo" bindtap="setSearchStorage">搜索</view>
     </view>
+
     <view class="record" style='display:{{para1}}'>
       <view class="local" wx:for="{{getSearch}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
-        <view wx:if="{{itemName != ''}}" data-name="{{itemName}}" bindtap="setInputValue"> {{itemName}} </view>
+        <view class="history" wx:if="{{itemName != ''}}" data-name="{{itemName}}" bindtap="setInputValue"> {{itemName}} </view>
+
+        <modal class="clear_s" hidden="{{modalHidden_s}}" bindconfirm="modalChangeConfirm_s" bindcancel="modalChangeCancel">
+          <view class='middle'> 
+            <text> 是否删除此条记录？</text>
+          </view>
+        </modal>
+        <view class="clear-single" data-idx="{{idx}}" bindtap="clearSingle">×</view>
+
       </view>
       <modal class="modal" hidden="{{modalHidden}}" bindconfirm="modalChangeConfirm" bindcancel="modalChangeCancel">
-        <view> 是否删除历史记录 </view>
+        <view class='middle'> 
+          <text> 是否删除全部历史记录？</text> 
+        </view>
       </modal>
-      <button class="clear_h" style="display:inline-block" bindtap="clearSearchStorage">清空浏览记录</button>
+      <view class="clear">
+        <button class="clear_h" style="display:inline-block" bindtap="clearSearchStorage">清空所有浏览记录</button>
+      </view>
     </view>
   </view>
 
-    <view class="page-second" style='display:{{para2}}'>
-      <block  wx:for="{{search}}" wx:key="{{index}}">
-        <navigator class="search-item"  url="../productDetail/productDetail?id={{item.goodsId}}">
-          <image class="item-img" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
-          <view class='inline'>
-            <image class="item-img" wx:if="{{item.originalImg}}" src="{{domain}}/api/info/picture/{{item.originalImg}}" style="width: 140rpx; height: 140rpx"></image>
-            <view class='item-desc'>
-              <view class="item-desc-1">{{item.goodsContent}}</view>
-              <view class="item-price main-color flex-1">
-                <block class="item-desc-2" wx:for="{{item.goodsSpecs}}" wx:key="{{item.goodsSpecs}}">
-                  <text class="">￥{{item.specPrice}}/{{item.specName}}</text>
-                </block>
-              </view>
+  <view class="page-second" style='display:{{para2}}'>
+    <block  wx:for="{{search}}" wx:key="{{index}}">
+      <navigator class="search-item"  url="../productDetail/productDetail?id={{item.goodsId}}">
+        <image class="item-img" wx:if="{{!item.originalImg}}" src="../../images/no_pic.png"></image>
+        <view class='inline'>
+          <image class="item-img" wx:if="{{item.originalImg}}" src="{{domain}}/api/info/picture/{{item.originalImg}}" style="width: 140rpx; height: 140rpx"></image>
+          <view class='item-desc'>
+            <view class="item-desc-1">{{item.goodsContent}}</view>
+            <view class="item-price main-color flex-1">
+              <block class="item-desc-2" wx:for="{{item.goodsSpecs}}" wx:key="{{item.goodsSpecs}}">
+                <text class="">￥{{item.specPrice}}/{{item.specName}}</text>
+              </block>
             </view>
           </view>
-        </navigator>
-      </block>  
-    </view>
+        </view>
+      </navigator>
+    </block>  
+  </view>
+
+  <view class="page-third" style='display:{{para3}}'>
+    <view class="noneGet" > 未搜索到相关产品，请输入其他关键字重试~ </view>
+  </view>
+
 </view>
 

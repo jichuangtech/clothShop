@@ -1,23 +1,85 @@
 /* pages/search/search.wxss */
-.page-first{
-  margin-left: 5%;
+page{
+  background-color:#ebebeb;
+}
+.search{
+  display: flex;
+  height: 80rpx;
+  flex-direction: row;
+  margin-top: 20rpx;
 }
 .board{
-  width: 65%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  background-color: #fff;
+  width: 80%;
+  border-radius: 15rpx;
+  border-style: solid;
+  border-color: #ebebeb;
+  border-width: 1rpx;
 }
-.clearInput{
+.board icon.search{
   width: 10%;
-  font-size: 27rpx
+  padding-left: 3%;
+  margin-top: 25rpx;
+}
+.search-input{
+  height: 80rpx;
+  width: 90%;
+  line-height: 80rpx;
+}
+.board icon.clearInput{
+  margin-top: 18rpx;
+  margin-right: 0rpx;
+  font-size: 35rpx;
+  width: 10%
 }
 .sousuo{
-  width: 20%;
-  font-size: 27rpx
+  font-size: 37rpx;
+  padding: 2rpx;
+  margin-top: 12rpx;
+  margin-left: 12rpx;
+  background-color: #ebebeb;
+}
+.record{
+  margin-top: 20rpx;
+}
+.local{
+  background-color: #fff;
+  border-bottom: 1rpx solid #ebebeb;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  flex-direction: row;
+}
+.history{
+  margin-left: 40rpx;
+  font-size: 38rpx;
+  width: 90%;
+}
+.clear{
+  display: flex;
+  align-items:center;
+  background-color: #fff;
+}
+.clear-single{
+  padding: 0rpx;
+  margin-right: 40rpx;
+  color: darkgray;
+  font-size: 40rpx;
+}
+.middle{
+  display: flex;
+  justify-content: center;
 }
 .clear_h{
-  margin-top: 20rpx;
-  margin-left: 28%;
-  font-size: 35rpx
+  font-size: 35rpx;
 }
+button::after{
+  border: none
+}
+
 
 .inline{
   display: flex;
@@ -35,4 +97,8 @@
 .item-desc{
   font-size: 32rpx;
   width: 74%;
+}
+
+.noneGet{
+  margin: 20%;
 }

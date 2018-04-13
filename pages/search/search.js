@@ -9,10 +9,12 @@ Page({
     domain: app.globalData.config.domain,
     para1: '',
     para2: 'none',
+    para3: 'none',
     loadTip: '',
     inputValue: '',
     getSearch: [],
     modalHidden: true,
+    modalHidden_s: true,
     searchList: [],
     search: [],
     s: []
@@ -28,14 +30,16 @@ Page({
   bindfocus: function () {
     this.setData({
       para1: '',
-      para2: 'none'
+      para2: 'none',
+      para3: 'none'
     })
   },
 
   setSearchStorage: function () {
     var that = this;
     if (that.data.inputValue != '') {
-      var searchData = wx.getStorageSync('searchData') || []
+      var s_data = wx.getStorageSync('searchData') || []
+      var searchData = s_data.reverse()
       var length = searchData.length
       searchData[length] = this.data.inputValue
       wx.setStorageSync('searchData', searchData)
@@ -43,6 +47,12 @@ Page({
     } else {
       console.log('输入不能为空')
     }
+    var getSearch = wx.getStorageSync('searchData');
+    var s = getSearch.reverse();
+    wx.setStorageSync('searchData', s);
+    this.setData({
+      getSearch: s,
+    })
   },
 
   setInputValue: function (e) {
@@ -50,6 +60,8 @@ Page({
     that.setData({
       inputValue: e.currentTarget.dataset.name
     })
+    wx.setStorageSync('inputValue', e.currentTarget.dataset.name);
+    that.selectResult();
   },
 
   getSearchList: function () {
@@ -69,11 +81,7 @@ Page({
           that.setData({
             searchList: res.data.data
           });
-          wx.setStorageSync('searchList', res.data.data);
-          that.setData({
-            para1: 'none',
-            para2: ''
-          });       
+          wx.setStorageSync('searchList', res.data.data);       
         }else {
           that.setData({
             loadTip: "暂时没有数据"
@@ -82,6 +90,20 @@ Page({
       }
     })
     that.selectResult();
+    var search = wx.getStorageSync('search');
+    if (search[0] == undefined) {
+      that.setData({
+        para1: 'none',
+        para2: 'none',
+        para3: ''
+      })
+    } else {
+      that.setData({
+        para1: 'none',
+        para2: '',
+        para3: 'none'
+      })
+    }
   },
 
   modalChangeConfirm: function () {
@@ -94,9 +116,23 @@ Page({
       url: '../search/search'
     })
   },
+  modalChangeConfirm_s: function (e) {
+    var index = e.currentTarget.dataset.idx;
+    var s = wx.getStorageSync('searchData');
+    s.splice(index,1);
+    wx.setStorageSync('searchData', s);
+    this.setData({
+      getSearch: s,
+      modalHidden_s: true,
+    })
+    wx.redirectTo({
+      url: '../search/search'
+    })
+  },
   modalChangeCancel: function () {
     this.setData({
-      modalHidden: true
+      modalHidden: true,
+      modalHidden_s: true 
     })
   },
   clearSearchStorage: function () {
@@ -104,22 +140,28 @@ Page({
       modalHidden: false
     })
   },
-  
+  clearSingle: function () {
+    this.setData({
+      modalHidden_s: false
+    })
+  },
+
   selectResult: function () {
     var that=this;
     var s = wx.getStorageSync('searchList');
     var i = wx.getStorageSync('inputValue');
-    console.log(s[4].goodsContent+'00000');
     var search = [];
     for (var x in s) {
       if ((s[x].goodsContent).indexOf(i) >= 0) {
         search.push(s[x]);
       }
     }
+    wx.setStorageSync('search', search);
     that.setData({
       search: search
     })
   },
+
   
   /**
    * 生命周期函数--监听页面加载
@@ -142,7 +184,10 @@ Page({
     var getSearch = wx.getStorageSync('searchData');
     this.setData({
       getSearch: getSearch,
-      inputValue: ''
+      inputValue: '',
+      para1: '',
+      para2: 'none',
+      para3: 'none'
     })
   },
 
