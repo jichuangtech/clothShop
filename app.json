@@ -11,9 +11,8 @@
     "pages/productList/productList",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search",
-    "pages/orderDetail/orderDetail"
-    
+    "pages/orderDetail/orderDetail",
+    "pages/search/search"
   ],
   "window": {
     "navigationBarBackgroundColor": "#808080",

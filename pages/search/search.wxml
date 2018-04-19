@@ -16,14 +16,12 @@
     <view class="record" style='display:{{para1}}'>
       <view class="local" wx:for="{{getSearch}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
         <view class="history" wx:if="{{itemName != ''}}" data-name="{{itemName}}" bindtap="setInputValue"> {{itemName}} </view>
-
-        <modal class="clear_s" hidden="{{modalHidden_s}}" bindconfirm="modalChangeConfirm_s" bindcancel="modalChangeCancel">
+        <modal class="clear_s" hidden="{{modalHidden_s}}" data-idx="{{idx}}" bindconfirm="modalChangeConfirm_s" bindcancel="modalChangeCancel">
           <view class='middle'> 
             <text> 是否删除此条记录？</text>
           </view>
         </modal>
-        <view class="clear-single" data-idx="{{idx}}" bindtap="clearSingle">×</view>
-
+        <view class="clear-single" bindtap="clearSingle">×</view>
       </view>
       <modal class="modal" hidden="{{modalHidden}}" bindconfirm="modalChangeConfirm" bindcancel="modalChangeCancel">
         <view class='middle'> 
